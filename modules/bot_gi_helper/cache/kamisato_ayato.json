@@ -1,0 +1,28 @@
+{
+    "name": "Kamisato Ayato",
+    "element": "HYDRO",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "roles": [
+        "DPS \u2729"
+    ],
+    "weapons": [
+        "1. Haran Geppaku Futsu (5\u2729)\n~= Primordial Jade Cutter (5\u2729) \n2. Mistsplitter Reforged (5\u2729)\n3. The Black Sword (4\u2729) \n4. Summit Shaper (5\u2729)*\n5. Kagotsurube Isshin (4\u2729)\n6. Lions Roar (4\u2729)*\n7. Amenoma Kageuchi (4\u2729) [R3] *\n~=Skyward Blade (5\u2729)*"
+    ],
+    "artifacts": [
+        "1. Heart of Depth (4) \n~= Gladiator's Finale (4)\n2. Heart of Depth (2) +18% ATK set (2)\n3. Blizzard Strayer (4)*\n4. Thundering Fury (4)*\n5. Echoes of an Offering (4)*\n\n"
+    ],
+    "main_stats": [
+        "Sands - ATK%\nGoblet - Hydro DMG\nCirclet - Crit Rate / DMG"
+    ],
+    "sub_stats": [
+        "1. Crit Rate / DMG\n2. ATK%\n3. Energy Recharge\n4. HP%\n5. Elemental Mastery\n6. Flat ATK"
+    ],
+    "talents": [
+        "1. Skill\n2. Burst"
+    ],
+    "tips": [
+        "Try to activate Ayato's Elemental Burst before using his skill to maximize his Normal Attack DMG. Getting enough Energy Recharge for this is important, and varies based on team. Since the casting time is so long, it may not be worth snapshotting into buffs.\n\nThe amount of slashes Ayato can do during an Elemental Skill window is sometimes influenced by the player's set FPS."
+    ],
+    "notes": "DPS\nDPS Ayato focuses on doing large amounts of on-field damage with his Elemental Skill and Elemental Burst. \n\nRegarding Weapon Choices:\nSkyward Blade and Amenoma Kageuchi: If you are running Ayato in teams where he needs more than 140% ER to burst, these weapons can be quite valuable.\nSummit Shaper: In teams where ATK buffs are scarce, this weapon has the potential to rival The Black Sword.\nLions Roar: In Electro-Charged teams, this weapon performs about equal to The Black Sword.\n\nRegarding Artifact Sets:\nEchoes of an Offering (4): The performance of this artifact set is inconsistent, and is based on user ping and other factors. It is not recommended to run this set unless your ping is consistently below 100. If you can achieve this, Echoes of an Offering (4) is only preferred on weapons with high amounts of DMG% such as Mistsplitter Reforged and Haran Geppaku Futsu. Otherwise, Heart of Depth (4) is preferred.\nBlizzard Strayer (4): When run in a Freeze Team, this is Ayato's best set. Note that it is not recommended to farm specifically for this set.\nThundering Fury (4): When run in an Electro-Charged team, this is Ayato's best set due to the Cooldown Reduction on Elemental Skill allowing for shorter rotations. Note that it is not recommended to farm specifically for this set."
+}

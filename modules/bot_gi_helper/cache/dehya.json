@@ -1,0 +1,42 @@
+{
+    "name": "Dehya",
+    "element": "PYRO",
+    "rarity": 5,
+    "weapon_type": "CLAYMORE",
+    "roles": [
+        "ON FIELD DPS",
+        "OFF FIELD DPS",
+        "BURGEON"
+    ],
+    "weapons": [
+        "1. Beacon of the Reed Sea (5\u2729)",
+        NaN,
+        "1. Mailed Flower (4\u2729)\n2. Makhaira Aquamarine (4\u2729)\n3. Bloodtainted Greatsword (3\u2729)\n~= Rainslasher (4\u2729)\n4. Favonius Greatsword (4\u2729)"
+    ],
+    "artifacts": [
+        NaN,
+        NaN,
+        "1. Flower of Paradise Lost (4)\n2. Gilded Dreams (4)\n3. +80 EM set (2) +80 EM set (2)\n4. Crimson Witch of Flames (4) "
+    ],
+    "main_stats": [
+        NaN,
+        NaN,
+        "Sands - Elemental Mastery\nGoblet - Elemental Mastery\nCirclet - Elemental Mastery"
+    ],
+    "sub_stats": [
+        NaN,
+        NaN,
+        "1. Elemental Mastery\n2. HP%\n3. Flat HP\n4. Crit Rate%"
+    ],
+    "talents": [
+        NaN,
+        NaN,
+        "1. Skill\n2. Normal Attack\n3. Burst\n\n*For an EM-focused build, upgrading Dehya's talent levels isn't a necessity."
+    ],
+    "tips": [
+        NaN,
+        NaN,
+        "Since Dehya does not need her elemental burst to trigger burgeon, she doesn't need to build energy recharge."
+    ],
+    "notes": "**This is a placeholder section, finalized information will be added soon**"
+}

@@ -1,0 +1,28 @@
+{
+    "name": "Kamisato Ayaka",
+    "element": "CRYO",
+    "rarity": 5,
+    "weapon_type": "SWORD",
+    "roles": [
+        "DPS \u2729"
+    ],
+    "weapons": [
+        "1. Mistsplitter Reforged (5\u2729)\n2. Haran Geppaku Futsu (5\u2729)\n3. Light of Foliar Incision (5\u2729) \n~= Primordial Jade Cutter (5\u2729)*\n~= Summit Shaper (5\u2729)\n4. Aquila Favonia (5\u2729)*\n~= Skyward Blade (5\u2729)* \n5. Amenoma Kageuchi (4\u2729) \n~= The Black Sword (4\u2729) \n~= Blackcliff Longsword (1 stack) (4\u2729)* \n6. Kagotsurube Isshin (4\u2729)\n7. Harbinger of Dawn (3\u2729) [R5]*"
+    ],
+    "artifacts": [
+        "1. Blizzard Strayer (4)\n2. Blizzard Strayer (2) +18% ATK set (2)\n3. +18% ATK set (2) +18% ATK set (2)\n4. Blizzard Strayer (2) Noblesse Oblige (2)"
+    ],
+    "main_stats": [
+        "Sands - ATK%\nGoblet - Cryo DMG\nCirclet - Crit DMG / ATK% "
+    ],
+    "sub_stats": [
+        "1. Crit DMG\n2. ATK%\n3. Energy Recharge\n4. Crit Rate*\n5. Flat ATK\n\nCrit Rate loses value here assuming you're running Blizzard Strayer (4), if you're not using that artifact set, then it has the same priority as Crit DMG (You still want to aim for 1:2 ratio in the end)"
+    ],
+    "talents": [
+        "1. Burst\n2. Normal Attack\n3. Skill"
+    ],
+    "tips": [
+        "Ayaka's Charged Attack, Elemental Skill and Elemental Burst is able to hit enemies inside sucked inside Venti's Elemental Burst.\n\nHer Elemental Burst also stays in place on frozen enemies and slightly knocks enemies away when they're not frozen."
+    ],
+    "notes": "DPS\nKamisato Ayaka is a pretty straightforward DPS that deals most of her damage from her Elemental Burst. She has very high scalings on her burst at the cost of it being 80 energy. You will likely need another Cryo battery on the team to provide energy for her (Diona, Kaeya, Rosaria, etc). She has a special dash (like Mona) and after she dashes, she will get a Cryo infusion on her Normal Attacks. Ensure you always have this bonus active to maximise your rotation damage.\n\nRegarding Main Stats Priority:\nCirclet main stat will be dependant on your overall stats, depending on your overall stats, one can be better than the other. Since Ayaka is able to get a lot of Crit Value from Blizzard Strayer (4) set, ascension passive, and also possibly weapons, ATK% circlets can be competitive to Crit ones, it also has a better drop rate, so don't throw away your good ATK% circlets.\n\nRegarding Weapon Choices:\nPrimordial Jade Cutter: With Blizzard Strayer (4) and Cryo Resonance, this weapon overcrits, so try to avoid getting Crit Rate substats.\nAquila Favonia: While Aquila Favonia has Physical Damage% as a main stat, which is basically useless on Ayaka, it is still a good statstick as it has a high base ATK and ATK% buff from the passive, however, it's not a huge upgrade over the other 4 star options and there might be a character which can utilize this weapon better (such as Bennett).\nSkyward Blade: The Energy Recharge main stat provided from this sword makes Ayaka comfortable in terms of having a good burst uptime, try to avoid getting Energy Recharge substats since the weapon already provides you with enough Energy Recharge.\nAmenoma Kageuchi: Lowers Ayaka's Energy Recharge requirement which allows her to allocate some of her Energy Recharge substats to other offensive substats. This weapon is also free and craftable while being competitive with other 4 star and even some 5 star weapons as well on the list.\nBlackcliff Longsword: Due to Ayaka's burst snapshotting, her burst is unable to benefit from the ATK buff from this weapon's passive on the first rotation (since you cast it immediately before defeating an opponent).\nHarbinger of Dawn: A good Crit statstick if you can keep the requirements up (having >90% HP)."
+}
