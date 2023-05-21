@@ -85,7 +85,8 @@ async def _gi(ctx, *args):
                     ### Genshin Impact Character Builds and Guides: 🤓 ###
                     Use `.gi build <character name> [--full | --no-cache]` for specific character build! ⭐️  (BETA)
                     Use the `--full` option to get the complete guide in one message (Works on DM). 
-                    Use the `--no-cache` option to discard cached data and get the latest build!"""), 
+                    Use the `--no-cache` option to discard cached data and get the latest build!
+                    Please don't spam the reaction buttons! ⚠️""")
                 embeds=EMBEDS_BUILD_LINKS
             )
             return
@@ -108,7 +109,7 @@ async def _gi(ctx, *args):
 
                 while True:
                     try:
-                        reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=60.0)
+                        reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=90.0)
 
                     except asyncio.TimeoutError:
                         embed = results[0][current]
