@@ -91,7 +91,7 @@ async def _gi(ctx, *args):
             )
             return
         elif len(args) >= 2:
-            char_name = next(iter([arg for arg in args[1:] if not arg.startswith('-')] ), None)
+            char_name = ' '.join([arg for arg in args[1:] if not arg.startswith('-')])
             if char_name:
                 results = get_character_build(char_name, False if '--no-cache' in args[1:] else True)
                 if not results:

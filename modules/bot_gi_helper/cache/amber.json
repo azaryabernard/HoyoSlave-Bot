@@ -1,0 +1,35 @@
+{
+    "name": "Amber",
+    "element": "PYRO",
+    "rarity": 4,
+    "weapon_type": "BOW",
+    "roles": [
+        "DPS ",
+        "SUPPORT\n\u2729"
+    ],
+    "weapons": [
+        "1. Amos' Bow (5\u2729)\n2. Thundering Pulse (5\u2729)\n3. Aqua Simulacra (5\u2729)\n4. Skyward Harp (5\u2729)\n5. Prototype Crescent (4\u2729)*\n6. Sharpshooter's Oath (3\u2729) [R5] \n7. Windblume Ode (4\u2729) [R5] \n8. Blackcliff Warbow (4\u2729)\n9. Polar Star (5\u2729)\n10. Hamayumi (4\u2729)*",
+        "1. Elegy for the End (5\u2729)\n2. Favonius Warbow (4\u2729)\n3. Sacrificial Bow (4\u2729)\n4. The Viridescent Hunt (4\u2729)\n\n"
+    ],
+    "artifacts": [
+        "1. Wanderer's Troupe (4)\n2. Shimenawa's Reminiscence (4)*\n3. Crimson Witch of Flames (4)\n4. Crimson Witch of Flames (2) +80 EM set (2)\n5. Crimson Witch of Flames (2) +18% ATK set (2)\n6. +18% ATK set (2) / +18% ATK set (2)",
+        "1. Noblesse Oblige (4)\n2. Instructor (4)*\n3. +20% Energy Recharge set (2) +20% Energy Recharge set (2)\n4. The Exile (4)"
+    ],
+    "main_stats": [
+        "Sands - ATK% / Elemental Mastery\nGoblet - Pyro DMG\nCirclet - Crit DMG",
+        "Sands - Energy Recharge / ATK%\nGoblet - Pyro DMG\nCirclet - Crit Rate / DMG\n"
+    ],
+    "sub_stats": [
+        "1. Crit DMG\n2. ATK%\n3. Elemental Mastery\n4. Energy Recharge\n5. Flat ATK",
+        "1. Energy Recharge\n2. Crit Rate / DMG\n3. ATK%\n4. Elemental Mastery\n5. Flat ATK"
+    ],
+    "talents": [
+        "1. Normal Attack\n2. Burst\n3. Skill",
+        "1. Burst\n2. Skill"
+    ],
+    "tips": [
+        NaN,
+        NaN
+    ],
+    "notes": "DPS\nAmber DPS will be focused on maximizing Charged Shot damage on enemy weak spots as Amber's Ascension 4 Talent increases ATK by 15% for 10s after hitting a weak spot. Crit is also guaranteed when you land your shot on a weak spot so we aim to maximize Crit DMG with little to no dependance on Crit Rate, this could change after [C4].\nAfter [C4], the playstyle catering towards her Skill damage becomes available, with this build you will want to run Crimson Witch of Flames (4) while trying to maintain the 1:2 Crit Ratio for more frequent nukes. This playstyle is safer, more consistent and has more AoE damage to play compared to Charge Shot Amber.\n\nRegarding Weapon Choices:\nPrototype Crescent: This bow will beat Skyward Harp if it's [R2+].\nHamayumi: This bow will beat Sharpshooter's Oath [R5] if it's [R2+].\n\nRegarding Artifact Sets:\nShimenawa's Reminiscence (4): At [C4] this set will beat out Wanderer's Troupe (4) for Amber Charged Shot Main DPS.\n\nSUPPORT\nDue to her poor scalings, this section is dedicated to a low-investment build that provides utility and shieldbreaking capabilities by abusing her quick Pyro application on her Elemental Burst. Due to her energy generation being extremely poor, her Energy Recharge options are prioritized.\n\nRegarding Artifact Sets:\nInstructor (4): This set is preferred over Noblesse Oblige (4) when Amber is used as support in a Hu Tao Vaporize team."
+}
