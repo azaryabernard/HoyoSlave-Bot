@@ -86,7 +86,7 @@ async def _gi(ctx, *args):
                     Use `.gi build <character name> [--full | --no-cache]` for specific character build! ⭐️  (BETA)
                     Use the `--full` option to get the complete guide in one message (Works on DM). 
                     Use the `--no-cache` option to discard cached data and get the latest build!
-                    Please don't spam the reaction buttons! ⚠️""")
+                    Please don't spam the reaction buttons! ⚠️"""),
                 embeds=EMBEDS_BUILD_LINKS
             )
             return
