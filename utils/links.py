@@ -47,3 +47,11 @@ EMBEDS_BUILD_LINKS = [
     Embed(title='Base Stat Comparison', url=base_stat_comp, color=0x00ff00).set_thumbnail(url=base_stat_icon),
     Embed(title='KeqingMains', url=kqm, color=0x00ff00).set_thumbnail(url=kqm_icon)
 ]
+
+# Honkai: Star Rail Map
+star_rail_map = 'https://act.hoyolab.com/sr/app/interactive-map/index.html?lang=en-us#/map/'
+star_rail_map_icon = 'https://static.wikia.nocookie.net/logopedia/images/3/33/HoYoLAB_icon_new.png/revision/latest/scale-to-width-down/250?cb=20220530005712'
+
+EMBEDS_HSR_MAP_LINKS = [
+    Embed(title='Star Rail Map', url=star_rail_map, color=0x00ff00).set_thumbnail(url=star_rail_map_icon)
+]

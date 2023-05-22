@@ -10,12 +10,14 @@ from utils.links import (
     EMBEDS_WIKI_LINKS,
     EMBEDS_BUILD_LINKS,
     EMBEDS_DB_LINKS,
+    EMBEDS_HSR_MAP_LINKS,
 )
  
 # Discord
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='.', intents=intents)
+RESTART = False
 
 
 @bot.event
@@ -24,6 +26,12 @@ async def on_ready():
     print('Logged in as')
     print(bot.user)
     print('------------------')
+    await bot.change_presence(activity=discord.Game(name='Project Bunny 19C, run .hoyo for more info!'))
+    # notify the admin that the bot is ready
+    print(bot.application.owner)
+    user = await bot.fetch_user(bot.application.owner.id)
+    await user.send('**Bot on Standby!**\n*Bronya is observing where Captain\'s IQ flew off to. 🤔*')
+
 
 
 # ADMIN COMMANDS
@@ -33,12 +41,24 @@ async def _sudo(ctx, *args):
     await ctx.send(f"### ACCESS GRANTED: {ctx.author} ###")
     if len(args) == 0:
         await ctx.send('*Please specify the command!*')
-        return
 
-    if args[0] == 'shutdown':
-        await ctx.send('*Shutting down...*')
+    elif args[0] == 'shutdown':
+        await ctx.send('*Shutting down...*\n\u200e')
         await bot.close()
-        return
+    
+    elif args[0] == 'restart':
+        global RESTART
+        await ctx.send('*Restarting...*\n\u200e')
+        RESTART = True
+        await bot.close()
+    
+    elif args[0] == "test":
+        await ctx.send("Test")
+
+    else:
+        await ctx.send(f"*Unknown command: {args[0]}*")
+    
+
 
 @_sudo.error
 async def sudo_error(ctx, error):
@@ -152,6 +172,29 @@ async def _gi(ctx, *args):
 async def gi_error(ctx, error):
     await ctx.send(f"ERROR_GI: {error}")
 
+
+# GENERAL HELP PAGE
+HELP_MESSAGE = dedent(f"""\
+## Welcome to Everything HoyoVerse Related Games! ##
+Use `.gi [help]` to access Genshin Impact related commands!
+Use `.hsr [help]` to access Honkai Star Rail related commands!
+Use `.hoyo` to access this page!
+
+Other commands: TBD
+""")
+                      
+@bot.command(name='hoyo')
+async def _help(ctx, *args):
+    if len(args) == 0:
+        await ctx.send(HELP_MESSAGE)
+        return
+    else:
+        await ctx.send("Wrong command! See `.help` for more info.")
+
+@_help.error
+async def help_error(ctx, error):
+    await ctx.send(f"ERROR_HELP: {error}")
+
 # HONKAI: STAR RAIL COMMANDS
 HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
@@ -160,41 +203,70 @@ HSR_COMMANDS = [
     # '.hsr db - Honkai Star Rail Database 📚'
 ]
 
+HSR_HELP_MESSAGE = dedent(f"""\
+Usage: `.hsr <commands>`
+See available commands for more informations:
+`{''.join(HSR_COMMANDS)}`"""
+)
+                          
+@bot.command(name='hsr')
+async def _hsr(ctx, *args):
+    if len(args) == 0:
+        await ctx.send(HSR_HELP_MESSAGE)
+        return
 
+    if args[0] == 'map':
+        await ctx.send(
+            "### Honkai Star Rail Interactive Maps: 📍 ###",
+            embeds=EMBEDS_HSR_MAP_LINKS
+        )
+    # elif args[0] == 'wiki':
+    #     await ctx.send(
+    #         "### Honkai Star Rail Official Wiki: 🧐 ###",
+    #         embeds=EMBEDS_WIKI_LINKS
+    #     )
+    # elif args[0] == 'build':
+    #     await ctx.send(
+    #         "### Honkai Star Rail Character Builds and Guides: 🤓 ###",
+    #         embeds=EMBEDS_BUILD_LINKS
+    #     )
+    # elif args[0] == 'db':
+    #     await ctx.send(
+    #         "### Honkai Star Rail Database: 📚 ###",
+    #         embeds=EMBEDS_DB_LINKS
+    #     )
+    elif args[0] == 'help':
+        await ctx.send(HSR_HELP_MESSAGE)
+    else:
+        await ctx.send("Wrong command! See `.hsr help` for more info.")
 
-# @client.event
-async def on_message(message):
-    # GENERAL COMMANDS
-    if message.content == '.hoo':
-        channel = message.channel
-        await channel.send('Hoo~')
+@_hsr.error
+async def hsr_error(ctx, error):
+    await ctx.send(f"ERROR_HSR: {error}")
+
+# GENERAL COMMANDS
+@bot.command(name='hoo')
+async def _hoo(ctx):
+    await ctx.send('Hoo~ 🫢')
+
+@bot.command(name='curse')
+async def _curse(ctx, *args):
+    cursewords_base = ["Noob", "Boo", "Lame", "Asu", "Jancuk", "Fuck u", "Puki", "Cuki", "Jambret", "Jangkrik", "Anjing"]
+    cursewords = cursewords_base if len(args) > 0 and '!' in args else cursewords_base[:3]
+    # check if there is ! after command    
+    if len(args) == 0 or len(args) == 1 and args[0] == '!':
+        await ctx.send(f'{cursewords[randrange(len(cursewords))]}!')
+        return
     
-    elif message.content == '.curse!':
-        await message.channel.send('Noob!')
+    for member in ctx.message.mentions:
+        await ctx.send(f'{cursewords[randrange(len(cursewords))]}! <@{member.id}> 👎')
 
-    elif message.content.startswith('.curse'):
-        cursewords = ["Noob"] #, "Boo", "Asu", "Jancuk", "Fuck u", "Puki", "Cuki", "Jambret", "Jangkrik", "Anjing"]
-        channel = message.channel
-        if not message.mentions:
-            await channel.send(f'{cursewords[randrange(len(cursewords))]}!')
-            return
-        
-        for member in message.mentions:
-            await channel.send(f'{cursewords[randrange(len(cursewords))]}! <@{member.id}> 👎')
-
-
-    
-    # HONKAI: STAR RAIL COMMANDS - TODO
-    elif message.content.startswith('.hsr'):
-        channel = message.channel
-        hsr_content = message.content.split(' ')
-        if len(hsr_content) == 1:
-            await channel.send('Honkai Star Rail!')
-        else:
-            if hsr_content[1] == 'map':
-                hsr_map = '[HoYoLAB](https://act.hoyolab.com/sr/app/interactive-map/index.html?lang=en-us#/map/)'
-                await channel.send(f'!{hsr_map}')
- 
 
 # Run the client on the server
 bot.run('MTEwMjk3OTQ2MzA0MzYxMjcxMw.GJtoDg.QDwZlZAr-N5VujaDhnDsITfXzPjcPffKEmPbfQ')
+
+if RESTART:
+    import sys
+    print("restart now")
+    import os
+    os.execv(sys.executable, ['python3'] + sys.argv)
