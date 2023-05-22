@@ -49,17 +49,17 @@ EMBEDS_GI_BUILD_LINKS = [
 ]
 
 # Honkai: Star Rail Map
-star_rail_map = 'https://act.hoyolab.com/sr/app/interactive-map/index.html?lang=en-us#/map/'
-star_rail_map_icon = 'https://static.wikia.nocookie.net/logopedia/images/3/33/HoYoLAB_icon_new.png/revision/latest/scale-to-width-down/250?cb=20220530005712'
+hsr_map = 'https://act.hoyolab.com/sr/app/interactive-map/index.html?lang=en-us#/map/'
+hsr_map_icon = 'https://static.wikia.nocookie.net/logopedia/images/3/33/HoYoLAB_icon_new.png/revision/latest/scale-to-width-down/250?cb=20220530005712'
 
 EMBEDS_HSR_MAP_LINKS = [
-    Embed(title='Star Rail Map', url=star_rail_map, color=0x00ff00).set_thumbnail(url=star_rail_map_icon)
+    Embed(title='Star Rail Map', url=hsr_map, color=0x00ff00).set_thumbnail(url=hsr_map_icon)
 ]
 
 # Honkai: Star Rail TC, Character Builds, and Guides
-helper_team = 'https://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y'
-helper_team_icon = "https://drive.google.com/file/d/16OHTY_WIHLWS3NQTptjxjDlLWoPdhnsV/view?usp=sharing"
+hsr_helper_team = 'https://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y'
+hsr_helper_team_icon = "https://drive.google.com/file/d/16OHTY_WIHLWS3NQTptjxjDlLWoPdhnsV/view?usp=sharing"
 
 EMBEDS_HSR_BUILD_LINKS = [
-    Embed(title='Helper Team\'s Characters Builds', url=helper_team, color=0x00ff00).set_thumbnail(url=helper_team_icon)
+    Embed(title='Helper Team\'s Characters Builds', url=hsr_helper_team, color=0x00ff00).set_thumbnail(url=hsr_helper_team_icon)
 ]
