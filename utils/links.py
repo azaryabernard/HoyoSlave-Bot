@@ -59,3 +59,7 @@ EMBEDS_HSR_MAP_LINKS = [
 # Honkai: Star Rail TC, Character Builds, and Guides
 helper_team = 'https://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y'
 helper_team_icon = "https://drive.google.com/file/d/16OHTY_WIHLWS3NQTptjxjDlLWoPdhnsV/view?usp=sharing"
+
+EMBEDS_HSR_BUILD_LINKS = [
+    Embed(title='Helper Team\'s Characters Builds', url=helper_team, color=0x00ff00).set_thumbnail(url=helper_team_icon)
+]
