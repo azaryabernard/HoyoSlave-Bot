@@ -2,6 +2,7 @@ from enum import Enum
 import os
 import json
 
+
 # The key for the google sheets
 # Source: [Genshin Impact Helper's Team](https://docs.google.com/spreadsheets/d/1gNxZ2xab1J6o1TuNVWMeLOZ7TPOqrsf3SshP5DLvKzI)
 SHEETS_KEY = "1gNxZ2xab1J6o1TuNVWMeLOZ7TPOqrsf3SshP5DLvKzI"

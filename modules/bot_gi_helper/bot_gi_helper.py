@@ -10,7 +10,6 @@ from .models import (
 )
 
 
-
 """ HELPER FUNCTIONS """
 # This function is used to get the character by name
 def get_character_by_name(name: str):
@@ -54,7 +53,7 @@ def seperate_by_roles(strs: list[str], roles_count: int):
         return [f"**[All]**\n" + strs[0]]
     else:
         return []
-    
+
 
 """ MAIN FUNCTIONS """
 # This function is used to get the data from google sheets
