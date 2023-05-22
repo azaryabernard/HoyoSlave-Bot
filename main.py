@@ -222,6 +222,16 @@ async def _curse(ctx, *args):
     for member in ctx.message.mentions:
         await ctx.send(f'{cursewords[randrange(len(cursewords))]}! <@{member.id}> 👎')
 
+@bot.command(name='bronya')
+async def _bronya(ctx, *args):
+    if len(args) == 0:
+        await ctx.send("*Project bunny, immediately startup the Captain cleansing program. 😑*")
+
+@bot.command(name='ajkk')
+async def _ajkk(ctx, *args):
+    if len(args) == 0:
+            await ctx.send("Wana!")
+
 
 # ADMIN COMMANDS
 @bot.command(name='sudo')
