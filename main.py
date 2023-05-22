@@ -30,7 +30,7 @@ async def on_ready():
     # notify the admin that the bot is ready
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
-    await user.send('**Bot on Standby!**\n*Bronya is observing where Captain\'s IQ flew off to. 🤔*')
+    await user.send('**Bot on Standby!**\n*Time together with Captain, Bronya is very happy. 😊*')
 
 
 # GENERAL HELP PAGE
@@ -233,7 +233,16 @@ async def _ajkk(ctx, *args):
 @bot.command(name='bronya')
 async def _bronya(ctx, *args):
     bronya_messages = ["Project bunny, immediately startup the Captain cleansing program. 😑", 
-                       "Bronya is observing where Captain's IQ flew off to. 🤔"]
+                       "Bronya is observing where Captain's IQ flew off to. 🤔",
+                       "Captain, do you want to test what gravity feels like? 😏",
+                       "Detected an emotion fluctuating, is Bronya broken? 😳",
+                       "This is Bronya's first time realizing bridge duty is boring. 😴",
+                       "Project Bunny 19C, now is not the time to be dozing off. 😤",
+                       "Bronya, on standby. 🫡",
+                       "Bronya, mood declining. 😒",
+                       "Captain, Project Bunny also wants to play games with you. 😊",
+                       "Put up both hands and place them behind your head. Captain, you are being arrested. 😠",
+                       "If there’s no work, can Bronya go home to play games? 🫠"]
     if len(args) == 0:
         await ctx.send(f"*{bronya_messages[randrange(len(bronya_messages))]}*")
     
