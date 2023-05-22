@@ -8,7 +8,7 @@ gi_hoyolab_map_icon = "https://static.wikia.nocookie.net/logopedia/images/3/33/H
 gi_app_sample = 'https://genshin-impact-map.appsample.com/'
 gi_app_sample_icon = "https://gim.appsample.net/images/share.jpg"
 
-EMBEDS_MAP_LINKS = [
+EMBEDS_GI_MAP_LINKS = [
     Embed(title='HoYoLAB Genshin Impact Interactive Map', url=gi_hoyolab_map, color=0x00ff00).set_thumbnail(url=gi_hoyolab_map_icon), 
     Embed(title='AppSample Genshin Impact Interactive Map', url=gi_app_sample,  color=0x00ff00).set_thumbnail(url=gi_app_sample_icon)
 ]
@@ -17,7 +17,7 @@ EMBEDS_MAP_LINKS = [
 # Genshin Impact Wiki
 gi_wiki = 'https://genshin-impact.fandom.com/wiki/Genshin_Impact_Wiki'
 
-EMBEDS_WIKI_LINKS = [
+EMBEDS_GI_WIKI_LINKS = [
     Embed(title='Genshin Impact Wiki', url=gi_wiki, color=0x00ff00).set_thumbnail(url="https://ih1.redbubble.net/image.1788133237.8111/st,small,845x845-pad,1000x1000,f8f8f8.jpg")
 ]
 
@@ -28,7 +28,7 @@ paimon_moe_icon = 'https://paimon.moe/images/paimon_hello.png'
 ambr_top = 'https://ambr.top/en'
 ambr_top_icon = 'https://ambr.top/images/icon.png'
 
-EMBEDS_DB_LINKS = [
+EMBEDS_GI_DB_LINKS = [
     Embed(title="Paimon Moe", url=paimon_moe, color=0x00ff00).set_thumbnail(url=paimon_moe_icon),
     Embed(title='Project Amber', url=ambr_top, color=0x00ff00).set_thumbnail(url=ambr_top_icon)
 ]
@@ -42,7 +42,7 @@ base_stat_icon = "https://ih1.redbubble.net/image.1788133237.8111/st,small,845x8
 kqm = 'https://keqingmains.com'
 kqm_icon = 'https://keqingmains.com/wp-content/uploads/2021/10/kqm-logo-full-e1633177025729.png'
 
-EMBEDS_BUILD_LINKS = [
+EMBEDS_GI_BUILD_LINKS = [
     Embed(title='Helper Team\'s Characters Builds', url=helper_team, color=0x00ff00).set_thumbnail(url=helper_team_icon),
     Embed(title='Base Stat Comparison', url=base_stat_comp, color=0x00ff00).set_thumbnail(url=base_stat_icon),
     Embed(title='KeqingMains', url=kqm, color=0x00ff00).set_thumbnail(url=kqm_icon)
