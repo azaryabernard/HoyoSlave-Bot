@@ -230,7 +230,11 @@ async def _bronya(ctx, *args):
 @bot.command(name='ajkk')
 async def _ajkk(ctx, *args):
     if len(args) == 0:
-            await ctx.send("Wana!")
+        await ctx.send("Wana!")
+        return
+    for member in ctx.message.mentions:
+        await ctx.send(f'Wana kon! <@{member.id}>')
+    
 
 
 # ADMIN COMMANDS
