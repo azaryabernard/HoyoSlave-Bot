@@ -13,12 +13,13 @@ from utils.links import (
     EMBEDS_GI_MAP_LINKS, EMBEDS_GI_WIKI_LINKS,
     EMBEDS_GI_BUILD_LINKS, EMBEDS_GI_DB_LINKS,
     EMBEDS_HSR_MAP_LINKS, EMBEDS_HSR_BUILD_LINKS,
+    EMBEDS_HSR_DB_LINKS, EMBEDS_HSR_WIKI_LINKS
 )
 
 
 # DEFINES
 PREFIX = '.'
-RESTART = False
+REBOOT = False
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -183,9 +184,9 @@ async def gi_error(ctx, error):
 # HONKAI: STAR RAIL COMMANDS
 HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
-    # '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
+    '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
     '.hsr build - Character Builds and Guides 🤓\n', 
-    # '.hsr db - Honkai Star Rail Database 📚'
+    '.hsr db - Honkai Star Rail Database 📚'
 ]
 
 HSR_HELP_MESSAGE = dedent(f"""\
@@ -203,6 +204,12 @@ async def _hsr(ctx, *args):
         await ctx.send(
             "### Honkai Star Rail Interactive Maps: 📍 ###",
             embeds=EMBEDS_HSR_MAP_LINKS
+        )
+    # HSR WIKI
+    elif args[0] == 'wiki':
+        await ctx.send(
+            "### Honkai Star Rail Official Wiki: 🧐 ###",
+            embeds=EMBEDS_HSR_WIKI_LINKS
         )
     # HRS BUILD
     elif args[0] == 'build':
@@ -278,21 +285,12 @@ async def _hsr(ctx, *args):
                             await msg.edit(embed=results[0][current])
             else:
                 await ctx.send("Error: Wrong Usage! See .hsr build for more info.")
-    # elif args[0] == 'wiki':
-    #     await ctx.send(
-    #         "### Honkai Star Rail Official Wiki: 🧐 ###",
-    #         embeds=EMBEDS_GI_WIKI_LINKS
-    #     )
-    # elif args[0] == 'build':
-    #     await ctx.send(
-    #         "### Honkai Star Rail Character Builds and Guides: 🤓 ###",
-    #         embeds=EMBEDS_GI_BUILD_LINKS
-    #     )
-    # elif args[0] == 'db':
-    #     await ctx.send(
-    #         "### Honkai Star Rail Database: 📚 ###",
-    #         embeds=EMBEDS_GI_DB_LINKS
-    #     )
+    # HSR DB
+    elif args[0] == 'db':
+        await ctx.send(
+            "### Honkai Star Rail Database: 📚 ###",
+            embeds=EMBEDS_HSR_DB_LINKS
+        )
     elif args[0] == 'help':
         await ctx.send(HSR_HELP_MESSAGE)
     else:
@@ -358,10 +356,10 @@ async def _sudo(ctx, *args):
         await ctx.send('*Shutting down...*\n\u200e')
         await bot.close()
     
-    elif args[0] == 'restart':
-        global RESTART
-        await ctx.send('*Restarting...*\n\u200e')
-        RESTART = True
+    elif args[0] == 'reboot':
+        global REBOOT
+        await ctx.send('*Rebooting...*\n\u200e')
+        REBOOT = True
         await bot.close()
     
     elif args[0] == 'update':
@@ -372,8 +370,8 @@ async def _sudo(ctx, *args):
         else:
             await ctx.send('*Error: Update failed!*\n\u200e')
             return
-        RESTART = True
-        await ctx.send('*Restarting...*\n\u200e')
+        REBOOT = True
+        await ctx.send('*Rebooting...*\n\u200e')
         await bot.close()
 
     elif args[0] == 'clear-cache':
@@ -412,6 +410,6 @@ async def sudo_error(ctx, error):
 # Run the client on the server
 bot.run('MTEwMjk3OTQ2MzA0MzYxMjcxMw.GJtoDg.QDwZlZAr-N5VujaDhnDsITfXzPjcPffKEmPbfQ')
 
-if RESTART:
-    print("Restarting now")
+if REBOOT:
+    print("Rebooting now...")
     os.execv(sys.executable, ['python3'] + sys.argv)

@@ -48,6 +48,14 @@ EMBEDS_GI_BUILD_LINKS = [
     Embed(title='KeqingMains', url=kqm, color=0x00ff00).set_thumbnail(url=kqm_icon)
 ]
 
+# HSR Impact Wiki
+hsr_wiki = 'https://honkai-star-rail.fandom.com/wiki/Honkai:_Star_Rail_Wiki'
+hsr_wiki_icon = "https://play-lh.googleusercontent.com/AsaeL9oWkGdjyDNwbmzsaYY_WxdPrmQVGUfgfzL4mhJteC1X3HdLib9bafnXaYr3WB8=w240-h480-rw"
+
+EMBEDS_HSR_WIKI_LINKS = [
+    Embed(title='Honkai: Star Rail Wiki', url=hsr_wiki, color=0x00ff00).set_thumbnail(url=hsr_wiki_icon)
+]
+
 # Honkai: Star Rail Map
 hsr_map = 'https://act.hoyolab.com/sr/app/interactive-map/index.html?lang=en-us#/map/'
 hsr_map_icon = 'https://static.wikia.nocookie.net/logopedia/images/3/33/HoYoLAB_icon_new.png/revision/latest/scale-to-width-down/250?cb=20220530005712'
@@ -62,4 +70,15 @@ hsr_helper_team_icon = "https://lh3.googleusercontent.com/fife/APg5EObrK_J0SbnPM
 
 EMBEDS_HSR_BUILD_LINKS = [
     Embed(title='Helper Team\'s Characters Builds', url=hsr_helper_team, color=0x00ff00).set_thumbnail(url=hsr_helper_team_icon)
+]
+
+# Honkai: Star Rail Database
+hsr_prydwen = 'https://www.prydwen.gg/star-rail/'
+hsr_prydwen_icon = 'https://www.prydwen.gg/static/e5cca805ee22a6a5327c633bbab70f48/c5628/prydwen_logo_small.webp'
+hsr_starrailstation = 'https://starrailstation.com/en'
+hsr_starrailstation_icon = 'https://starrailstation.com/9437f709e7dcd20c41dfd76f66de2def.png'
+
+EMBEDS_HSR_DB_LINKS = [
+    Embed(title='Prydwen\'s Star Rail Database', url=hsr_prydwen, color=0x00ff00).set_thumbnail(url=hsr_prydwen_icon),
+    Embed(title='Star Rail Station', url=hsr_starrailstation, color=0x00ff00).set_thumbnail(url=hsr_starrailstation_icon)
 ]
