@@ -3,7 +3,7 @@ import io
 import pandas as pd
 from discord import Embed, File
 from .models import (
-    Character, Element, WeaponType, 
+    Character, Element, Path, 
     CHARACTERS,
     get_element_url, gen_character_dict,
     save_dict_to_json, load_json_to_dict
@@ -34,11 +34,11 @@ def get_characters_by_rarity(rarity: int):
             characters.append(character)
     return characters
 
-# This function is used to get the character by weapon type (unused)
-def get_characters_by_weapon_type(weapon_type: WeaponType):
+# This function is used to get the character by Path (unused)
+def get_characters_by_weapon_type(path: Path):
     characters = []
     for character in CHARACTERS:
-        if weapon_type == character.get_weapon_type():
+        if path == character.path():
             characters.append(character)
     return characters
 
@@ -94,7 +94,6 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         df.columns = ['characters', 'roles', 'weapons', 'artifacts', 'main_stats', 'sub_stats', 'talents', 'tips']
         df.reset_index(drop=True, inplace=True)
         # special case for traveler
-        _character = character
         if "Traveler" in character.get_name():
             character = Character("Traveler", character.get_element(), character.get_rarity(), character.get_weapon_type())
 
@@ -104,7 +103,7 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         end_index = df.characters[start_index+1:].notna().idxmax()
         # parse to Dict
         char_dict = gen_character_dict(
-            character=_character,
+            character=character,
             roles=df.roles[start_index+2:end_index].tolist(),
             weapons=df.weapons[start_index+2:end_index].tolist(),
             artifacts=df.artifacts[start_index+2:end_index].tolist(),

@@ -296,6 +296,25 @@ async def _sudo(ctx, *args):
         RESTART = True
         await ctx.send('*Restarting...*\n\u200e')
         await bot.close()
+
+    elif args[0] == 'clear-cache':
+        if len(args) == 1:
+            await ctx.send('*Please specify the cache to clear!*')
+            return
+        if args[1] == 'hsr':
+            await ctx.send('*Clearing HSR cache...*')
+            res = os.system("rm -rf modules/bot_hsr_helper/cache/*")
+            if res == 0:
+                await ctx.send('*Clearing successful!*\n\u200e')
+            else:
+                await ctx.send('*Error: Clearing failed!*\n\u200e')
+        elif args[1] == 'gi':
+            await ctx.send('*Clearing GI cache...*')
+            res = os.system("rm -rf modules/bot_gi_helper/cache/*")
+            if res == 0:
+                await ctx.send('*Clearing successful!*\n\u200e')
+            else:
+                await ctx.send('*Error: Clearing failed!*\n\u200e')
     
     elif args[0] == "test":
         await ctx.send("Test")

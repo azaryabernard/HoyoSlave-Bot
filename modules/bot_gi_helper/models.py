@@ -19,8 +19,7 @@ dirname = os.path.dirname(__file__)
 
 # Enum for the elements
 class Element(Enum):
-    PYRO = 1; HYDRO = 2; ELECTRO = 3;
-    DENDRO = 4; CRYO = 5; ANEMO = 6; GEO = 7
+    PYRO, HYDRO, ELECTRO, DENDRO, CRYO, ANEMO, GEO = range(7)
 
     def get_sheet_id(self):
         if self == Element.PYRO:
@@ -42,7 +41,7 @@ class Element(Enum):
         
 # Enum for the weapon types
 class WeaponType(Enum):
-    SWORD = 1; CLAYMORE = 2; POLEARM = 3; BOW = 4; CATALYST = 5
+    SWORD, CLAYMORE, POLEARM, BOW, CATALYST = range(5)
 
 # Class for the characters
 class Character():
@@ -76,7 +75,7 @@ class Character():
         return os.path.join(dirname, f"../../assets/character_icons/{parsed_name}_Icon.png")
     
     def get_description(self):
-        return f"{self.name} is a {self.rarity}⭐️ {self.element.name.lower()} {self.weapon_type.name.lower()} user in Genshin Impact."
+        return f"{self.name} is a {self.rarity}⭐️ {self.element.name.capitalize()} {self.weapon_type.name.capitalize()} user in Genshin Impact."
 
 # Define all the characters
 CHARACTERS = [
@@ -185,7 +184,7 @@ def get_element_url(element: Element):
 
 
 async def save_dict_to_json(dictionary: dict[str, any]):
-    file_name = dictionary["name"].lower().replace(" ", "_") + "_" + dictionary["element"].lower()
+    file_name = dictionary["name"].lower().replace(" ", "_")
     try:
         with open(os.path.join(dirname, f"cache/{file_name}.json"), "w", encoding="utf-8") as f:
             json.dump(dictionary, f, indent=4)
@@ -194,7 +193,7 @@ async def save_dict_to_json(dictionary: dict[str, any]):
 
 
 async def load_json_to_dict(character: Character) -> dict[str, any]:
-    file_name = character.name.lower().replace(" ", "_") + "_" + character.element.name.lower()
+    file_name = character.name.lower().replace(" ", "_")
     # check if file exists
     if not os.path.isfile(os.path.join(dirname, f"cache/{file_name}.json")):
         return None
