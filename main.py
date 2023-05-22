@@ -286,12 +286,13 @@ async def _sudo(ctx, *args):
         await bot.close()
     
     elif args[0] == 'update':
-        await ctx.send('*Updating...*\n')
+        await ctx.send('*Updating...*')
         res = os.system("git pull")
         if res == 0:
             await ctx.send('*Update successful!*\n\u200e')
         else:
-            await ctx.send('*Update failed!*\n\u200e')
+            await ctx.send('*Error: Update failed!*\n\u200e')
+            return
         RESTART = True
         await ctx.send('*Restarting...*\n\u200e')
         await bot.close()
