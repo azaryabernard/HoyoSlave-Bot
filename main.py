@@ -68,7 +68,7 @@ GI_COMMANDS = [
     '.gi map - Interactive Map 📍\n', 
     '.gi wiki - Genshin Wikia 🧐\n', 
     '.gi build - Character Builds and Guides 🤓\n', 
-    '.gi db - Genshin Database 📚'
+    '.gi db - Genshin Database, Wish Tracker 📚'
 ]
 
 GI_HELP_MESSAGE = dedent(f"""\
@@ -186,7 +186,7 @@ HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
     '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
     '.hsr build - Character Builds and Guides 🤓\n', 
-    '.hsr db - Honkai Star Rail Database 📚'
+    '.hsr db - Honkai Star Rail Database, Warp Tracker, Tierlist 📚'
 ]
 
 HSR_HELP_MESSAGE = dedent(f"""\
