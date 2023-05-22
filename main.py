@@ -232,8 +232,10 @@ async def _ajkk(ctx, *args):
 
 @bot.command(name='bronya')
 async def _bronya(ctx, *args):
+    bronya_messages = ["Project bunny, immediately startup the Captain cleansing program. 😑", 
+                       "Bronya is observing where Captain's IQ flew off to. 🤔"]
     if len(args) == 0:
-        await ctx.send("*Project bunny, immediately startup the Captain cleansing program. 😑*")
+        await ctx.send(f"*{bronya_messages[randrange(len(bronya_messages))]}*")
     
 
 
