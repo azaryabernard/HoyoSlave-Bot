@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import asyncio
-from time import sleep
+import sys, os
 from textwrap import dedent
 from random import randrange
 from modules.bot_gi_helper.bot_gi_helper import get_character_build
@@ -221,12 +221,7 @@ async def _curse(ctx, *args):
     
     for member in ctx.message.mentions:
         await ctx.send(f'{cursewords[randrange(len(cursewords))]}! <@{member.id}> 👎')
-
-@bot.command(name='bronya')
-async def _bronya(ctx, *args):
-    if len(args) == 0:
-        await ctx.send("*Project bunny, immediately startup the Captain cleansing program. 😑*")
-
+# TO BE DELETED!
 @bot.command(name='ajkk')
 async def _ajkk(ctx, *args):
     if len(args) == 0:
@@ -234,6 +229,11 @@ async def _ajkk(ctx, *args):
         return
     for member in ctx.message.mentions:
         await ctx.send(f'Wana kon! <@{member.id}>')
+
+@bot.command(name='bronya')
+async def _bronya(ctx, *args):
+    if len(args) == 0:
+        await ctx.send("*Project bunny, immediately startup the Captain cleansing program. 😑*")
     
 
 
@@ -255,6 +255,13 @@ async def _sudo(ctx, *args):
         RESTART = True
         await bot.close()
     
+    elif args[0] == 'update':
+        await ctx.send('*Updating...*\n')
+        os.system("git pull")
+        RESTART = True
+        await ctx.send('*Restarting...*\n\u200e')
+        await bot.close()
+    
     elif args[0] == "test":
         await ctx.send("Test")
 
@@ -273,6 +280,5 @@ async def sudo_error(ctx, error):
 bot.run('MTEwMjk3OTQ2MzA0MzYxMjcxMw.GJtoDg.QDwZlZAr-N5VujaDhnDsITfXzPjcPffKEmPbfQ')
 
 if RESTART:
-    import sys, os
     print("Restarting now")
     os.execv(sys.executable, ['python3'] + sys.argv)
