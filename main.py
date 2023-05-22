@@ -115,7 +115,7 @@ async def _gi(ctx, *args):
                     char_name.append(arg)
             char_name = ' '.join(char_name)
             if char_name:
-                results = get_character_build(char_name, not build_flags["--update"])
+                results = await get_character_build(char_name, not build_flags["--update"])
                 if not results:
                     await ctx.send(f"Error: Character Data for *{char_name}* not found!")
                     return

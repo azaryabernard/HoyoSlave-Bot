@@ -180,7 +180,11 @@ def gen_character_dict(
     }
 
 
-def save_dict_to_json(dictionary: dict[str, any]):
+def get_element_url(element: Element):
+        return f"https://docs.google.com/spreadsheets/d/{SHEETS_KEY}/export?format=csv&gid={element.get_sheet_id()}"
+
+
+async def save_dict_to_json(dictionary: dict[str, any]):
     file_name = dictionary["name"].lower().replace(" ", "_") + "_" + dictionary["element"].lower()
     try:
         with open(os.path.join(dirname, f"cache/{file_name}.json"), "w", encoding="utf-8") as f:
@@ -188,14 +192,11 @@ def save_dict_to_json(dictionary: dict[str, any]):
     except Exception as e:
         print(f"Error saving {file_name} to json: {e}")
 
-def load_json_to_dict(character: Character) -> dict[str, any]:
+
+async def load_json_to_dict(character: Character) -> dict[str, any]:
     file_name = character.name.lower().replace(" ", "_") + "_" + character.element.name.lower()
     # check if file exists
     if not os.path.isfile(os.path.join(dirname, f"cache/{file_name}.json")):
         return None
-    
     with open(os.path.join(dirname, f"cache/{file_name}.json"), "r", encoding="utf-8") as f:
         return json.load(f)
-
-def get_element_url(element: Element):
-        return f"https://docs.google.com/spreadsheets/d/{SHEETS_KEY}/export?format=csv&gid={element.get_sheet_id()}"

@@ -1,4 +1,4 @@
-import requests
+import aiohttp
 import io
 import pandas as pd
 from discord import Embed, File
@@ -54,14 +54,23 @@ def seperate_by_roles(strs: list[str], roles_count: int):
     else:
         return []
 
+# This function is used to fetch the data from the URL asynchronously
+async def fetch(session, url):
+    async with session.get(url) as response:
+        if response.status != 200:
+           print(f"Error getting data from {url}")
+           return None
+        response.encoding = 'utf-8'
+        return await response.text()
+
 
 """ MAIN FUNCTIONS """
 # This function is used to get the data from google sheets
-def get_data_from_google_sheets(character: Character, cached: bool = True) -> dict[str, any]:
+async def get_data_from_google_sheets(character: Character, cached: bool = True) -> dict[str, any]:
     char_dict = None
     # Checking if the data is cached
     if cached:
-        char_dict = load_json_to_dict(character)
+        char_dict = await load_json_to_dict(character)
         if char_dict is None:
             print("There is no cached data for this character. Fetching from google docs.")
             cached = False
@@ -76,14 +85,11 @@ def get_data_from_google_sheets(character: Character, cached: bool = True) -> di
         url = get_element_url(character.get_element())
         print(f"Fetching from {url}")
         # Getting the data from the URL
-        response = requests.get(url)
-        if response.status_code != 200:
-           print(f"Error getting data from {url}")
-           return None
-        # print(response.text)
+        response = None
+        async with aiohttp.ClientSession() as session:
+            response = await fetch(session, url)
         # Converting the data to a dataframe
-        response.encoding = 'utf-8'
-        df = pd.read_csv(io.StringIO(response.text), sep=',', engine='python')
+        df = pd.read_csv(io.StringIO(response), sep=',', engine='python')
         df = df.drop(df.columns[[0]], axis=1)[4:]
         df.columns = ['characters', 'roles', 'weapons', 'artifacts', 'main_stats', 'sub_stats', 'talents', 'tips']
         df.reset_index(drop=True, inplace=True)
@@ -108,20 +114,20 @@ def get_data_from_google_sheets(character: Character, cached: bool = True) -> di
             notes=df.roles[end_index]
         )
         # Saving the data to cache
-        save_dict_to_json(char_dict)
+        await save_dict_to_json(char_dict)
     # Returning the data
     return char_dict
 
 
 # Exported function to get the character build, may return None
-def get_character_build(name: str, cached: bool = True) -> list[Embed]:
+async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     # Getting the character by name
     character = get_character_by_name(name)
     if character == None:
         print(f"Character not found with name: {name}")
         return None
     # Getting the data from google sheets / cache
-    char_dict = get_data_from_google_sheets(character, cached)
+    char_dict = await get_data_from_google_sheets(character, cached)
     if char_dict is None:
         print(f"Error getting data for character: {character.get_name()}")
         return None
@@ -155,7 +161,6 @@ def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             value=artifacts[i] if i < len(artifacts) else "",
             inline=True
         )
-    
     # Stats Embed (Main Stats, Sub Stats)
     stats_embed = Embed(
             title=f"{character.get_name()} (2/4)",
@@ -182,7 +187,6 @@ def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             value=talents[i] if i < len(talents) else "",
             inline=True
         )
-    
     # Tips Embed (long > 1024)
     tips_embed = Embed(
         title=f"{character.get_name()} (3/4)",
@@ -196,7 +200,6 @@ def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             value=tip,
             inline=False
         )
-        
     # Notes Embed (long > 1024)
     notes_embed = Embed(
         title=f"{character.get_name()} (4/4)",
@@ -216,4 +219,7 @@ def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             inline=False
         )
     # Returning the Embeds
-    return ([main_embed, stats_embed, tips_embed, notes_embed], character.get_image_path())
+    return (
+        [main_embed, stats_embed, tips_embed, notes_embed],
+        character.get_image_path()
+    )
