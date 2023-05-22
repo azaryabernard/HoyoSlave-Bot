@@ -1,14 +1,18 @@
 import discord
 from discord.ext import commands
-import asyncio
-import sys, os
+import asyncio, sys, os
 from textwrap import dedent
 from random import randrange
-from modules.bot_gi_helper.bot_gi_helper import get_character_build
+from modules.bot_gi_helper.bot_gi_helper import (
+    get_character_build as get_gi_character_build
+)
+from modules.bot_hsr_helper.bot_hsr_helper import (
+    get_character_build as get_hsr_character_build
+)
 from utils.links import (
     EMBEDS_GI_MAP_LINKS, EMBEDS_GI_WIKI_LINKS,
     EMBEDS_GI_BUILD_LINKS, EMBEDS_GI_DB_LINKS,
-    EMBEDS_HSR_MAP_LINKS,
+    EMBEDS_HSR_MAP_LINKS, EMBEDS_HSR_BUILD_LINKS,
 )
 
 
@@ -114,12 +118,12 @@ async def _gi(ctx, *args):
                 else:
                     char_name.append(arg)
             char_name = ' '.join(char_name)
+            print("CHAR NAME:", char_name)
             if char_name:
-                results = await get_character_build(char_name, not build_flags["--update"])
+                results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:
                     await ctx.send(f"Error: Character Data for *{char_name}* not found!")
                     return
-                
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
@@ -180,7 +184,7 @@ async def gi_error(ctx, error):
 HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
     # '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
-    # '.hsr build - Character Builds and Guides 🤓\n', 
+    '.hsr build - Character Builds and Guides 🤓\n', 
     # '.hsr db - Honkai Star Rail Database 📚'
 ]
 
@@ -194,11 +198,86 @@ See available commands for more informations:
 async def _hsr(ctx, *args):
     if len(args) == 0:
         await ctx.send(HSR_HELP_MESSAGE)
+    # HSR MAP
     elif args[0] == 'map':
         await ctx.send(
             "### Honkai Star Rail Interactive Maps: 📍 ###",
             embeds=EMBEDS_HSR_MAP_LINKS
         )
+    # HRS BUILD
+    elif args[0] == 'build':
+        if len(args) == 1:
+            await ctx.send(
+                dedent("""\
+                    ### Honkai: Star Rail Character Builds and Guides: 🤓 ###
+                    Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
+                    Use the `--full` option to get the complete guide in one message. 
+                    Use the `--update` option to discard cached data and get the latest build!
+                    Please don't spam the reaction buttons! ⚠️"""),
+                embeds=EMBEDS_HSR_BUILD_LINKS
+            )
+        elif len(args) >= 2:
+            build_flags = {'--full': False, '--update': False}
+            char_name = []
+            for arg in args[1:]:
+                # replace em-dash with double dash
+                arg = arg.replace('—', '--')
+                if arg.startswith('--'):
+                    if arg in build_flags:
+                        build_flags[arg] = True
+                    else:
+                        await ctx.send(f"Error: Invalid option *{arg}*!")
+                        return
+                else:
+                    char_name.append(arg)
+            char_name = ' '.join(char_name)
+            if char_name:
+                results = await get_hsr_character_build(char_name, not build_flags["--update"])
+                if not results:
+                    await ctx.send(f"Error: Character Data for *{char_name}* not found!")
+                    return
+                
+                # Force full page in DM
+                if ctx.guild is None:
+                    build_flags["--full"] = True
+                    await ctx.send("DM only mode, forcing full page!")
+                if build_flags["--full"]:
+                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
+                    return
+                
+                # MULTI PAGE EMBEDS
+                buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
+                current = 0
+                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename="image.png"))
+                [await msg.add_reaction(button) for button in buttons]
+                    
+                while True:
+                    try:
+                        reaction, user = await bot.wait_for(
+                            "reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=90.0
+                        )
+                    except asyncio.TimeoutError as e:
+                        embed = results[0][current]
+                        embed.set_footer(text="Timed out!")
+                        await msg.clear_reactions()
+                    else:
+                        previous_page = current
+                        if reaction.emoji == u"\u23EA":
+                            current = 0
+                        elif reaction.emoji == u"\u25C0":
+                            if current > 0:
+                                current -= 1
+                        elif reaction.emoji == u"\u25B6":
+                            if current < len(results[0]) - 1:
+                                current += 1
+                        elif reaction.emoji == u"\u23E9":
+                            current = len(results[0]) - 1
+
+                        [await msg.remove_reaction(button, ctx.author) for button in buttons]
+                        if current != previous_page:
+                            await msg.edit(embed=results[0][current])
+            else:
+                await ctx.send("Error: Wrong Usage! See .hsr build for more info.")
     # elif args[0] == 'wiki':
     #     await ctx.send(
     #         "### Honkai Star Rail Official Wiki: 🧐 ###",
@@ -219,9 +298,9 @@ async def _hsr(ctx, *args):
     else:
         await ctx.send("Wrong command! See `.hsr help` for more info.")
 
-@_hsr.error
-async def hsr_error(ctx, error):
-    await ctx.send(f"ERROR_HSR: {error}")
+# @_hsr.error
+# async def hsr_error(ctx, error):
+#     await ctx.send(f"ERROR_HSR: {error}")
 
 
 # OTHER COMMANDS

@@ -184,7 +184,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             inline=True
         )
         stats_embed.add_field(
-            name="Talents" if i == 0 else "",
+            name="Talent Priority" if i == 0 else "",
             value=talents[i] if i < len(talents) else "",
             inline=True
         )
@@ -197,7 +197,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     for i, tip in enumerate(tips):
         tips_embed.add_field(
-            name="Tips" if i == 0 else "",
+            name="Ability Tips" if i == 0 else "",
             value=tip,
             inline=False
         )

@@ -55,3 +55,7 @@ star_rail_map_icon = 'https://static.wikia.nocookie.net/logopedia/images/3/33/Ho
 EMBEDS_HSR_MAP_LINKS = [
     Embed(title='Star Rail Map', url=star_rail_map, color=0x00ff00).set_thumbnail(url=star_rail_map_icon)
 ]
+
+# Honkai: Star Rail TC, Character Builds, and Guides
+helper_team = 'https://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y'
+helper_team_icon = "https://drive.google.com/file/d/16OHTY_WIHLWS3NQTptjxjDlLWoPdhnsV/view?usp=sharing"

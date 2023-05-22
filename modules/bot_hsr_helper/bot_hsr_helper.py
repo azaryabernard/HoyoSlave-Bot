@@ -1,7 +1,7 @@
 import aiohttp
 import io
 import pandas as pd
-from discord import Embed, File
+from discord import Embed
 from .models import (
     Character, Element, Path, 
     CHARACTERS,
@@ -95,10 +95,17 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         df.reset_index(drop=True, inplace=True)
         # special case for traveler
         if "Trailblazer" in character.get_name():
-            character = Character("Traveler" + f"({character.get_element().name.capitalize()})", character.get_element(), character.get_rarity(), character.get_path())
-
+            character = Character(
+                "Trailblazer" + f" ({character.get_element().name.capitalize()})", 
+                character.get_element(), 
+                character.get_rarity(), 
+                character.get_path()
+            )
         # Parse characters data with character name
-        df_bool = df.characters.apply(lambda x: character.get_first_name().capitalize() in x and character.get_last_name().capitalize() in x if isinstance(x, str) else False)
+        df_bool = df.characters.apply(
+            lambda x: character.get_first_name().lower() in x.lower() and character.get_last_name().lower() in x.lower()
+            if isinstance(x, str) else False
+        )
         start_index = df_bool.eq(True).argmax()
         end_index = df.characters[start_index+1:].notna().idxmax()
         # parse to Dict
@@ -183,7 +190,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             inline=True
         )
         stats_embed.add_field(
-            name="Traces" if i == 0 else "",
+            name="Trace Priority" if i == 0 else "",
             value=traces[i] if i < len(traces) else "",
             inline=True
         )
@@ -194,9 +201,10 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_thumbnail(url="attachment://image.png")
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
+    tips.append("...")
     for i, tip in enumerate(tips):
         tips_embed.add_field(
-            name="Tips (TBA)" if i == 0 else "",
+            name="Ability Priority (TBA)" if i == 0 else "",
             value=tip,
             inline=False
         )
@@ -207,7 +215,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_thumbnail(
         url="attachment://image.png"
     ).set_footer(
-        text= "Source: Honkai: Star Rail Community Character Build Guide\nhttps://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y/"
+        text= "Source: Honkai: Star Rail Community Character Build Guide"
     )
     notes = char_dict["notes"].split("\n\n")
     notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]

@@ -77,7 +77,37 @@ class Character():
 
 # Define all the characters
 CHARACTERS = [
-
+    # QUANTUM
+    Character("Seele", Element.QUANTUM, 5, Path.HUNT),
+    Character("Qingque", Element.QUANTUM, 4, Path.ERUDITION),
+    # FIRE
+    Character("Himeko", Element.FIRE, 5, Path.ERUDITION),
+    Character("Trailblazer Fire", Element.FIRE, 5, Path.PRESERVATION),
+    Character("Asta", Element.FIRE, 4, Path.HARMONY),
+    Character("Hook", Element.FIRE, 4, Path.DESTURCTION),
+    # ICE
+    Character("Gepard", Element.ICE, 5, Path.PRESERVATION),
+    Character("Yanqing", Element.ICE, 5, Path.HUNT),
+    Character("Herta", Element.ICE, 4, Path.ERUDITION),
+    Character("March 7th", Element.ICE, 4, Path.PRESERVATION),
+    Character("Pela", Element.ICE, 4, Path.NIHILITY),
+    # LIGHTNING
+    Character("Bailu", Element.LIGHTNING, 5, Path.ABUNDANCE),
+    Character("Jing Yuan", Element.LIGHTNING, 5, Path.ERUDITION),
+    Character("Arlan", Element.LIGHTNING, 4, Path.DESTURCTION),
+    Character("Serval", Element.LIGHTNING, 4, Path.ERUDITION),
+    Character("Tingyun", Element.LIGHTNING, 4, Path.HARMONY),
+    # WIND
+    Character("Bronya", Element.WIND, 5, Path.HARMONY),
+    Character("Dan Heng", Element.WIND, 4, Path.HUNT),
+    Character("Sampo", Element.WIND, 4, Path.NIHILITY),
+    # IMAGINARY
+    Character("Welt", Element.IMAGINARY, 5, Path.NIHILITY),
+    # PHYSICAL
+    Character("Clara", Element.PHYSICAL, 5, Path.DESTURCTION),
+    Character("Trailblazer Physical", Element.PHYSICAL, 4, Path.DESTURCTION),
+    Character("Sushang", Element.PHYSICAL, 4, Path.HUNT),
+    Character("Natasha", Element.PHYSICAL, 4, Path.ABUNDANCE),
 ]
 
 
@@ -110,7 +140,7 @@ def gen_character_dict(
 
 
 def get_element_url(element: Element):
-        return f"https://docs.google.com/spreadsheets/d/{SHEETS_KEY}/edit#gid={element.get_sheet_id()}"
+        return f"https://docs.google.com/spreadsheets/d/{SHEETS_KEY}/export?format=csv&gid={element.get_sheet_id()}"
 
 
 async def save_dict_to_json(dictionary: dict[str, any]):
