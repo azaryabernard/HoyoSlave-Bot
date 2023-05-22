@@ -1,0 +1,28 @@
+{
+    "name": "Hu Tao",
+    "element": "PYRO",
+    "rarity": 5,
+    "weapon_type": "POLEARM",
+    "roles": [
+        "DPS \u2729"
+    ],
+    "weapons": [
+        "1. Staff of Homa (5\u2729)\n2. Staff of the Scarlet Sands (5\u2729)\n3. Dragon's Bane (4\u2729)\n4. Deathmatch (4\u2729)*\n5. Primordial Jade Winged-Spear (5\u2729)*\n6. Missive Windspear (4\u2729)\n7. Blackcliff Pole (1 stack) (4\u2729)* \n~= Lithic Spear (2 stacks) (4\u2729) \n~= White Tassel (3\u2729)*\n~= Vortex Vanquisher (3 stacks) (5\u2729)*"
+    ],
+    "artifacts": [
+        "1. Crimson Witch of Flames (4)\n2. Shimenawa's Reminiscence (4)*\n3. Gilded Dreams (4)*\n4. Crimson Witch of Flames (2) / +80 EM set (2) / Tenacity of the Millelith (2) [Choose Two]*\n5. Retracing Bolide (4)*"
+    ],
+    "main_stats": [
+        "Sands - HP% / Elemental Mastery\nGoblet - Pyro DMG\nCirclet - Crit Rate / DMG"
+    ],
+    "sub_stats": [
+        "1. Crit Rate / DMG\n2. Elemental Mastery*\n3. HP%\n4. ATK%\n5. Energy Recharge\n"
+    ],
+    "talents": [
+        "1. Normal Attack\n2. Skill\n3. Burst"
+    ],
+    "tips": [
+        "When ending Hu Tao's combos with an Elemental Burst, if you do not jump/dash cancel the last charged attack, the Elemental Burst will still benefit from Hu Tao's Elemental Skill.\n\nIt is recommended to use cancels when performing your Hu Tao combos as to maximize damage.\nN2CJ for [C0] and N2CD for [C1].\nN3CJ/N3CD can be used to conserve stamina at the cost of damage.\n\n*N = Normal Attack, C = Charged Attack, J = Jump, D = Dash"
+    ],
+    "notes": "DPS\nHu Tao is most effective when used with Xingqiu to proc Vaporize/Freeze Melt reactions which utilizes her BiS Set, Crimson Witch of Flames (4). Freeze Melt refers to freezing enemies for Melt set up, since unlike Diluc or Klee, Hu Tao doesn't shatter frozen enemies.\n\nRegarding Weapon Choices:\nPrimordial Jade Winged-Spear: Is better than the [R1] variants of Dragon's Bane and Deathmatch with ideal stacking. While this is a very strong weapon when fully stacked, maintaining the stacks on Hu Tao isn't ideal in realistic situations making the weapon less consistent than other options.\nDeathmatch: This weapon is better than Dragon's Bane when you're not doing Vaporize.\nBlackcliff Pole: Despite seeming quite good due to the Crit DMG substat, Blackcliff Pole at 1 stack performs only slightly better than an [R5] White Tassel in practice as it is difficult to maintain stacks consistently. It is not recommended to buy this weapon specifically for Hu Tao and should only be used if you already have one.\nVortex Vanquisher: Provides little to nothing to Hu Tao since she scales better with HP% than ATK% with every spear in the game. Base ATK makes little difference on Hu Tao because she has a very high HP to ATK conversion cap.\nWhite Tassel: This weapon requires your combos to be more focused on Normal Attacks (N2C over N1C) to make use of it's passive.\n\nRegarding Artifact Sets: \nShimenawa's Reminiscence (4): Provides higher AA damage than Crimson Witch of Flames (4) but lowers your Elemental Burst damage which hurts your AoE damage, also if you're unable to burst, it might cause survivability issues if you're not running a healer.\nGilded Dreams (4): This artifact set is equal to Crimson Witch of Flames (4) if you are using Staff of the Scarlet Sands.\nRetracing Bolide (4) and Crimson Witch of Flames (2) / Tenacity of the Millelith (2) + 80 EM set (2): All these options are almost on equal footing because both of the sets have an equal overall damage output assuming you have 100% shield uptime when using Retracing Bolide (4). The difference is, you want to use +80 EM set (2) / Tenacity of the Millelith (2) / Crimson's Witch of Flame (2) when focusing on Nuking and better consistency, while Retracing Bolide (4) is for overall higher AA damage at the expense of lower burst damage, although inconsistent if you cannot keep your shield permanently.\n\nRegarding Artifact Substats Priority: \nSince Hu Tao is able to trigger Vaporize on most of her damage output, Elemental Mastery is quite valuable on her. If you have less than 100EM total (including from Sucrose EM share, Instructor (4), etc) EM substat take priority over Crit Rate / DMG."
+}
