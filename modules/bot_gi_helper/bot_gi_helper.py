@@ -208,7 +208,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_thumbnail(
         url="attachment://image.png"
     ).set_footer(
-        text= "Source: Genshin Impact Helper Team's Character Builds"
+        text= "Source: Genshin Impact Helper Team's Character Builds\nhttps://docs.google.com/spreadsheets/d/1gNxZ2xab1J6o1TuNVWMeLOZ7TPOqrsf3SshP5DLvKzI/"
     )
     notes = char_dict["notes"].split("\n\n")
     notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]

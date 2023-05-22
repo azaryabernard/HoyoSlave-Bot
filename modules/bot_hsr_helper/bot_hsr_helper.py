@@ -35,7 +35,7 @@ def get_characters_by_rarity(rarity: int):
     return characters
 
 # This function is used to get the character by Path (unused)
-def get_characters_by_weapon_type(path: Path):
+def get_characters_by_path(path: Path):
     characters = []
     for character in CHARACTERS:
         if path == character.path():
@@ -74,7 +74,7 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         if char_dict is None:
             print("There is no cached data for this character. Fetching from google docs.")
             cached = False
-        elif not char_dict["roles"] or not char_dict["weapons"] or not char_dict["artifacts"]:
+        elif not char_dict["roles"] or not char_dict["light_cones"] or not char_dict["relics"]:
             print("Cached data incomplete / corrupted. Fetching from google docs.")
             cached = False
         else:
@@ -91,25 +91,25 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         # Converting the data to a dataframe
         df = pd.read_csv(io.StringIO(response), sep=',', engine='python')
         df = df.drop(df.columns[[0]], axis=1)[4:]
-        df.columns = ['characters', 'roles', 'weapons', 'artifacts', 'main_stats', 'sub_stats', 'talents', 'tips']
+        df.columns = ['characters', 'roles', 'light_cones', 'relics', 'main_stats', 'sub_stats', 'traces', 'tips']
         df.reset_index(drop=True, inplace=True)
         # special case for traveler
-        if "Traveler" in character.get_name():
-            character = Character("Traveler", character.get_element(), character.get_rarity(), character.get_weapon_type())
+        if "Trailblazer" in character.get_name():
+            character = Character("Traveler" + f"({character.get_element().name.capitalize()})", character.get_element(), character.get_rarity(), character.get_path())
 
         # Parse characters data with character name
-        df_bool = df.characters.apply(lambda x: character.get_first_name().upper() in x and character.get_last_name().upper() in x if isinstance(x, str) else False)
+        df_bool = df.characters.apply(lambda x: character.get_first_name().capitalize() in x and character.get_last_name().capitalize() in x if isinstance(x, str) else False)
         start_index = df_bool.eq(True).argmax()
         end_index = df.characters[start_index+1:].notna().idxmax()
         # parse to Dict
         char_dict = gen_character_dict(
             character=character,
             roles=df.roles[start_index+2:end_index].tolist(),
-            weapons=df.weapons[start_index+2:end_index].tolist(),
-            artifacts=df.artifacts[start_index+2:end_index].tolist(),
+            light_cones=df.light_cones[start_index+2:end_index].tolist(),
+            relics=df.relics[start_index+2:end_index].tolist(),
             main_stats=df.main_stats[start_index+2:end_index].tolist(),
             sub_stats=df.sub_stats[start_index+2:end_index].tolist(),
-            talents=df.talents[start_index+2:end_index].tolist(),
+            traces=df.traces[start_index+2:end_index].tolist(),
             tips=df.tips[start_index+2:end_index].tolist(),
             notes=df.roles[end_index]
         )
@@ -135,15 +135,15 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     # Roles
     roles_count = len(char_dict["roles"])
 
-    # Main Embed (Roles, Weapons, Artifacts)
+    # Main Embed (Roles, Light Cones, Relics)
     main_embed = Embed(
             title=f"{character.get_name()} (1/4)", 
             description=character.get_description(),
         ).set_thumbnail(url="attachment://image.png")
     
     roles = seperate_by_roles(char_dict["roles"], roles_count)
-    weapons = seperate_by_roles(char_dict["weapons"], roles_count)
-    artifacts = seperate_by_roles(char_dict["artifacts"], roles_count)
+    light_cones = seperate_by_roles(char_dict["light_cones"], roles_count)
+    relics = seperate_by_roles(char_dict["relics"], roles_count)
 
     for i in range(roles_count):
         main_embed.add_field(
@@ -152,13 +152,13 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             inline=True
         )
         main_embed.add_field(
-            name="Weapons" if i == 0 else "",
-            value=weapons[i] if i < len(weapons) else "",
+            name="Light Cones" if i == 0 else "",
+            value=light_cones[i] if i < len(light_cones) else "",
             inline=True
         )
         main_embed.add_field(
-            name="Artifacts" if i == 0 else "",
-            value=artifacts[i] if i < len(artifacts) else "",
+            name="Relics" if i == 0 else "",
+            value=relics[i] if i < len(relics) else "",
             inline=True
         )
     # Stats Embed (Main Stats, Sub Stats)
@@ -169,7 +169,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     
     main_stats = seperate_by_roles(char_dict["main_stats"], roles_count)
     sub_stats = seperate_by_roles(char_dict["sub_stats"], roles_count)
-    talents = seperate_by_roles(char_dict["talents"], roles_count)
+    traces = seperate_by_roles(char_dict["traces"], roles_count)
 
     for i in range(roles_count):
         stats_embed.add_field(
@@ -183,8 +183,8 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
             inline=True
         )
         stats_embed.add_field(
-            name="Talents" if i == 0 else "",
-            value=talents[i] if i < len(talents) else "",
+            name="Traces" if i == 0 else "",
+            value=traces[i] if i < len(traces) else "",
             inline=True
         )
     # Tips Embed (long > 1024)
@@ -196,7 +196,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     for i, tip in enumerate(tips):
         tips_embed.add_field(
-            name="Tips" if i == 0 else "",
+            name="Tips (TBA)" if i == 0 else "",
             value=tip,
             inline=False
         )
@@ -207,7 +207,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_thumbnail(
         url="attachment://image.png"
     ).set_footer(
-        text= "Source: Genshin Impact Helper Team's Character Builds"
+        text= "Source: Honkai: Star Rail Community Character Build Guide\nhttps://docs.google.com/spreadsheets/d/1FG_6viMaygymJucNU60pGptbgDjLNOpUKPD81pZQ1_Y/"
     )
     notes = char_dict["notes"].split("\n\n")
     notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]

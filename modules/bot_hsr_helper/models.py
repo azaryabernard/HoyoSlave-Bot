@@ -37,7 +37,7 @@ class Element(Enum):
         elif self == Element.PHYSICAL:
             return SHEET_PHYSICAL_ID
         
-# Enum for the weapon types
+# Enum for the Character Paths
 class Path(Enum):
     HUNT, ABUNDANCE, DESTURCTION, ERUDITION, PRESERVATION, NIHILITY, HARMONY = range(7)
 
