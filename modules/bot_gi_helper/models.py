@@ -103,7 +103,7 @@ CHARACTERS = [
     Character("Gorou", Element.GEO, 4, WeaponType.BOW),
     Character("Hu Tao", Element.PYRO, 5, WeaponType.POLEARM),
     Character("Jean", Element.ANEMO, 5, WeaponType.SWORD),
-    Character("Kaedehara Kazuha", Element.ANEMO, 5, WeaponType.SWORD),
+    Character("Kaedahara Kazuha", Element.ANEMO, 5, WeaponType.SWORD),
     Character("Kaeya", Element.CRYO, 4, WeaponType.SWORD),
     Character("Kamisato Ayaka", Element.CRYO, 5, WeaponType.SWORD),
     Character("Kamisato Ayato", Element.HYDRO, 5, WeaponType.SWORD),
