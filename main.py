@@ -13,10 +13,13 @@ from utils.links import (
 
 
 # DEFINES
-INTENTS = discord.Intents.default()
-INTENTS.message_content = True
+PREFIX = '.'
 RESTART = False
-bot = commands.Bot(command_prefix='.', intents=INTENTS)
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True
+intents.reactions = True
+bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
 
 
 # STARTUP
@@ -26,7 +29,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user)
     print('------------------')
-    await bot.change_presence(activity=discord.Game(name='Project Bunny 19C, run .hoyo for more info!'))
+    await bot.change_presence(activity=discord.Game(name='Project Bunny 19C, run .help for more info!'))
     # notify the admin that the bot is ready
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
@@ -38,12 +41,12 @@ HELP_MESSAGE = dedent(f"""\
 ## Welcome to Everything HoyoVerse Related Games! ##
 Use `.gi [help]` to access Genshin Impact related commands!
 Use `.hsr [help]` to access Honkai Star Rail related commands!
-Use `.hoyo` to access this page!
+Use `.help` to access this page!
 
 Other commands: TBD
 """)
                       
-@bot.command(name='hoyo')
+@bot.command(name='help')
 async def _help(ctx, *args):
     if len(args) == 0:
         await ctx.send(HELP_MESSAGE)
@@ -90,20 +93,38 @@ async def _gi(ctx, *args):
             await ctx.send(
                 dedent("""\
                     ### Genshin Impact Character Builds and Guides: 🤓 ###
-                    Use `.gi build <character name> [--full | --no-cache]` for specific character build! ⭐️  (BETA)
-                    Use the `--full` option to get the complete guide in one message (Works on DM). 
-                    Use the `--no-cache` option to discard cached data and get the latest build!
+                    Use `.gi build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
+                    Use the `--full` option to get the complete guide in one message. 
+                    Use the `--update` option to discard cached data and get the latest build!
                     Please don't spam the reaction buttons! ⚠️"""),
                 embeds=EMBEDS_GI_BUILD_LINKS
             )
         elif len(args) >= 2:
-            char_name = ' '.join([arg for arg in args[1:] if not arg.startswith('-')])
+            build_flags = {'--full': False, '--update': False}
+            char_name = []
+            for arg in args[1:]:
+                # replace em-dash with double dash
+                arg = arg.replace('—', '--')
+                if arg.startswith('--'):
+                    if arg in build_flags:
+                        build_flags[arg] = True
+                    else:
+                        await ctx.send(f"Error: Invalid option *{arg}*!")
+                        return
+                else:
+                    char_name.append(arg)
+            char_name = ' '.join(char_name)
             if char_name:
-                results = get_character_build(char_name, False if '--no-cache' in args[1:] else True)
+                results = get_character_build(char_name, not build_flags["--update"])
                 if not results:
                     await ctx.send(f"Error: Character Data for *{char_name}* not found!")
                     return
-                if "--full" in args[1:]:
+                
+                # Force full page in DM
+                if ctx.guild is None:
+                    build_flags["--full"] = True
+                    await ctx.send("DM only mode, forcing full page!")
+                if build_flags["--full"]:
                     [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
                     return
                 
@@ -118,7 +139,7 @@ async def _gi(ctx, *args):
                         reaction, user = await bot.wait_for(
                             "reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=90.0
                         )
-                    except asyncio.TimeoutError:
+                    except asyncio.TimeoutError as e:
                         embed = results[0][current]
                         embed.set_footer(text="Timed out!")
                         await msg.clear_reactions()
@@ -135,9 +156,7 @@ async def _gi(ctx, *args):
                         elif reaction.emoji == u"\u23E9":
                             current = len(results[0]) - 1
 
-                        for button in buttons:
-                            await msg.remove_reaction(button, ctx.author)
-
+                        [await msg.remove_reaction(button, ctx.author) for button in buttons]
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:

@@ -62,14 +62,15 @@ def get_data_from_google_sheets(character: Character, cached: bool = True) -> di
     char_dict = None
     # Checking if the data is cached
     if cached:
-        # TODO: Implement VALID caching
-        char_dict = load_json_to_dict(character.get_name().lower().replace(" ", "_"))
+        char_dict = load_json_to_dict(character)
         if char_dict is None:
             print("There is no cached data for this character. Fetching from google docs.")
             cached = False
         elif not char_dict["roles"] or not char_dict["weapons"] or not char_dict["artifacts"]:
             print("Cached data incomplete / corrupted. Fetching from google docs.")
             cached = False
+        else:
+            print("Fetching from cache.")
     # If it is not cached, fetch from the google docs from Genshin Impact Helper's Team
     if not cached:
         # URL for the google docs
@@ -87,8 +88,12 @@ def get_data_from_google_sheets(character: Character, cached: bool = True) -> di
         df = df.drop(df.columns[[0]], axis=1)[4:]
         df.columns = ['characters', 'roles', 'weapons', 'artifacts', 'main_stats', 'sub_stats', 'talents', 'tips']
         df.reset_index(drop=True, inplace=True)
-        # Parse characters, get last name
-        df_bool = df.characters.apply(lambda x: character.get_last_name().upper() in x and character.get_first_name().upper() in x if isinstance(x, str) else False)
+        # special case for traveler
+        if "Traveler" in character.get_name():
+            character = Character("Traveler", character.get_element(), character.get_rarity(), character.get_weapon_type())
+
+        # Parse characters data with character name
+        df_bool = df.characters.apply(lambda x: character.get_first_name().upper() in x and character.get_last_name().upper() in x if isinstance(x, str) else False)
         start_index = df_bool.eq(True).argmax()
         end_index = df.characters[start_index+1:].notna().idxmax()
         # parse to Dict

@@ -131,10 +131,10 @@ CHARACTERS = [
     Character("Sucrose", Element.ANEMO, 4, WeaponType.CATALYST),
     Character("Childe", Element.HYDRO, 5, WeaponType.BOW),
     Character("Thoma", Element.PYRO, 4, WeaponType.POLEARM),
-    Character("Traveler", Element.ANEMO, 5, WeaponType.SWORD),
-    Character("Traveler", Element.GEO, 5, WeaponType.SWORD),
-    Character("Traveler", Element.ELECTRO, 5, WeaponType.SWORD),
-    Character("Traveler", Element.DENDRO, 5, WeaponType.SWORD),
+    Character("Traveler Anemo", Element.ANEMO, 5, WeaponType.SWORD),
+    Character("Traveler Geo", Element.GEO, 5, WeaponType.SWORD),
+    Character("Traveler Electro", Element.ELECTRO, 5, WeaponType.SWORD),
+    Character("Traveler Dendro", Element.DENDRO, 5, WeaponType.SWORD),
     Character("Venti", Element.ANEMO, 5, WeaponType.BOW),
     Character("Wanderer", Element.ANEMO, 5, WeaponType.CATALYST),
     Character("Xiangling", Element.PYRO, 4, WeaponType.POLEARM),
@@ -180,14 +180,15 @@ def gen_character_dict(
 
 
 def save_dict_to_json(dictionary: dict[str, any]):
-    file_name = dictionary["name"].lower().replace(" ", "_")
+    file_name = dictionary["name"].lower().replace(" ", "_") + "_" + dictionary["element"].lower()
     try:
         with open(os.path.join(dirname, f"cache/{file_name}.json"), "w", encoding="utf-8") as f:
             json.dump(dictionary, f, indent=4)
     except Exception as e:
         print(f"Error saving {file_name} to json: {e}")
 
-def load_json_to_dict(file_name: str) -> dict[str, any]:
+def load_json_to_dict(character: Character) -> dict[str, any]:
+    file_name = character.name.lower().replace(" ", "_") + "_" + character.element.name.lower()
     # check if file exists
     if not os.path.isfile(os.path.join(dirname, f"cache/{file_name}.json")):
         return None
