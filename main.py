@@ -136,9 +136,8 @@ async def _gi(ctx, *args):
                 else:
                     await ctx.send(
                         dedent("""\
-                        **(hints)**
-                        Press the **reaction buttons** below to navigate through the pages.
-                        Use the `--full` option to get the complete guide in one long message.""")
+                        *Press the **reaction buttons** below to navigate through the pages.*
+                        *Use the `--full` option to get the complete guide in one long message.*""")
                 )
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
@@ -261,9 +260,8 @@ async def _hsr(ctx, *args):
                 else:
                     await ctx.send(
                         dedent("""\
-                        **(hints)**
-                        Press the **reaction buttons** below to navigate through the pages.
-                        Use the `--full` option to get the complete guide in one long message.""")
+                        *Press the **reaction buttons** below to navigate through the pages.*
+                        *Use the `--full` option to get the complete guide in one long message.*""")
                 )
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
