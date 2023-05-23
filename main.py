@@ -372,6 +372,8 @@ async def _sudo(ctx, *args):
             return
         if os.popen("git rev-parse HEAD").read() == os.popen("git rev-parse @{u}").read():
             await ctx.send('*Bot is up to date!*\n\u200e')
+        else:
+            await ctx.send('*There are changes to pull, please update!*\n\u200e')
     
     elif args[0] == 'update':
         await ctx.send('*Updating...*')
