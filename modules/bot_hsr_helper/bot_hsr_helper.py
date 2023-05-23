@@ -220,8 +220,8 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
         text= "Source: Honkai: Star Rail Community Character Build Guide"
     )
     notes = char_dict["notes"].split("\n\n") if isinstance(char_dict["notes"], str) else ""
-    notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]
-    notes = [note for subnotes in notes for note in subnotes]
+    # split notes into 1024 char limit
+    notes = [note[i:i+1024] for note in notes for i in range(0, len(note), 1024)]
     for i, note in enumerate(notes):
         notes_embed.add_field(
             name="Notes" if i == 0 else "",
