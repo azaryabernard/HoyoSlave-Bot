@@ -39,7 +39,7 @@ async def on_ready():
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
     await user.send(f'**Bot on Standby!**\n')
-    bot.invoke(bot.get_command('bronya'))
+    await bot.invoke(bot.get_command('bronya'))
 
 
 # GENERAL HELP PAGE
@@ -297,9 +297,9 @@ async def _hsr(ctx, *args):
     else:
         await ctx.send("Wrong command! See `.hsr help` for more info.")
 
-# @_hsr.error
-# async def hsr_error(ctx, error):
-#     await ctx.send(f"ERROR_HSR: {error}")
+@_hsr.error
+async def hsr_error(ctx, error):
+    await ctx.send(f"ERROR_HSR: {error}")
 
 
 # OTHER COMMANDS
