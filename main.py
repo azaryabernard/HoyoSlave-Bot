@@ -370,12 +370,8 @@ async def _sudo(ctx, *args):
         else:
             await ctx.send('*Error: Remote status check failed!*\n\u200e')
             return
-        
-        res = os.system("git status -uno")
-        if res == 0:
-            await ctx.send('*No updates available!*\n\u200e')
-        else:
-            await ctx.send('*Updates available!*\n\u200e')
+        if os.system("git rev-parse HEAD") == os.system("git rev-parse @{u}"):
+            await ctx.send('*Bot is up to date!*\n\u200e')
     
     elif args[0] == 'update':
         await ctx.send('*Updating...*')
