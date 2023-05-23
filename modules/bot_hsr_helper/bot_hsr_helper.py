@@ -90,10 +90,11 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
             response = await fetch(session, url)
         # Converting the data to a dataframe
         df = pd.read_csv(io.StringIO(response), sep=',', engine='python')
-        df = df.drop(df.columns[[0]], axis=1)[4:]
-        print(df)
+        df_drops = [0]  + list(range(9, len(df.columns)))
+        df = df.drop(df.columns[df_drops], axis=1)[4:]
         df.columns = ['characters', 'roles', 'light_cones', 'relics', 'main_stats', 'sub_stats', 'traces', 'tips']
         df.reset_index(drop=True, inplace=True)
+        print("Masuk")
         # special case for traveler
         if "Trailblazer" in character.get_name():
             character = Character(
@@ -218,7 +219,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_footer(
         text= "Source: Honkai: Star Rail Community Character Build Guide"
     )
-    notes = char_dict["notes"].split("\n\n")
+    notes = char_dict["notes"].split("\n\n") if isinstance(char_dict["notes"], str) else ""
     notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]
     notes = [note for subnotes in notes for note in subnotes]
     for i, note in enumerate(notes):

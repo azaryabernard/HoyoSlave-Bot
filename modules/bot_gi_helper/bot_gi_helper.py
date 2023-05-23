@@ -90,7 +90,8 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
             response = await fetch(session, url)
         # Converting the data to a dataframe
         df = pd.read_csv(io.StringIO(response), sep=',', engine='python')
-        df = df.drop(df.columns[[0]], axis=1)[4:]
+        df_drops = [0]  + list(range(9, len(df.columns)))
+        df = df.drop(df.columns[df_drops], axis=1)[4:]
         df.columns = ['characters', 'roles', 'weapons', 'artifacts', 'main_stats', 'sub_stats', 'talents', 'tips']
         df.reset_index(drop=True, inplace=True)
         # special case for traveler
@@ -210,7 +211,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     ).set_footer(
         text= "Source: Genshin Impact Helper Team's Character Builds"
     )
-    notes = char_dict["notes"].split("\n\n")
+    notes = char_dict["notes"].split("\n\n") if isinstance(char_dict["notes"], str) else ""
     notes =  [[note[0:512], note[512:1024]] if len(note) >= 1024 else [note] for note in notes]
     notes = [note for subnotes in notes for note in subnotes]
     for i, note in enumerate(notes):
