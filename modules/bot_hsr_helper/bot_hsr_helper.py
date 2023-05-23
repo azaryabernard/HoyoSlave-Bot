@@ -90,8 +90,8 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
             response = await fetch(session, url)
         # Converting the data to a dataframe
         df = pd.read_csv(io.StringIO(response), sep=',', engine='python')
-        df = df.drop(df.columns[[0]], axis=1)[4:]
         df.columns = ['characters', 'roles', 'light_cones', 'relics', 'main_stats', 'sub_stats', 'traces', 'tips']
+        df = df.drop(df.columns[[0]], axis=1)[4:]
         df.reset_index(drop=True, inplace=True)
         # special case for traveler
         if "Trailblazer" in character.get_name():
