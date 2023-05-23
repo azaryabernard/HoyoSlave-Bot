@@ -67,9 +67,9 @@ async def help_error(ctx, error):
 GI_COMMANDS = [
     '.gi map - Interactive Map 📍\n', 
     '.gi wiki - Genshin Wikia 🧐\n', 
-    '.gi db - Genshin Database, Wish Tracker 📚'
+    '.gi db - Genshin Database, Wish Tracker 📚\n'
     '.gi build - Character Builds and Guides 🤓\n', 
-    '(new) -> .gi build <character name> for character specific build ⭐️\n',
+    '.gi build <character name> for character specific build ⭐️ (new!)',
 ]
 
 GI_HELP_MESSAGE = dedent(f"""\
@@ -102,7 +102,7 @@ async def _gi(ctx, *args):
                     Use `.gi build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use the `--full` option to get the complete guide in one message. 
                     Use the `--update` option to discard cached data and get the latest build!
-                    Please don't spam the reaction buttons! ⚠️"""),
+                    Use the **reaction buttons** to navigate through the pages. Please don't spam them! ⚠️"""),
                 embeds=EMBEDS_GI_BUILD_LINKS
             )
         elif len(args) >= 2:
@@ -133,7 +133,13 @@ async def _gi(ctx, *args):
                 if build_flags["--full"]:
                     [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
                     return
-                
+                else:
+                    await ctx.send(
+                        dedent("""\
+                        **Hints:**
+                        Press the **reaction buttons** below to navigate through the pages.
+                        Use the `--full` option to get the complete guide in one long message.""")
+                )
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
@@ -186,9 +192,9 @@ async def gi_error(ctx, error):
 HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
     '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
-    '.hsr db - Honkai Star Rail Database, Warp Tracker, Tierlist 📚'
+    '.hsr db - Honkai Star Rail Database, Warp Tracker, Tierlist 📚\n'
     '.hsr build - Character Builds and Guides 🤓\n', 
-    '(new) -> .hsr build <character name> - Specific Character Build ⭐️\n'
+    '.hsr build <character name> - Specific Character Build ⭐️ (new!)'
 ]
 
 HSR_HELP_MESSAGE = dedent(f"""\
@@ -220,10 +226,9 @@ async def _hsr(ctx, *args):
                 dedent("""\
                     ### Honkai: Star Rail Character Builds and Guides: 🤓 ###
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
-                    Use the reaction buttons to navigate through the pages.
                     Use the `--full` option to get the complete guide in one long message. 
                     Use the `--update` option to discard cached data and get the latest build!
-                    Please don't spam the reaction buttons! ⚠️"""),
+                    Use the **reaction buttons** to navigate through the pages. Please don't spam them! ⚠️"""),
                 embeds=EMBEDS_HSR_BUILD_LINKS
             )
         elif len(args) >= 2:
@@ -246,13 +251,6 @@ async def _hsr(ctx, *args):
                 if not results:
                     await ctx.send(f"Error: Character Data for *{char_name}* not found!")
                     return
-                # hints
-                if not build_flags["--full"]:
-                    await ctx.send(
-                        dedent("""\
-                        (Hint) Press \u23EA\u25C0\u25B6\u23E9 to navigate through the pages.
-                        (Hint) Use the `--full` option to get the complete guide in one long message.""")
-                )
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
@@ -260,7 +258,13 @@ async def _hsr(ctx, *args):
                 if build_flags["--full"]:
                     [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
                     return
-                
+                else:
+                    await ctx.send(
+                        dedent("""\
+                        **Hints:**
+                        Press the **reaction buttons** below to navigate through the pages.
+                        Use the `--full` option to get the complete guide in one long message.""")
+                )
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
