@@ -67,8 +67,9 @@ async def help_error(ctx, error):
 GI_COMMANDS = [
     '.gi map - Interactive Map 📍\n', 
     '.gi wiki - Genshin Wikia 🧐\n', 
-    '.gi build - Character Builds and Guides 🤓\n', 
     '.gi db - Genshin Database, Wish Tracker 📚'
+    '.gi build - Character Builds and Guides 🤓\n', 
+    '(new) -> .gi build <character name> for character specific build ⭐️\n',
 ]
 
 GI_HELP_MESSAGE = dedent(f"""\
@@ -185,8 +186,9 @@ async def gi_error(ctx, error):
 HSR_COMMANDS = [
     '.hsr map - Interactive Map 📍\n', 
     '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
-    '.hsr build - Character Builds and Guides 🤓\n', 
     '.hsr db - Honkai Star Rail Database, Warp Tracker, Tierlist 📚'
+    '.hsr build - Character Builds and Guides 🤓\n', 
+    '(new) -> .hsr build <character name> - Specific Character Build ⭐️\n'
 ]
 
 HSR_HELP_MESSAGE = dedent(f"""\
@@ -218,7 +220,8 @@ async def _hsr(ctx, *args):
                 dedent("""\
                     ### Honkai: Star Rail Character Builds and Guides: 🤓 ###
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
-                    Use the `--full` option to get the complete guide in one message. 
+                    Use the reaction buttons to navigate through the pages.
+                    Use the `--full` option to get the complete guide in one long message. 
                     Use the `--update` option to discard cached data and get the latest build!
                     Please don't spam the reaction buttons! ⚠️"""),
                 embeds=EMBEDS_HSR_BUILD_LINKS
@@ -243,7 +246,13 @@ async def _hsr(ctx, *args):
                 if not results:
                     await ctx.send(f"Error: Character Data for *{char_name}* not found!")
                     return
-                
+                # hints
+                if not build_flags["--full"]:
+                    await ctx.send(
+                        dedent("""\
+                        (Hint) Press \u23EA\u25C0\u25B6\u23E9 to navigate through the pages.
+                        (Hint) Use the `--full` option to get the complete guide in one long message.""")
+                )
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
