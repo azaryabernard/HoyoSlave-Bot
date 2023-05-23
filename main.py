@@ -38,8 +38,7 @@ async def on_ready():
     # notify the admin that the bot is ready
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
-    await user.send(f'**Bot on Standby!**\n')
-    await bot.invoke(bot.get_command('bronya'))
+    await user.send(f'**Bot on Standby!**\n{get_random_bronya_message()}')
 
 
 # GENERAL HELP PAGE
@@ -342,10 +341,13 @@ bronya_messages = ["Project bunny, immediately startup the Captain cleansing pro
                     "If there\'s no work, can Bronya go home to play games? 🫠",
                     "Time together with Captain, Bronya is very happy. 😊"]
 
+def get_random_bronya_message():
+    return bronya_messages[randrange(len(bronya_messages))]
+
 @bot.command(name='bronya')
 async def _bronya(ctx, *args):
     if len(args) == 0:
-        await ctx.send(f"*{bronya_messages[randrange(len(bronya_messages))]}*")
+        await ctx.send(f"*{get_random_bronya_message()}*")
 
 
 # ADMIN COMMANDS
