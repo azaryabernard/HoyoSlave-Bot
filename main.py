@@ -15,6 +15,10 @@ from utils.embeds import (
     EMBEDS_HSR_MAP_LINKS, EMBEDS_HSR_BUILD_LINKS,
     EMBEDS_HSR_DB_LINKS, EMBEDS_HSR_WIKI_LINKS
 )
+from utils.errors import (
+    error_character_not_found, 
+    ERROR_IMAGE, Modules
+)
 
 
 # DEFINES
@@ -65,7 +69,7 @@ async def _help(ctx, *args):
 
 @_help.error
 async def help_error(ctx, error):
-    await ctx.send(f"ERROR (HELP): {error}")
+    await ctx.send(f"HELP ERROR: {error}")
 
 
 # GENSHIN IMPACT COMMANDS
@@ -120,7 +124,7 @@ async def _gi(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(f"ERROR: Invalid option *{arg}*!")
+                        await ctx.send(f"GI ERROR: Invalid option *{arg}*!")
                         return
                 else:
                     char_name.append(arg)
@@ -129,7 +133,7 @@ async def _gi(ctx, *args):
             if char_name:
                 results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(f"ERROR: Character Data for *{char_name}* not found!", file=ERROR_IMAGE)
+                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=ERROR_IMAGE)
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -176,7 +180,7 @@ async def _gi(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send("ERROR: Wrong Usage! See .gi build for more info.")
+                await ctx.send("GI ERROR: Wrong Usage! See .gi build for more info.")
     elif args[0] == 'db':
         await ctx.send(
             "### Genshin Impact Database: 📚 ###",
@@ -189,7 +193,7 @@ async def _gi(ctx, *args):
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(f"ERROR (GI): {error}", file=ERROR_IMAGE)
+    await ctx.send(f"GI ERROR: {error}", file=ERROR_IMAGE)
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -245,7 +249,7 @@ async def _hsr(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(f"ERROR: Invalid option *{arg}*!")
+                        await ctx.send(f"HSR ERROR: Invalid option *{arg}*!")
                         return
                 else:
                     char_name.append(arg)
@@ -253,8 +257,7 @@ async def _hsr(ctx, *args):
             if char_name:
                 results = await get_hsr_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(dedent(f"""```ansi
-\u001b[0;31mERROR: Character Data for *{char_name}* not found!```"""), file=ERROR_IMAGE)
+                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=ERROR_IMAGE)
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -301,7 +304,7 @@ async def _hsr(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send("ERROR: Wrong Usage! See .hsr build for more info.")
+                await ctx.send("HSR ERROR: Wrong Usage! See .hsr build for more info.")
     # HSR DB
     elif args[0] == 'db':
         await ctx.send(
@@ -315,7 +318,7 @@ async def _hsr(ctx, *args):
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(f"ERROR (HSR): {error}", file=ERROR_IMAGE)
+    await ctx.send(f"HSR ERROR: {error}", file=ERROR_IMAGE)
 
 
 # OTHER COMMANDS
@@ -391,7 +394,7 @@ async def _sudo(ctx, *args):
         if res == 0:
             await ctx.send('*Remote status check successful!*\n\u200e')
         else:
-            await ctx.send('*ERROR: Remote status check failed!*\n\u200e')
+            await ctx.send('*SUDO ERROR: Remote status check failed!*\n\u200e')
             return
         if os.popen("git rev-parse HEAD").read() == os.popen("git rev-parse @{u}").read():
             await ctx.send('*Bot is up to date!*\n\u200e')
@@ -404,7 +407,7 @@ async def _sudo(ctx, *args):
         if res == 0:
             await ctx.send('*Update successful!*\n\u200e')
         else:
-            await ctx.send('*ERROR: Update failed!*\n\u200e')
+            await ctx.send('*SUDO ERROR: Update failed!*\n\u200e')
             return
         REBOOT = True
         await ctx.send('*Rebooting...*\n\u200e')
@@ -420,14 +423,14 @@ async def _sudo(ctx, *args):
             if res == 0:
                 await ctx.send('*Clearing successful!*\n\u200e')
             else:
-                await ctx.send('*ERROR: Clearing failed!*\n\u200e')
+                await ctx.send('*SUDO ERROR: Clearing failed!*\n\u200e')
         elif args[1] == 'gi':
             await ctx.send('*Clearing GI cache...*')
             res = os.system("rm -rf modules/bot_gi_helper/cache/*")
             if res == 0:
                 await ctx.send('*Clearing successful!*\n\u200e')
             else:
-                await ctx.send('*ERROR: Clearing failed!*\n\u200e')
+                await ctx.send('*SUDO ERROR: Clearing failed!*\n\u200e')
     
     elif args[0] == "test":
         await ctx.send("Test")
@@ -440,7 +443,7 @@ async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         await ctx.send(f'*WARNING: ACCESS DENIED!*\n{ctx.author} is not the admin!\nFurther trigger of this command will be reported to the admin!')
     else:
-        await ctx.send(f"ERROR (SUDO): {error}")
+        await ctx.send(f"SUDO ERROR: {error}")
 
 
 # Run the client on the server
