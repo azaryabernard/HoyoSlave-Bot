@@ -253,12 +253,7 @@ async def _hsr(ctx, *args):
             if char_name:
                 results = await get_hsr_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(f"ERROR: Character Data for *{char_name}* not found!", file=ERROR_IMAGE)
-                    await ctx.send("""```ansi
-                    \u001b[0;40m\u001b[1;32mThat's some cool formatted text right?
-                    or
-                    \u001b[1;40;32mThat's some cool formatted text right?
-                    ```""")
+                    await ctx.send(f"```ansi\u001b[0;31mERROR: Character Data for *{char_name}* not found!```", file=ERROR_IMAGE)
                     return
                 # Force full page in DM
                 if ctx.guild is None:
