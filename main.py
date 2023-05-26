@@ -9,7 +9,7 @@ from modules.bot_gi_helper.bot_gi_helper import (
 from modules.bot_hsr_helper.bot_hsr_helper import (
     get_character_build as get_hsr_character_build
 )
-from utils.links import (
+from utils.embeds import (
     EMBEDS_GI_MAP_LINKS, EMBEDS_GI_WIKI_LINKS,
     EMBEDS_GI_BUILD_LINKS, EMBEDS_GI_DB_LINKS,
     EMBEDS_HSR_MAP_LINKS, EMBEDS_HSR_BUILD_LINKS,
@@ -25,6 +25,10 @@ intents.message_content = True
 intents.members = True
 intents.reactions = True
 bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
+
+# DEFINES - OTHERS
+DIRNAME = os.path.dirname(__file__)
+ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"assets/shared/hotr_cried.jpeg")
 
 
 # STARTUP
@@ -60,7 +64,7 @@ async def _help(ctx, *args):
 
 @_help.error
 async def help_error(ctx, error):
-    await ctx.send(f"ERROR_HELP: {error}")
+    await ctx.send(f"ERROR (HELP): {error}")
 
 
 # GENSHIN IMPACT COMMANDS
@@ -184,7 +188,8 @@ async def _gi(ctx, *args):
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(f"ERROR_GI: {error}")
+    error_image = discord.File(ERROR_IMAGE_PATH, filename="image.jpeg")
+    await ctx.send(f"ERROR (GI): {error}", file=error_image)
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -309,7 +314,8 @@ async def _hsr(ctx, *args):
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(f"ERROR_HSR: {error}")
+    error_image = discord.File(ERROR_IMAGE_PATH, filename="image.jpeg")
+    await ctx.send(f"ERROR (HSR): {error}", file=error_image)
 
 
 # OTHER COMMANDS
@@ -319,8 +325,8 @@ async def _hoo(ctx):
 
 @bot.command(name='curse')
 async def _curse(ctx, *args):
-    cursewords_base = ["Noob", "Boo", "Lame", "Asu", "Jancuk", "Fuck u", "Puki", "Cuki", "Jambret", "Jangkrik", "Anjing"]
-    cursewords = cursewords_base if len(args) > 0 and '!' in args else cursewords_base[:3]
+    cursewords_base = ["Noob", "Boo", "Lame", "Skill issue", "Asu", "Jancuk", "Fuck u", "Puki", "Cuki", "Jambret", "Jangkrik", "Anjing"]
+    cursewords = cursewords_base if len(args) > 0 and '!' in args else cursewords_base[:4]
     # check if there is ! after command    
     if len(args) == 0 or len(args) == 1 and args[0] == '!':
         await ctx.send(f'{cursewords[randrange(len(cursewords))]}!')
@@ -434,7 +440,7 @@ async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         await ctx.send(f'*WARNING: ACCESS DENIED!*\n{ctx.author} is not the admin!\nFurther trigger of this command will be reported to the admin!')
     else:
-        await ctx.send(f"ERROR_SUDO: {error}")
+        await ctx.send(f"ERROR (SUDO): {error}")
 
 
 # Run the client on the server

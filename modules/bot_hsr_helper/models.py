@@ -15,7 +15,7 @@ SHEET_WIND_ID = "653464458"
 SHEET_IMAGINARY_ID = "1780570478"
 SHEET_PHYSICAL_ID = "1836385190"
 
-dirname = os.path.dirname(__file__)
+DIRNAME = os.path.dirname(__file__)
 
 # Enum for the elements
 class Element(Enum):
@@ -70,7 +70,7 @@ class Character():
     def get_image_path(self):
         # Thanks to u/jojocheck for compiling all the icons!
         parsed_name = self.name.replace(" ", "_")
-        return os.path.join(dirname, f"../../assets/hsr_character_icons/{parsed_name}_Icon.png")
+        return os.path.join(DIRNAME, f"../../assets/hsr_character_icons/{parsed_name}_Icon.png")
     
     def get_description(self):
         return f"{self.name} is a {self.rarity}⭐️ {self.element.name.capitalize()} {self.path.name.capitalize()} user in Honkai: Star Rail."
@@ -146,7 +146,7 @@ def get_element_url(element: Element):
 async def save_dict_to_json(dictionary: dict[str, any]):
     file_name = dictionary["name"].lower().replace(" ", "_")
     try:
-        with open(os.path.join(dirname, f"cache/{file_name}.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(DIRNAME, f"cache/{file_name}.json"), "w", encoding="utf-8") as f:
             json.dump(dictionary, f, indent=4)
     except Exception as e:
         print(f"Error saving {file_name} to json: {e}")
@@ -155,7 +155,7 @@ async def save_dict_to_json(dictionary: dict[str, any]):
 async def load_json_to_dict(character: Character) -> dict[str, any]:
     file_name = character.name.lower().replace(" ", "_")
     # check if file exists
-    if not os.path.isfile(os.path.join(dirname, f"cache/{file_name}.json")):
+    if not os.path.isfile(os.path.join(DIRNAME, f"cache/{file_name}.json")):
         return None
-    with open(os.path.join(dirname, f"cache/{file_name}.json"), "r", encoding="utf-8") as f:
+    with open(os.path.join(DIRNAME, f"cache/{file_name}.json"), "r", encoding="utf-8") as f:
         return json.load(f)
