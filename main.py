@@ -28,8 +28,8 @@ bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
 
 # DEFINES - OTHERS
 DIRNAME = os.path.dirname(__file__)
-ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"assets/shared/hotr_cried.jpeg")
-ERROR_IMAGE = discord.File(ERROR_IMAGE_PATH, filename="image.jpeg")
+ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"assets/shared/hotr_cried.jpg")
+ERROR_IMAGE = discord.File(ERROR_IMAGE_PATH, filename="image.jpg")
 
 
 # STARTUP
