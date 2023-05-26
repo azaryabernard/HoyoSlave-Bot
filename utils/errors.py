@@ -6,11 +6,12 @@ from enum import Enum
 # DEFINES - OTHERS
 DIRNAME = os.path.dirname(__file__)
 ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"../assets/shared/hotr_cried.jpg")
-ERROR_IMAGE = discord.File(ERROR_IMAGE_PATH, filename="image.jpg")
-
 
 class Modules(Enum):
     UNKNOWN, GI, HSR, HELP, SUDO = range(5)
+
+def get_error_image():
+    return discord.File(ERROR_IMAGE_PATH, filename="image.jpg")
 
 # ERRORS - SHARED
 # CHARACTER NOT FOUND

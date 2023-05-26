@@ -18,7 +18,7 @@ from utils.embeds import (
 from utils.errors import (
     error_character_not_found, error_invalid_option,
     error_wrong_usage, error_access_denied,
-    error_catched, ERROR_IMAGE, Modules
+    error_catched, get_error_image, Modules
 )
 
 
@@ -129,7 +129,7 @@ async def _gi(ctx, *args):
             if char_name:
                 results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=ERROR_IMAGE)
+                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_error_image())
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -185,11 +185,11 @@ async def _gi(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(GI_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=ERROR_IMAGE)
+        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image())
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(error_catched(Modules.GI, error), file=ERROR_IMAGE)
+    await ctx.send(error_catched(Modules.GI, error), file=get_error_image())
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -253,7 +253,7 @@ async def _hsr(ctx, *args):
             if char_name:
                 results = await get_hsr_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=ERROR_IMAGE)
+                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_error_image())
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -314,7 +314,7 @@ async def _hsr(ctx, *args):
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(error_catched(Modules.HSR, error), file=ERROR_IMAGE)
+    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image())
 
 
 # OTHER COMMANDS
@@ -444,7 +444,7 @@ async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         await ctx.send(error_access_denied(Modules.SUDO, ctx.author))
     else:
-        await ctx.send(error_catched(Modules.SUDO, error), file=ERROR_IMAGE)
+        await ctx.send(error_catched(Modules.SUDO, error), file=get_error_image())
 
 
 # Run the client on the server
