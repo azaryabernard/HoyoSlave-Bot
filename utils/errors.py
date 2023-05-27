@@ -18,9 +18,9 @@ def get_error_image(type: int = 0):
     elif type == 1:
         return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_angry.jpg")
     elif type == 2:
-        return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_confused.jpg")
+        return discord.File(ERROR_IMAGE_PATH_3, filename="bronya_confused.jpg")
     else:
-        return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_confused.jpg")
+        return discord.File(ERROR_IMAGE_PATH_3, filename="bronya_confused.jpg")
 
 # ERRORS - SHARED
 # CHARACTER NOT FOUND
