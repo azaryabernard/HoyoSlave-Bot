@@ -114,12 +114,11 @@ async def _gi(ctx, *args):
             )
             # [await ctx.send(block) for block in get_gi_all_characters_str()]
             from time import sleep
-            for block in get_gi_all_characters_str():
-                await ctx.send(block)
+            for block in get_gi_all_characters_str(): await ctx.send(block)
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ('5', '4'):
-                [await ctx.send(block) for block in get_gi_all_characters_str(rarity=int(rarity))]
+                for block in get_gi_all_characters_str(rarity=int(rarity)): await ctx.send(block)
             else:
                 await ctx.send(error_invalid_option(Modules.GI, 'chars', rarity), file=get_bronya_image(3))
         else: 
@@ -164,7 +163,8 @@ async def _gi(ctx, *args):
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png")) for c_e in results[0]]
+                    for c_e in results[0]: 
+                        await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png"))
                     return
                 else:
                     await ctx.send(
@@ -176,8 +176,7 @@ async def _gi(ctx, *args):
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
                 msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
-                [await msg.add_reaction(button) for button in buttons]
-                    
+                for button in buttons: await msg.add_reaction(button)
                 while True:
                     try:
                         reaction, user = await bot.wait_for(
@@ -200,7 +199,7 @@ async def _gi(ctx, *args):
                         elif reaction.emoji == u"\u23E9":
                             current = len(results[0]) - 1
 
-                        [await msg.remove_reaction(button, ctx.author) for button in buttons]
+                        for button in buttons: await msg.remove_reaction(button, ctx.author)
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
@@ -307,7 +306,8 @@ async def _hsr(ctx, *args):
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png")) for c_e in results[0]]
+                    for c_e in results[0]: 
+                        await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png"))
                     return
                 else:
                     await ctx.send(
@@ -319,8 +319,7 @@ async def _hsr(ctx, *args):
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
                 msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
-                [await msg.add_reaction(button) for button in buttons]
-                    
+                for button in buttons: await msg.add_reaction(button)    
                 while True:
                     try:
                         reaction, user = await bot.wait_for(
@@ -343,7 +342,7 @@ async def _hsr(ctx, *args):
                         elif reaction.emoji == u"\u23E9":
                             current = len(results[0]) - 1
 
-                        [await msg.remove_reaction(button, ctx.author) for button in buttons]
+                        for button in buttons: await msg.remove_reaction(button, ctx.author)
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
