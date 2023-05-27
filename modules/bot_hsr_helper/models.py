@@ -77,6 +77,9 @@ class Character():
     def get_element(self):
         return self.element
     
+    def get_colored_element(self):
+        return self.element.get_color_ansi() + self.element.name.capitalize() + '\u001b[0m'
+    
     def get_rarity(self):
         return self.rarity
     
@@ -122,7 +125,7 @@ CHARACTERS = [
     Character("Welt", Element.IMAGINARY, 5, Path.NIHILITY),
     # PHYSICAL
     Character("Clara", Element.PHYSICAL, 5, Path.DESTURCTION),
-    Character("Trailblazer Physical", Element.PHYSICAL, 4, Path.DESTURCTION),
+    Character("Trailblazer Physical", Element.PHYSICAL, 5, Path.DESTURCTION),
     Character("Sushang", Element.PHYSICAL, 4, Path.HUNT),
     Character("Natasha", Element.PHYSICAL, 4, Path.ABUNDANCE),
 ]

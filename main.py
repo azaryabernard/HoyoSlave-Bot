@@ -196,9 +196,10 @@ async def gi_error(ctx, error):
 
 # HONKAI: STAR RAIL COMMANDS
 HSR_COMMANDS = [
-    '.hsr map - Interactive Map 📍\n', 
-    '.hsr wiki - Honkai Star Rail Wiki 🧐\n', 
-    '.hsr db - Honkai Star Rail Database, Warp Tracker, Tierlist 📚\n'
+    '.hsr map - Interactive Map(s) 📍\n', 
+    '.hsr wiki - Honkai: Star Rail Wiki 🧐\n', 
+    '.hsr db - Honkai: Star Rail Database, Warp Tracker, Tierlist 📚\n'
+    '.hsr chars - List of All Available Characters 📜\n'
     '.hsr build - Character Builds and Guides 🤓\n', 
     '.hsr build <character name> - Specific Character Build ⭐️ (new!)'
 ]
@@ -237,6 +238,7 @@ async def _hsr(ctx, *args):
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use the `--full` option to get the complete guide in one long message. 
                     Use the `--update` option to discard cached data and get the latest build!
+                    Use `.hsr chars` to get a list of all available characters.
                     Use the **reaction buttons** to navigate through the pages. Please don't spam them! ⚠️"""),
                 embeds=EMBEDS_HSR_BUILD_LINKS
             )

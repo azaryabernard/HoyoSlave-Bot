@@ -12,11 +12,11 @@ from .models import (
 
 """ HELPER FUNCTIONS """
 # This function is used to get the characters list
-def get_characters_per_rarity(characters: list[Character], rarity: int = None):
+def get_characters_per_rarity(rarity: int = None):
     if rarity is None:
-        return sorted(characters, key=lambda c:(-c.get_rarity(), c.get_name()))
+        return sorted(CHARACTERS, key=lambda c:(-c.get_rarity(), c.get_name()))
     else:
-        return sorted([c for c in characters if c.get_rarity() == rarity], key=Character.get_name)
+        return sorted([c for c in CHARACTERS if c.get_rarity() == rarity], key=Character.get_name)
 
 # This function is used to get the character by name
 def get_character_by_name(name: str):
@@ -94,7 +94,7 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         df.columns = ['characters', 'roles', 'light_cones', 'relics', 'main_stats', 'sub_stats', 'traces', 'tips']
         df.reset_index(drop=True, inplace=True)
         print("Masuk")
-        # special case for traveler
+        # special case for Trailblazer
         if "Trailblazer" in character.get_name():
             character = Character(
                 "Trailblazer" + f" ({character.get_element().name.capitalize()})", 
@@ -233,7 +233,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         character.get_image_path()
     )
 
-def tabulator(text, min_field=15):
+def tabulator(text, min_field=14):
     tabs_to_append = min_field - len(text)  
     return_string = (text if (tabs_to_append <= 0) else text + " "*tabs_to_append)
     return return_string 
@@ -244,9 +244,13 @@ def get_characters_str_by_rarity(rarity: int) -> str:
     chars_list = get_characters_per_rarity(rarity)
     # Creating the string
     sub_title = f"### {rarity}⭐️ Rarity ###"
-    ansi_block = ""
+    ansi_block = "```ansi\n"
     for c in chars_list:
-        ansi_block += f"{tabulator(c.get_name())}{tabulator(c.get_element())}{tabulator(c.get_path())}\n"
+        name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
+        element_str = c.get_colored_element()
+        path_str = c.get_path().name.capitalize()
+        ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
+    ansi_block += "```"
     return f"{sub_title}\n{ansi_block}"
 
 def get_all_characters_str() -> str:
