@@ -11,7 +11,7 @@ from .models import (
 
 
 """ HELPER FUNCTIONS """
-# This function is used to get the characters list
+# This function is used to get the characters list, (TODO: sorted by name)
 def get_characters_per_rarity(rarity: int = None):
     if rarity is None:
         chars_5, chars_4 = [], []
