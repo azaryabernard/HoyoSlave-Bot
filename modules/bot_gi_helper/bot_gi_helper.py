@@ -244,7 +244,7 @@ def tabulator(text, min_field=14):
 
 def get_all_characters_str(rarity: int = None) -> list[str]:
     strs = []
-    rarities = (5, 4) if rarity is None else (rarity)
+    rarities = (5, 4) if rarity is None else [rarity]
     for r in rarities:
         strs.append(f"### {r}⭐️ Rarity ###")
         # create an Ansi block every 15 characters
