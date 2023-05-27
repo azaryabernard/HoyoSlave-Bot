@@ -257,7 +257,7 @@ def get_all_characters_str(rarity: int = None) -> str:
         # create an Ansi block every 15 characters
         chars = get_characters_per_rarity(r)
         len_chars = len(chars)
-        inc = 15
+        inc = 25
         for i in range(0, len_chars, inc):
             ansi_block = "```ansi\n"
             for c in chars[i:i+inc]:
