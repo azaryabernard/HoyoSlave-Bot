@@ -75,6 +75,7 @@ GI_COMMANDS = [
     '.gi map - Interactive Map 📍\n', 
     '.gi wiki - Genshin Wikia 🧐\n', 
     '.gi db - Genshin Database, Wish Tracker 📚\n'
+    '.gi chars - List of All Available Characters 📜\n'
     '.gi build - Character Builds and Guides 🤓\n', 
     '.gi build <character name> for character specific build ⭐️ (new!)',
 ]
@@ -107,6 +108,7 @@ async def _gi(ctx, *args):
                 dedent("""\
                     ### Genshin Impact Character Builds and Guides: 🤓 ###
                     Use `.gi build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
+                    Use `.gi chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one message. 
                     Use the `--update` option to discard cached data and get the latest build!
                     Use the **reaction buttons** to navigate through the pages. Please don't spam them! ⚠️"""),
@@ -236,9 +238,9 @@ async def _hsr(ctx, *args):
                 dedent("""\
                     ### Honkai: Star Rail Character Builds and Guides: 🤓 ###
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
+                    Use `.hsr chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one long message. 
                     Use the `--update` option to discard cached data and get the latest build!
-                    Use `.hsr chars` to get a list of all available characters.
                     Use the **reaction buttons** to navigate through the pages. Please don't spam them! ⚠️"""),
                 embeds=EMBEDS_HSR_BUILD_LINKS
             )
