@@ -111,7 +111,7 @@ async def _gi(ctx, *args):
         splitted_4 = chars_4.split('\n')
         await ctx.send(title)
         for ss in (splitted_5, splitted_4):
-            inc = len(ss) / 2
+            inc = len(ss) // 2
             for i in range(0, len(ss), inc):
                 await ctx.send('\n'.join(ss[i:i+inc]))
 
