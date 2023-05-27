@@ -244,17 +244,23 @@ def get_characters_str_by_rarity(rarity: int) -> str:
     chars_list = get_characters_per_rarity(rarity)
     # Creating the string
     sub_title = f"### {rarity}⭐️ Rarity ###"
-    ansi_block = "```ansi\n"
+    ansi_block = ""
     for c in chars_list:
         name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
         element_str = c.get_colored_element()
         path_str = c.get_weapon_type().name.capitalize()
         ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
-    ansi_block += "```"
     return f"{sub_title}\n{ansi_block}"
 
 def get_all_characters_str() -> list[str]:
     title = "## List of Characters in Genshin Impact ##"
     chars_5 = get_characters_str_by_rarity(5)
     chars_4 = get_characters_str_by_rarity(4)
-    return (title, chars_5, chars_4)
+    splitted_5 = chars_5.split('\n')
+    splitted_4 = chars_4.split('\n')
+    strs = [title]
+    for ss in (splitted_5, splitted_4):
+        inc = len(ss) // 2
+        for i in range(0, len(ss), inc):
+            strs.append("```ansi\n" + '\n'.join(ss[i:i+inc]) + "```")
+    return strs

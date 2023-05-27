@@ -257,4 +257,11 @@ def get_all_characters_str() -> str:
     title = "## List of Characters in Honkai: Star Rail ##"
     chars_5 = get_characters_str_by_rarity(5)
     chars_4 = get_characters_str_by_rarity(4)
-    return [title, chars_5, chars_4]
+    splitted_5 = chars_5.split('\n')
+    splitted_4 = chars_4.split('\n')
+    strs = [title]
+    for ss in (splitted_5, splitted_4):
+        inc = len(ss) // 2
+        for i in range(0, len(ss), inc):
+            strs.append("```ansi\n" + '\n'.join(ss[i:i+inc]) + "```")
+    return strs
