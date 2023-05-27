@@ -7,7 +7,8 @@ from modules.bot_gi_helper.bot_gi_helper import (
     get_character_build as get_gi_character_build
 )
 from modules.bot_hsr_helper.bot_hsr_helper import (
-    get_character_build as get_hsr_character_build
+    get_character_build as get_hsr_character_build,
+    get_all_characters_str as get_hsr_all_characters_str
 )
 from utils.embeds import (
     EMBEDS_GI_MAP_LINKS, EMBEDS_GI_WIKI_LINKS,
@@ -224,6 +225,9 @@ async def _hsr(ctx, *args):
             "### Honkai Star Rail Official Wiki: 🧐 ###",
             embeds=EMBEDS_HSR_WIKI_LINKS
         )
+    # HSR CHARS
+    elif args[0] == 'chars':
+        await ctx.send(get_hsr_all_characters_str())
     # HRS BUILD
     elif args[0] == 'build':
         if len(args) == 1:

@@ -37,6 +37,22 @@ class Element(Enum):
         elif self == Element.PHYSICAL:
             return SHEET_PHYSICAL_ID
         
+    def get_color_ansi(self):
+        if self == Element.QUANTUM:
+            return '\u001b[1;36m'
+        elif self == Element.FIRE:
+            return '\u001b[1;31m'
+        elif self == Element.ICE:
+            return '\u001b[1;34m'
+        elif self == Element.LIGHTNING:
+            return '\u001b[1;35m'
+        elif self == Element.WIND:
+            return '\u001b[1;32m'
+        elif self == Element.IMAGINARY:
+            return '\u001b[1;33m'
+        elif self == Element.PHYSICAL:
+            return '\u001b[1;37m'
+        
 # Enum for the Character Paths
 class Path(Enum):
     HUNT, ABUNDANCE, DESTURCTION, ERUDITION, PRESERVATION, NIHILITY, HARMONY = range(7)
@@ -74,6 +90,7 @@ class Character():
     
     def get_description(self):
         return f"{self.name} is a {self.rarity}⭐️ {self.element.name.capitalize()} {self.path.name.capitalize()} user in Honkai: Star Rail."
+
 
 # Define all the characters
 CHARACTERS = [
