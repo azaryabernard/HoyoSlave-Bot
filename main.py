@@ -120,7 +120,7 @@ async def _gi(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(error_invalid_option(Modules.GI, arg))
+                        await ctx.send(error_invalid_option(Modules.GI, arg), file=get_error_image(3))
                         return
                 else:
                     char_name.append(arg)
@@ -129,7 +129,7 @@ async def _gi(ctx, *args):
             if char_name:
                 results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_error_image())
+                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_error_image(randrange(2)))
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -185,11 +185,11 @@ async def _gi(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(GI_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image())
+        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image(1))
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(error_catched(Modules.GI, error), file=get_error_image(2))
+    await ctx.send(error_catched(Modules.GI, error), file=get_error_image(3))
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -245,7 +245,7 @@ async def _hsr(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(error_invalid_option(Modules.HSR, arg))
+                        await ctx.send(error_invalid_option(Modules.HSR, arg), file=get_error_image(3))
                         return
                 else:
                     char_name.append(arg)
@@ -253,7 +253,7 @@ async def _hsr(ctx, *args):
             if char_name:
                 results = await get_hsr_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_error_image())
+                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_error_image(randrange(2)))
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -314,7 +314,7 @@ async def _hsr(ctx, *args):
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image(2))
+    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image(3))
 
 
 # OTHER COMMANDS
@@ -344,21 +344,24 @@ async def _ajkk(ctx, *args):
         await ctx.send(f'Wana kon! <@{member.id}>')
 
 # funzies, real dialogue by Bronya battlesuits in HI3
-bronya_messages = ["Project bunny, immediately startup the Captain cleansing program. 😑", 
-                    "Bronya is observing where Captain's IQ flew off to. 🤔",
-                    "Captain, do you want to test what gravity feels like? 😏",
-                    "Detected an emotion fluctuating, is Bronya broken? 😳",
-                    "This is Bronya's first time realizing bridge duty is boring. 😴",
-                    "Project Bunny 19C, now is not the time to be dozing off. 😤",
-                    "Bronya, on standby. 🫡",
-                    "Bronya, mood declining. 😒",
-                    "Captain, Project Bunny also wants to play games with you. 😊",
-                    "Put up both hands and place them behind your head. Captain, you are being arrested. 😠",
-                    "If there\'s no work, can Bronya go home to play games? 🫠",
-                    "Time together with Captain, Bronya is very happy. 😊"]
+bronya_messages = {
+    ("Project bunny, immediately startup the Captain cleansing program. 😑", 0),
+    ("Bronya is observing where Captain's IQ flew off to. 🤔", 0),
+    ("Captain, do you want to test what gravity feels like? 😏", 0),
+    ("Detected an emotion fluctuating, is Bronya broken? 😳", 0),
+    ("This is Bronya's first time realizing bridge duty is boring. 😴", 0),
+    ("Project Bunny 19C, now is not the time to be dozing off. 😤", 0),
+    ("Bronya, on standby. 🫡", 0),
+    ("Bronya, mood declining. 😒", 0),
+    ("Captain, Project Bunny also wants to play games with you. 😊", 0),
+    ("Put up both hands and place them behind your head. Captain, you are being arrested. 😠", 0),
+    ("If there\'s no work, can Bronya go home to play games? 🫠", 0),
+    ("Time together with Captain, Bronya is very happy. 😊", 0)
+}
 
 def get_random_bronya_message():
-    return bronya_messages[randrange(len(bronya_messages))]
+    rand = randrange(len(bronya_messages))
+    return bronya_messages[rand][0]
 
 @bot.command(name='bronya')
 async def _bronya(ctx, *args):
@@ -442,7 +445,7 @@ async def _sudo(ctx, *args):
 @_sudo.error
 async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
-        await ctx.send(error_access_denied(Modules.SUDO, ctx.author), file=get_error_image(1))
+        await ctx.send(error_access_denied(Modules.SUDO, ctx.author), file=get_error_image(2))
     else:
         await ctx.send(error_catched(Modules.SUDO, error))
 

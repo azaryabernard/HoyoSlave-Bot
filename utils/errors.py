@@ -5,22 +5,26 @@ from enum import Enum
 
 # DEFINES - OTHERS
 DIRNAME = os.path.dirname(__file__)
-ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"../assets/shared/hotr_cried.jpg")
-ERROR_IMAGE_PATH_2 = os.path.join(DIRNAME, f"../assets/shared/bronya_angry.jpg")
-ERROR_IMAGE_PATH_3 = os.path.join(DIRNAME, f"../assets/shared/bronya_confused.jpg")
 
 class Modules(Enum):
     UNKNOWN, GI, HSR, HELP, SUDO = range(5)
 
 def get_error_image(type: int = 0):
+    image_name_ext = ""
     if type == 0:
-        return discord.File(ERROR_IMAGE_PATH, filename="hotr_cried.jpg")
+        image_name_ext = "hotr_cried.jpg"
     elif type == 1:
-        return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_angry.jpg")
+        image_name_ext = "bronya_confused.jpg"
     elif type == 2:
-        return discord.File(ERROR_IMAGE_PATH_3, filename="bronya_confused.jpg")
+        image_name_ext = "bronya_angry.jpg"
+    elif type == 3:
+        image_name_ext = "bronya_not_responding.jpg"
     else:
-        return discord.File(ERROR_IMAGE_PATH_3, filename="bronya_confused.jpg")
+        image_name_ext = "bronya_not_responding.jpg"
+    return discord.File(
+        os.path.join(DIRNAME, f"../assets/shared/{image_name_ext}"), 
+        filename=f"{image_name_ext}"
+    )
 
 # ERRORS - SHARED
 # CHARACTER NOT FOUND
