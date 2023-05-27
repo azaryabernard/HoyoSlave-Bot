@@ -107,9 +107,14 @@ async def _gi(ctx, *args):
     # GI CHARS
     elif args[0] == 'chars':
         (title, chars_5, chars_4) = get_gi_all_characters_str()
+        splitted_5 = chars_5.split('\n')
+        splitted_4 = chars_4.split('\n')
         await ctx.send(title)
-        await ctx.send(chars_5)
-        await ctx.send(chars_4)
+        for ss in (splitted_5, splitted_4):
+            inc = len(ss) / 2
+            for i in range(0, len(ss), inc):
+                await ctx.send('\n'.join(ss[i:i+inc]))
+
     # GI BUILD
     elif args[0] == 'build':
         if len(args) == 1:
@@ -239,7 +244,14 @@ async def _hsr(ctx, *args):
         )
     # HSR CHARS
     elif args[0] == 'chars':
-        await ctx.send(get_hsr_all_characters_str())
+        (title, chars_5, chars_4) = get_hsr_all_characters_str()
+        splitted_5 = chars_5.split('\n')
+        splitted_4 = chars_4.split('\n')
+        await ctx.send(title)
+        for ss in (splitted_5, splitted_4):
+            inc = len(ss)
+            for i in range(0, len(ss), inc):
+                await ctx.send('\n'.join(ss[i:i+inc]))
     # HRS BUILD
     elif args[0] == 'build':
         if len(args) == 1:
