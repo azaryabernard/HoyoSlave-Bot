@@ -95,25 +95,37 @@ async def _gi(ctx, *args):
     # GI MAP
     elif args[0] == 'map':
         await ctx.send(
-            "### Genshin Impact Interactive Maps: 📍 ###",
+            "## Genshin Impact Interactive Maps: 📍 ##",
             embeds=EMBEDS_GI_MAP_LINKS
         )
     # GI WIKI
     elif args[0] == 'wiki':
         await ctx.send(
-            "### Genshin Impact Official Wiki: 🧐 ###",
+            "## Genshin Impact Official Wiki: 🧐 ##",
             embeds=EMBEDS_GI_WIKI_LINKS
         )
     # GI CHARS
     elif args[0] == 'chars':
-        [await ctx.send(block) for block in get_gi_all_characters_str()]
+        if len(args) == 1:
+            await ctx.send(
+                dedent("""\
+                    ## List of All Characters in Genshin Impact ##
+                    Use .hsr chars <rarity> (optional) to filter by rarity (5⭐️ or 4⭐️)""")
+            )
+            [await ctx.send(block) for block in get_hsr_all_characters_str()]
+        elif len(args) >= 2:
+            rarity = args[1]
+            if rarity in ['5', '4']:
+                [await ctx.send(block) for block in get_hsr_all_characters_str(rarity=rarity)]
+        else: 
+            await ctx.send(error_wrong_usage(Modules.HSR, "chars"), file=get_bronya_image(3))
 
     # GI BUILD
     elif args[0] == 'build':
         if len(args) == 1:
             await ctx.send(
                 dedent("""\
-                    ### Genshin Impact Character Builds and Guides: 🤓 ###
+                    ## Genshin Impact Character Builds and Guides: 🤓 ##
                     Use `.gi build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use `.gi chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one message. 
@@ -190,7 +202,7 @@ async def _gi(ctx, *args):
                 await ctx.send(error_wrong_usage(Modules.GI, "build"), file=get_bronya_image(3))
     elif args[0] == 'db':
         await ctx.send(
-            "### Genshin Impact Database: 📚 ###",
+            "## Genshin Impact Database: 📚 ##",
             embeds=EMBEDS_GI_DB_LINKS
         )
     elif args[0] == 'help':
@@ -226,24 +238,36 @@ async def _hsr(ctx, *args):
     # HSR MAP
     elif args[0] == 'map':
         await ctx.send(
-            "### Honkai Star Rail Interactive Maps: 📍 ###",
+            "## Honkai Star Rail Interactive Maps: 📍 ##",
             embeds=EMBEDS_HSR_MAP_LINKS
         )
     # HSR WIKI
     elif args[0] == 'wiki':
         await ctx.send(
-            "### Honkai Star Rail Official Wiki: 🧐 ###",
+            "## Honkai Star Rail Official Wiki: 🧐 ##",
             embeds=EMBEDS_HSR_WIKI_LINKS
         )
     # HSR CHARS
     elif args[0] == 'chars':
-        [await ctx.send(block) for block in get_hsr_all_characters_str()]
+        if len(args) == 1:
+            await ctx.send(
+                dedent("""\
+                    ## List of All Characters in Honkai: Star Rail ##
+                    Use .hsr chars <rarity> (optional) to filter by rarity (5⭐️ or 4⭐️)""")
+            )
+            [await ctx.send(block) for block in get_hsr_all_characters_str()]
+        elif len(args) >= 2:
+            rarity = args[1]
+            if rarity in ['5', '4']:
+                [await ctx.send(block) for block in get_hsr_all_characters_str(rarity=rarity)]
+        else: 
+            await ctx.send(error_wrong_usage(Modules.HSR, "chars"), file=get_bronya_image(3))
     # HRS BUILD
     elif args[0] == 'build':
         if len(args) == 1:
             await ctx.send(
                 dedent("""\
-                    ### Honkai: Star Rail Character Builds and Guides: 🤓 ###
+                    ## Honkai: Star Rail Character Builds and Guides: 🤓 ##
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use `.hsr chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one long message. 
@@ -320,7 +344,7 @@ async def _hsr(ctx, *args):
     # HSR DB
     elif args[0] == 'db':
         await ctx.send(
-            "### Honkai Star Rail Database: 📚 ###",
+            "## Honkai Star Rail Database: 📚 ##",
             embeds=EMBEDS_HSR_DB_LINKS
         )
     elif args[0] == 'help':

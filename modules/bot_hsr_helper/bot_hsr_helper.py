@@ -12,14 +12,20 @@ from .models import (
 
 """ HELPER FUNCTIONS """
 # This function is used to get the characters list
-def get_characters_per_rarity():
-    chars_5, chars_4 = [], []
-    for c in CHARACTERS:
-        (chars_5, chars_4)[c.get_rarity() == 4].append(c)
-    return (
-        sorted(chars_5, key=Character.get_name), 
-        sorted(chars_4, key=Character.get_name)
-    )
+def get_characters_per_rarity(rarity: int = None):
+    if rarity is None:
+        chars_5, chars_4 = [], []
+        for c in CHARACTERS:
+            (chars_5, chars_4)[c.get_rarity() == 4].append(c)
+        return (
+            sorted(chars_5, key=Character.get_name), 
+            sorted(chars_4, key=Character.get_name)
+        )
+    else:
+        return sorted(
+            [c for c in CHARACTERS if c.get_rarity() == rarity], 
+            key=Character.get_name
+        )
 
 # This function is used to get the character by name
 def get_character_by_name(name: str):
@@ -243,17 +249,18 @@ def tabulator(text, min_field=14):
     return return_string 
 
 # Exported function to get the characters list string
-def get_all_characters_str() -> str:
-    title = "## List of Characters in Honkai: Star Rail ##"
-    strs = [title]
-    chars_5, chars_4 = get_characters_per_rarity()
-    for (r, chars) in [(5, chars_5), (4, chars_4)]:
+def get_all_characters_str(rarity: int = None) -> str:
+    strs = []
+    rarities = [5, 4] if rarity is None else [rarity]
+    for r in rarities:
         strs.append(f"### {r}⭐️ Rarity ###")
-        # create an Ansi block every 10 characters
+        # create an Ansi block every 15 characters
+        chars = get_characters_per_rarity(r)
         len_chars = len(chars)
-        for i in range(0, len_chars, 10):
+        inc = 15
+        for i in range(0, len_chars, inc):
             ansi_block = "```ansi\n"
-            for c in chars[i:i+10]:
+            for c in chars[i:i+inc]:
                 name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
                 element_str = c.get_colored_element()
                 path_str = c.get_path().name.capitalize()
