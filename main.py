@@ -106,7 +106,10 @@ async def _gi(ctx, *args):
         )
     # GI CHARS
     elif args[0] == 'chars':
-        await ctx.send(get_gi_all_characters_str())
+        (title, chars_5, chars_4) = get_gi_all_characters_str()
+        await ctx.send(title)
+        await ctx.send(chars_5)
+        await ctx.send(chars_4)
     # GI BUILD
     elif args[0] == 'build':
         if len(args) == 1:

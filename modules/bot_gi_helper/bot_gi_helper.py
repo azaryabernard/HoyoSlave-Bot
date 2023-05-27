@@ -253,8 +253,8 @@ def get_characters_str_by_rarity(rarity: int) -> str:
     ansi_block += "```"
     return f"{sub_title}\n{ansi_block}"
 
-def get_all_characters_str() -> str:
+def get_all_characters_str() -> list[str]:
     title = "## List of Characters in Genshin Impact ##"
     chars_5 = get_characters_str_by_rarity(5)
     chars_4 = get_characters_str_by_rarity(4)
-    return f"{title}\n{chars_5}\n{chars_4}"
+    return (title, chars_5, chars_4)
