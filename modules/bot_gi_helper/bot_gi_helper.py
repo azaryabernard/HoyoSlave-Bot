@@ -257,6 +257,6 @@ def get_all_characters_str(rarity: int = None) -> list[str]:
                 name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
                 element_str = c.get_colored_element()
                 weapon_str = c.get_weapon_type().name.capitalize()
-                ansi_block += f"{tabulator(name, min_field=18)}{tabulator(element_str, min_field=25)}{tabulator(weapon_str)}\n"
+                ansi_block += f"{tabulator(name, min_field=20)}{tabulator(element_str, min_field=25)}{tabulator(weapon_str)}\n"
             strs.append(f"{ansi_block}```")
     return strs
