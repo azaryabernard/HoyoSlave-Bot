@@ -249,7 +249,6 @@ def get_characters_str_by_rarity(rarity: int) -> str:
         element_str = c.get_colored_element()
         path_str = c.get_path().name.capitalize()
         ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
-    ansi_block += "```"
     return f"{ansi_block}"
 
 def get_all_characters_str() -> str:
