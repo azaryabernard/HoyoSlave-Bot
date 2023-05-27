@@ -9,7 +9,7 @@ DIRNAME = os.path.dirname(__file__)
 class Modules(Enum):
     UNKNOWN, GI, HSR, HELP, SUDO = range(5)
 
-def get_error_image(type: int = 0):
+def get_bronya_image(type: int = 0):
     image_name_ext = ""
     if type == 0:
         image_name_ext = "hotr_cried.jpg"
@@ -19,6 +19,10 @@ def get_error_image(type: int = 0):
         image_name_ext = "bronya_angry.jpg"
     elif type == 3:
         image_name_ext = "bronya_not_responding.jpg"
+    elif type == 4:
+        image_name_ext = "bronya_welcome.jpg"
+    elif type == 5:
+        image_name_ext = "bronya_project_bunny.jpg"
     else:
         image_name_ext = "bronya_not_responding.jpg"
     return discord.File(

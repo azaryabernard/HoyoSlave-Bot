@@ -18,7 +18,7 @@ from utils.embeds import (
 from utils.errors import (
     error_character_not_found, error_invalid_option,
     error_wrong_usage, error_access_denied,
-    error_catched, get_error_image, Modules
+    error_catched, get_bronya_image, Modules
 )
 
 
@@ -43,7 +43,8 @@ async def on_ready():
     # notify the admin that the bot is ready
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
-    await user.send(f'**Bot on Standby!**\n{get_random_bronya_message()}')
+    message, image = get_random_bronya_message()
+    await user.send(f'**Bot on Standby!**\n{message}', file=get_bronya_image(image))
 
 
 # GENERAL HELP PAGE
@@ -61,7 +62,7 @@ async def _help(ctx, *args):
     if len(args) == 0:
         await ctx.send(HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.UNKNOWN, 'help'), file=get_error_image(3))
+        await ctx.send(error_wrong_usage(Modules.UNKNOWN, 'help'), file=get_bronya_image(3))
 
 @_help.error
 async def help_error(ctx, error):
@@ -120,7 +121,7 @@ async def _gi(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(error_invalid_option(Modules.GI, arg), file=get_error_image(3))
+                        await ctx.send(error_invalid_option(Modules.GI, arg), file=get_bronya_image(3))
                         return
                 else:
                     char_name.append(arg)
@@ -129,7 +130,7 @@ async def _gi(ctx, *args):
             if char_name:
                 results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_error_image(randrange(2)))
+                    await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_bronya_image(randrange(2)))
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -176,7 +177,7 @@ async def _gi(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send(error_wrong_usage(Modules.GI, "build"), file=get_error_image(3))
+                await ctx.send(error_wrong_usage(Modules.GI, "build"), file=get_bronya_image(3))
     elif args[0] == 'db':
         await ctx.send(
             "### Genshin Impact Database: 📚 ###",
@@ -185,11 +186,11 @@ async def _gi(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(GI_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image(3))
+        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_bronya_image(3))
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(error_catched(Modules.GI, error), file=get_error_image(3))
+    await ctx.send(error_catched(Modules.GI, error), file=get_bronya_image(3))
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -245,7 +246,7 @@ async def _hsr(ctx, *args):
                     if arg in build_flags:
                         build_flags[arg] = True
                     else:
-                        await ctx.send(error_invalid_option(Modules.HSR, arg), file=get_error_image(3))
+                        await ctx.send(error_invalid_option(Modules.HSR, arg), file=get_bronya_image(3))
                         return
                 else:
                     char_name.append(arg)
@@ -253,7 +254,7 @@ async def _hsr(ctx, *args):
             if char_name:
                 results = await get_hsr_character_build(char_name, not build_flags["--update"])
                 if not results:
-                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_error_image(randrange(2)))
+                    await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_bronya_image(randrange(2)))
                     return
                 # Force full page in DM
                 if ctx.guild is None:
@@ -300,7 +301,7 @@ async def _hsr(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send(error_wrong_usage(Modules.HSR, "build"), file=get_error_image(3))
+                await ctx.send(error_wrong_usage(Modules.HSR, "build"), file=get_bronya_image(3))
     # HSR DB
     elif args[0] == 'db':
         await ctx.send(
@@ -310,11 +311,11 @@ async def _hsr(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(HSR_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.HSR, "help"), file=get_error_image(3))
+        await ctx.send(error_wrong_usage(Modules.HSR, "help"), file=get_bronya_image(3))
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image(3))
+    await ctx.send(error_catched(Modules.HSR, error), file=get_bronya_image(3))
 
 
 # OTHER COMMANDS
@@ -344,29 +345,39 @@ async def _ajkk(ctx, *args):
         await ctx.send(f'Wana kon! <@{member.id}>')
 
 # funzies, real dialogue by Bronya battlesuits in HI3
-bronya_messages = {
-    ("Project bunny, immediately startup the Captain cleansing program. 😑", 0),
-    ("Bronya is observing where Captain's IQ flew off to. 🤔", 0),
-    ("Captain, do you want to test what gravity feels like? 😏", 0),
-    ("Detected an emotion fluctuating, is Bronya broken? 😳", 0),
-    ("This is Bronya's first time realizing bridge duty is boring. 😴", 0),
-    ("Project Bunny 19C, now is not the time to be dozing off. 😤", 0),
-    ("Bronya, on standby. 🫡", 0),
-    ("Bronya, mood declining. 😒", 0),
-    ("Captain, Project Bunny also wants to play games with you. 😊", 0),
-    ("Put up both hands and place them behind your head. Captain, you are being arrested. 😠", 0),
-    ("If there\'s no work, can Bronya go home to play games? 🫠", 0),
-    ("Time together with Captain, Bronya is very happy. 😊", 0)
-}
+bronya_messages = [
+    ("Project bunny, immediately startup the Captain cleansing program. 😑", 2),
+    ("Bronya is observing where Captain's IQ flew off to. 🤔", 1),
+    ("Captain, do you want to test what gravity feels like? 😏", 2),
+    ("Detected an emotion fluctuating, is Bronya broken? 😳", 3),
+    ("This is Bronya's first time realizing bridge duty is boring. 🫠", 3),
+    ("Project Bunny 19C, now is not the time to be dozing off. 😤", 1),
+    ("Bronya, on standby. 🫡", 5),
+    ("Bronya, mood declining. 😒", 3),
+    ("Captain, Project Bunny also wants to play games with you. 😊", 5),
+    ("Put up both hands and place them behind your head. Captain, you are being arrested. 😠", 2),
+    ("If there\'s no work, can Bronya go home to play games? 🥹", 4),
+    ("Time together with Captain, Bronya is very happy. 😊", 4),
+    ("Good evening Captain... I mean morning. 😄", 1),
+    ("Since we have the day off... Wanna join Bronya for some game, Captain? 😅", 4),
+    ("Just order whatever you want and let Project Bunny do the cookin. 😌", 5),
+    ("Today's work turned out perfect. And the rest... we'll save for Project Bunny 😌", 5),
+    ("Next time, maybe Seele can ride on Project Bunny and we can go touring together. 😊", 5),
+    ("As long as Bronya keep moving forward... this legacy will continue to grow. 🫡", 4),
+    ("I was thinking about something... were you too Captain? 😕", 1),
+    ("The analysis shows that Captain really needs some rest. 😴", 4),
+    
+]
 
 def get_random_bronya_message():
     rand = randrange(len(bronya_messages))
-    return bronya_messages[rand][0]
+    return bronya_messages[rand]
 
 @bot.command(name='bronya')
 async def _bronya(ctx, *args):
+    message, image = get_random_bronya_message()
     if len(args) == 0:
-        await ctx.send(f"*{get_random_bronya_message()}*")
+        await ctx.send(f"*{message}*", file=get_bronya_image(image))
 
 
 # ADMIN COMMANDS
@@ -445,7 +456,7 @@ async def _sudo(ctx, *args):
 @_sudo.error
 async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
-        await ctx.send(error_access_denied(Modules.SUDO, ctx.author), file=get_error_image(2))
+        await ctx.send(error_access_denied(Modules.SUDO, ctx.author), file=get_bronya_image(2))
     else:
         await ctx.send(error_catched(Modules.SUDO, error))
 
