@@ -49,9 +49,9 @@ class Element(Enum):
         elif self == Element.DENDRO:
             return '\u001b[1;32m'
         elif self == Element.CRYO:
-            return '\u001b[1;36m'
-        elif self == Element.ANEMO:
             return '\u001b[1;37m'
+        elif self == Element.ANEMO:
+            return '\u001b[1;36m'
         elif self == Element.GEO:
             return '\u001b[1;33m'
         else:

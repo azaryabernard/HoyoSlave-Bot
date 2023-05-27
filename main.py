@@ -5,7 +5,7 @@ from textwrap import dedent
 from random import randrange
 from modules.bot_gi_helper.bot_gi_helper import (
     get_character_build as get_gi_character_build,
-    get_all_characgters_str as get_gi_all_characters_str
+    get_all_characters_str as get_gi_all_characters_str
 )
 from modules.bot_hsr_helper.bot_hsr_helper import (
     get_character_build as get_hsr_character_build,
