@@ -388,7 +388,7 @@ async def _sudo(ctx, *args):
         await ctx.send('*Checking remote status...*')
         res = os.system("git remote update")
         if res == 0:
-            await ctx.send('*Remote status check successful!*\n\u200e', file=get_error_image(1))
+            await ctx.send('*Remote status check successful!*\n\u200e')
         else:
             await ctx.send(error_catched(Modules.SUDO, "Remote status check failed!"))
             return
