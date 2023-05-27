@@ -4,7 +4,8 @@ import asyncio, sys, os
 from textwrap import dedent
 from random import randrange
 from modules.bot_gi_helper.bot_gi_helper import (
-    get_character_build as get_gi_character_build
+    get_character_build as get_gi_character_build,
+    get_all_characgters_str as get_gi_all_characters_str
 )
 from modules.bot_hsr_helper.bot_hsr_helper import (
     get_character_build as get_hsr_character_build,
@@ -105,7 +106,7 @@ async def _gi(ctx, *args):
         )
     # GI CHARS
     elif args[0] == 'chars':
-        await ctx.send(get_hsr_all_characters_str())
+        await ctx.send(get_gi_all_characters_str())
     # GI BUILD
     elif args[0] == 'build':
         if len(args) == 1:
