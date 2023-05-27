@@ -110,13 +110,15 @@ async def _gi(ctx, *args):
             await ctx.send(
                 dedent("""\
                     ## List of All Characters in Genshin Impact ##
-                    Hint: Use `.gi chars <rarity>` to filter by rarity (5⭐️ or 4⭐️)""")
+                    Hint: Use `.gi chars <rarity>` to filter by rarity (5 Stars or 4 Stars)""")
             )
             [await ctx.send(block) for block in get_gi_all_characters_str()]
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ['5', '4']:
                 [await ctx.send(block) for block in get_gi_all_characters_str(rarity=rarity)]
+            else:
+                await ctx.send(error_invalid_option(Modules.GI, 'chars', rarity), file=get_bronya_image(3))
         else: 
             await ctx.send(error_wrong_usage(Modules.GI, "chars"), file=get_bronya_image(3))
 
@@ -253,13 +255,15 @@ async def _hsr(ctx, *args):
             await ctx.send(
                 dedent("""\
                     ## List of All Characters in Honkai: Star Rail ##
-                    Hint: Use `.hsr chars <rarity>` to filter by rarity (5⭐️ or 4⭐️)""")
+                    Hint: Use `.hsr chars <rarity>` to filter by rarity (5 Stars or 4 Stars)""")
             )
             [await ctx.send(block) for block in get_hsr_all_characters_str()]
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ['5', '4']:
                 [await ctx.send(block) for block in get_hsr_all_characters_str(rarity=rarity)]
+            else:
+                await ctx.send(error_invalid_option(Modules.HSR, 'chars', rarity), file=get_bronya_image(3))
         else: 
             await ctx.send(error_wrong_usage(Modules.HSR, "chars"), file=get_bronya_image(3))
     # HRS BUILD
