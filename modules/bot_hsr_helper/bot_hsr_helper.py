@@ -251,7 +251,7 @@ def tabulator(text, min_field=14):
 # Exported function to get the characters list string
 def get_all_characters_str(rarity: int = None) -> str:
     strs = []
-    r_chars = get_characters_by_rarity(rarity)
+    r_chars = get_characters_per_rarity(rarity)
     # create an Ansi block every 15 characters
     for r, chars in r_chars:
         if not chars:

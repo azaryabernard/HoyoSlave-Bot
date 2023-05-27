@@ -214,9 +214,9 @@ async def _gi(ctx, *args):
     else:
         await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_bronya_image(3))
 
-@_gi.error
-async def gi_error(ctx, error):
-    await ctx.send(error_catched(Modules.GI, error), file=get_bronya_image(3))
+# @_gi.error
+# async def gi_error(ctx, error):
+#     await ctx.send(error_catched(Modules.GI, error), file=get_bronya_image(3))
 
 
 # HONKAI: STAR RAIL COMMANDS
