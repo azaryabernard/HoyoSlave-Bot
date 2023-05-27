@@ -388,7 +388,7 @@ async def _sudo(ctx, *args):
         await ctx.send('*Checking remote status...*')
         res = os.system("git remote update")
         if res == 0:
-            await ctx.send('*Remote status check successful!*\n\u200e')
+            await ctx.send('*Remote status check successful!*\n\u200e', file=get_error_image(1))
         else:
             await ctx.send(error_catched(Modules.SUDO, "Remote status check failed!"))
             return
@@ -442,9 +442,9 @@ async def _sudo(ctx, *args):
 @_sudo.error
 async def sudo_error(ctx, error):
     if isinstance(error, commands.NotOwner):
-        await ctx.send(error_access_denied(Modules.SUDO, ctx.author))
+        await ctx.send(error_access_denied(Modules.SUDO, ctx.author), file=get_error_image(1))
     else:
-        await ctx.send(error_catched(Modules.SUDO, error), file=get_error_image())
+        await ctx.send(error_catched(Modules.SUDO, error))
 
 
 # Run the client on the server
