@@ -458,7 +458,7 @@ async def _sudo(ctx, *args):
         await ctx.send('*Updating...*')
         res = os.system("git pull")
         if res == 0:
-            await ctx.send('*Update successful!*\n\u200e')
+            await ctx.send('*Update successful!*')
         else:
             await ctx.send(error_catched(Modules.SUDO, "Update failed!"))
             return
