@@ -12,11 +12,14 @@ from .models import (
 
 """ HELPER FUNCTIONS """
 # This function is used to get the characters list
-def get_characters_per_rarity(rarity: int = None):
-    if rarity is None:
-        return sorted(CHARACTERS, key=lambda c:(-c.get_rarity(), c.get_name()))
-    else:
-        return sorted([c for c in CHARACTERS if c.get_rarity() == rarity], key=Character.get_name)
+def get_characters_per_rarity():
+    chars_5, chars_4 = [], []
+    for c in CHARACTERS:
+        (chars_5, chars_4)[c.get_rarity() == 4].append(c)
+    return (
+        sorted(chars_5, key=Character.get_name), 
+        sorted(chars_4, key=Character.get_name)
+    )
 
 # This function is used to get the character by name
 def get_character_by_name(name: str):
@@ -239,26 +242,21 @@ def tabulator(text, min_field=14):
     return_string = (text if (tabs_to_append <= 0) else text + " "*tabs_to_append)
     return return_string 
 
-def get_characters_str_by_rarity(rarity: int) -> str:
-    # Getting the character per rarity 
-    chars_list = get_characters_per_rarity(rarity)
-    # Creating the string
-    ansi_block = ""
-    for c in chars_list:
-        name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
-        element_str = c.get_colored_element()
-        path_str = c.get_path().name.capitalize()
-        ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
-    return f"{ansi_block}"
-
+# Exported function to get the characters list string
 def get_all_characters_str() -> str:
     title = "## List of Characters in Honkai: Star Rail ##"
     strs = [title]
-    for r in (5, 4):
-        chars = get_characters_str_by_rarity(r)
+    chars_5, chars_4 = get_characters_per_rarity()
+    for (r, chars) in [(5, chars_5), (4, chars_4)]:
         strs.append(f"### {r}⭐️ Rarity ###")
-        splitted = chars.split('\n')
-        inc = len(splitted) // 2
-        for i in range(0, len(splitted), inc):
-            strs.append("```ansi\n" + '\n'.join(splitted[i:i+inc]) + "```")
+        # create an Ansi block every 10 characters
+        len_chars = len(chars)
+        for i in range(0, len_chars, 10):
+            ansi_block = "```ansi\n"
+            for c in chars[i:i+10]:
+                name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
+                element_str = c.get_colored_element()
+                path_str = c.get_path().name.capitalize()
+                ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
+            strs.append(f"{ansi_block}```")
     return strs

@@ -246,7 +246,7 @@ def get_all_characters_str() -> list[str]:
     title = "## List of Characters in Genshin Impact ##"
     strs = [title]
     chars_5, chars_4 = get_characters_per_rarity()
-    for (r, chars) in ((5, chars_5), (4, chars_4)):
+    for (r, chars) in [(5, chars_5), (4, chars_4)]:
         strs.append(f"### {r}⭐️ Rarity ###")
         # create an Ansi block every 10 characters
         len_chars = len(chars)
@@ -256,6 +256,6 @@ def get_all_characters_str() -> list[str]:
                 name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
                 element_str = c.get_colored_element()
                 path_str = c.get_weapon_type().name.capitalize()
-                ansi_block += f"{tabulator(name, min_field=18)}{tabulator(element_str, min_field=25)}{tabulator(path_str)}\n"
+                ansi_block += f"{tabulator(name, min_field=20)}{tabulator(element_str, min_field=25)}{tabulator(path_str)}\n"
             strs.append(f"{ansi_block}```")
     return strs
