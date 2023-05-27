@@ -61,7 +61,7 @@ async def _help(ctx, *args):
     if len(args) == 0:
         await ctx.send(HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.UNKNOWN, 'help'))
+        await ctx.send(error_wrong_usage(Modules.UNKNOWN, 'help'), file=get_error_image(3))
 
 @_help.error
 async def help_error(ctx, error):
@@ -176,7 +176,7 @@ async def _gi(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send(error_wrong_usage(Modules.GI, "build"))
+                await ctx.send(error_wrong_usage(Modules.GI, "build"), file=get_error_image(3))
     elif args[0] == 'db':
         await ctx.send(
             "### Genshin Impact Database: 📚 ###",
@@ -185,7 +185,7 @@ async def _gi(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(GI_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image(1))
+        await ctx.send(error_wrong_usage(Modules.GI, "help"), file=get_error_image(3))
 
 @_gi.error
 async def gi_error(ctx, error):
@@ -300,7 +300,7 @@ async def _hsr(ctx, *args):
                         if current != previous_page:
                             await msg.edit(embed=results[0][current])
             else:
-                await ctx.send(error_wrong_usage(Modules.HSR, "build"))
+                await ctx.send(error_wrong_usage(Modules.HSR, "build"), file=get_error_image(3))
     # HSR DB
     elif args[0] == 'db':
         await ctx.send(
@@ -310,7 +310,7 @@ async def _hsr(ctx, *args):
     elif args[0] == 'help':
         await ctx.send(HSR_HELP_MESSAGE)
     else:
-        await ctx.send(error_wrong_usage(Modules.HSR, "help"))
+        await ctx.send(error_wrong_usage(Modules.HSR, "help"), file=get_error_image(3))
 
 @_hsr.error
 async def hsr_error(ctx, error):
