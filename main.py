@@ -116,7 +116,7 @@ async def _gi(ctx, *args):
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ('5', '4'):
-                await ctx.send("## List of All Characters in Genshin Impact ##")"
+                await ctx.send("## List of All Characters in Genshin Impact ##")
                 for block in get_gi_all_characters_str(rarity=int(rarity)): await ctx.send(block)
             else:
                 await ctx.send(error_invalid_option(Modules.GI, 'chars', rarity), file=get_bronya_image(3))
