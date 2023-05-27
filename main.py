@@ -44,7 +44,7 @@ async def on_ready():
     print(bot.application.owner)
     user = await bot.fetch_user(bot.application.owner.id)
     message, image = get_random_bronya_message()
-    await user.send(f'**Bot on Standby!**\n{message}', file=get_bronya_image(image))
+    await user.send(f'**Bot on Standby!**\n*{message}*', file=get_bronya_image(image))
 
 
 # GENERAL HELP PAGE
