@@ -254,9 +254,9 @@ def get_all_characters_str(rarity: int = None) -> list[str]:
         for i in range(0, len_chars, inc):
             ansi_block = "```ansi\n"
             for c in chars[i:i+inc]:
-                name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
+                name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
                 element_str = c.get_colored_element()
-                path_str = c.get_path().name.capitalize()
-                ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
+                weapon_str = c.get_weapon_type().name.capitalize()
+                ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(weapon_str)}\n"
             strs.append(f"{ansi_block}```")
     return strs
