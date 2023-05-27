@@ -243,6 +243,7 @@ def get_characters_str_by_rarity(rarity: int) -> str:
     # Getting the character per rarity 
     chars_list = get_characters_per_rarity(rarity)
     # Creating the string
+    ansi_block = ""
     for c in chars_list:
         name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
         element_str = c.get_colored_element()
