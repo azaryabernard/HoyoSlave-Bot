@@ -112,12 +112,11 @@ async def _gi(ctx, *args):
                     ## List of All Characters in Genshin Impact ##
                     Hint: Use `.gi chars <rarity>` to filter by rarity (5 Stars or 4 Stars)""")
             )
-            # [await ctx.send(block) for block in get_gi_all_characters_str()]
-            from time import sleep
             for block in get_gi_all_characters_str(): await ctx.send(block)
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ('5', '4'):
+                await ctx.send("## List of All Characters in Genshin Impact ##")"
                 for block in get_gi_all_characters_str(rarity=int(rarity)): await ctx.send(block)
             else:
                 await ctx.send(error_invalid_option(Modules.GI, 'chars', rarity), file=get_bronya_image(3))
@@ -263,6 +262,7 @@ async def _hsr(ctx, *args):
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ('5', '4'):
+                await ctx.send("## List of All Characters in Honkai: Star Rail ##")
                 for block in get_hsr_all_characters_str(rarity=int(rarity)): await ctx.send(block)
             else:
                 await ctx.send(error_invalid_option(Modules.HSR, 'chars', rarity), file=get_bronya_image(3))
