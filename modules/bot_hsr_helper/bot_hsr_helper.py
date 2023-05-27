@@ -254,8 +254,7 @@ def get_all_characters_str(rarity: int = None) -> str:
     r_chars = get_characters_per_rarity(rarity)
     # create an Ansi block every 15 characters
     for _, (r, chars) in enumerate(r_chars):
-        if not chars:
-            continue
+        if not chars: continue
         strs.append(f"### {r}⭐️ Rarity ###")
         inc = 25
         for i in range(0, len(chars), inc):
