@@ -122,11 +122,11 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
 
 
 # Exported function to get the character build, may return None
-async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
+async def get_character_build(char_name: str, cached: bool = True) -> list[Embed]:
     # Getting the character by name
-    character = get_character_by_name(name)
+    character = get_character_by_name(char_name)
     if character == None:
-        print(f"Character not found with name: {name}")
+        print(f"Character not found with name: {char_name}")
         return None
     # Getting the data from google sheets / cache
     char_dict = await get_data_from_google_sheets(character, cached)
@@ -141,7 +141,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     main_embed = Embed(
             title=f"{character.get_name()} (1/4)", 
             description=character.get_description(),
-        ).set_thumbnail(url="attachment://image.png")
+        ).set_thumbnail(url=f"attachment://{char_name}.png")
     
     roles = seperate_by_roles(char_dict["roles"], roles_count)
     weapons = seperate_by_roles(char_dict["weapons"], roles_count)
@@ -167,7 +167,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     stats_embed = Embed(
             title=f"{character.get_name()} (2/4)",
             description=character.get_description(),
-        ).set_thumbnail(url="attachment://image.png")
+        ).set_thumbnail(url=f"attachment://{char_name}.png")
     
     main_stats = seperate_by_roles(char_dict["main_stats"], roles_count)
     sub_stats = seperate_by_roles(char_dict["sub_stats"], roles_count)
@@ -193,7 +193,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
     tips_embed = Embed(
         title=f"{character.get_name()} (3/4)",
         description=character.get_description(),
-    ).set_thumbnail(url="attachment://image.png")
+    ).set_thumbnail(url=f"attachment://{char_name}.png")
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     for i, tip in enumerate(tips):
@@ -207,7 +207,7 @@ async def get_character_build(name: str, cached: bool = True) -> list[Embed]:
         title=f"{character.get_name()} (4/4)",
         description=character.get_description(),
     ).set_thumbnail(
-        url="attachment://image.png"
+        url=f"attachment://{char_name}.png"
     ).set_footer(
         text= "Source: Genshin Impact Helper Team's Character Builds"
     )
