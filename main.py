@@ -91,17 +91,22 @@ See available commands for more informations:
 async def _gi(ctx, *args):
     if len(args) == 0:
         await ctx.send(GI_HELP_MESSAGE)
-
+    # GI MAP
     elif args[0] == 'map':
         await ctx.send(
             "### Genshin Impact Interactive Maps: 📍 ###",
             embeds=EMBEDS_GI_MAP_LINKS
         )
+    # GI WIKI
     elif args[0] == 'wiki':
         await ctx.send(
             "### Genshin Impact Official Wiki: 🧐 ###",
             embeds=EMBEDS_GI_WIKI_LINKS
         )
+    # GI CHARS
+    elif args[0] == 'chars':
+        await ctx.send(get_hsr_all_characters_str())
+    # GI BUILD
     elif args[0] == 'build':
         if len(args) == 1:
             await ctx.send(
