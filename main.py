@@ -136,7 +136,7 @@ async def _gi(ctx, *args):
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
+                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png")) for c_e in results[0]]
                     return
                 else:
                     await ctx.send(
@@ -147,7 +147,7 @@ async def _gi(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename="image.png"))
+                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
                 [await msg.add_reaction(button) for button in buttons]
                     
                 while True:
@@ -260,7 +260,7 @@ async def _hsr(ctx, *args):
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename="image.png")) for c_e in results[0]]
+                    [await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png")) for c_e in results[0]]
                     return
                 else:
                     await ctx.send(
@@ -271,7 +271,7 @@ async def _hsr(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename="image.png"))
+                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
                 [await msg.add_reaction(button) for button in buttons]
                     
                 while True:

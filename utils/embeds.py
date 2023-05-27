@@ -82,3 +82,5 @@ EMBEDS_HSR_DB_LINKS = [
     Embed(title='Prydwen\'s Star Rail Database', url=hsr_prydwen, color=0x00ff00).set_thumbnail(url=hsr_prydwen_icon),
     Embed(title='Star Rail Station', url=hsr_starrailstation, color=0x00ff00).set_thumbnail(url=hsr_starrailstation_icon)
 ]
+
+# Error Messages
