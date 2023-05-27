@@ -133,7 +133,7 @@ CHARACTERS = [
     Character("Klee", Element.PYRO, 5, WeaponType.CATALYST),
     Character("Kujou Sara", Element.ELECTRO, 4, WeaponType.BOW),
     Character("Kuki Shinobu", Element.ELECTRO, 4, WeaponType.SWORD),
-    Character("Layla", Element.CRYO, 4, WeaponType.BOW),
+    Character("Layla", Element.CRYO, 4, WeaponType.SWORD),
     Character("Lisa", Element.ELECTRO, 4, WeaponType.CATALYST),
     Character("Mika", Element.CRYO, 4, WeaponType.POLEARM),
     Character("Mona", Element.HYDRO, 5, WeaponType.CATALYST),
