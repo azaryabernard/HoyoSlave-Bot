@@ -233,11 +233,11 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         character.get_image_path()
     )
 
+# Functions to get the characters list string
 def tabulator(text, min_field=14):
     tabs_to_append = min_field - len(text)  
     return_string = (text if (tabs_to_append <= 0) else text + " "*tabs_to_append)
     return return_string 
-
 
 def get_characters_str_by_rarity(rarity: int) -> str:
     # Getting the character per rarity 

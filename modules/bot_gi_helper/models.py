@@ -39,6 +39,24 @@ class Element(Enum):
         else:
             return None
         
+    def get_color_ansi(self):
+        if self == Element.PYRO:
+            return '\u001b[1;31m'
+        elif self == Element.HYDRO:
+            return '\u001b[1;34m'
+        elif self == Element.ELECTRO:
+            return '\u001b[1;35m'
+        elif self == Element.DENDRO:
+            return '\u001b[1;32m'
+        elif self == Element.CRYO:
+            return '\u001b[1;36m'
+        elif self == Element.ANEMO:
+            return '\u001b[1;37m'
+        elif self == Element.GEO:
+            return '\u001b[1;33m'
+        else:
+            return None
+        
 # Enum for the weapon types
 class WeaponType(Enum):
     SWORD, CLAYMORE, POLEARM, BOW, CATALYST = range(5)
@@ -62,6 +80,9 @@ class Character():
     
     def get_element(self):
         return self.element
+    
+    def get_colored_element(self):
+        return self.element.get_color_ansi() + self.element.name.capitalize() + '\u001b[0m'
     
     def get_rarity(self):
         return self.rarity

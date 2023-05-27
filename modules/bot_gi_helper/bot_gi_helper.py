@@ -11,6 +11,13 @@ from .models import (
 
 
 """ HELPER FUNCTIONS """
+# This function is used to get the characters list
+def get_characters_per_rarity(rarity: int = None):
+    if rarity is None:
+        return sorted(CHARACTERS, key=lambda c:(-c.get_rarity(), c.get_name()))
+    else:
+        return sorted([c for c in CHARACTERS if c.get_rarity() == rarity], key=Character.get_name)
+    
 # This function is used to get the character by name
 def get_character_by_name(name: str):
     for character in CHARACTERS:
@@ -225,3 +232,29 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         [main_embed, stats_embed, tips_embed, notes_embed],
         character.get_image_path()
     )
+
+# Functions to get the characters list string
+def tabulator(text, min_field=14):
+    tabs_to_append = min_field - len(text)  
+    return_string = (text if (tabs_to_append <= 0) else text + " "*tabs_to_append)
+    return return_string 
+
+def get_characters_str_by_rarity(rarity: int) -> str:
+    # Getting the character per rarity 
+    chars_list = get_characters_per_rarity(rarity)
+    # Creating the string
+    sub_title = f"### {rarity}⭐️ Rarity ###"
+    ansi_block = "```ansi\n"
+    for c in chars_list:
+        name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
+        element_str = c.get_colored_element()
+        path_str = c.get_path().name.capitalize()
+        ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
+    ansi_block += "```"
+    return f"{sub_title}\n{ansi_block}"
+
+def get_all_characters_str() -> str:
+    title = "## List of Characters in Genshin Impact ##"
+    chars_5 = get_characters_str_by_rarity(5)
+    chars_4 = get_characters_str_by_rarity(4)
+    return f"{title}\n{chars_5}\n{chars_4}"
