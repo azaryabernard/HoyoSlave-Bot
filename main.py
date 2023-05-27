@@ -189,7 +189,7 @@ async def _gi(ctx, *args):
 
 @_gi.error
 async def gi_error(ctx, error):
-    await ctx.send(error_catched(Modules.GI, error), file=get_error_image())
+    await ctx.send(error_catched(Modules.GI, error), file=get_error_image(2))
 
 
 # HONKAI: STAR RAIL COMMANDS
@@ -314,7 +314,7 @@ async def _hsr(ctx, *args):
 
 @_hsr.error
 async def hsr_error(ctx, error):
-    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image())
+    await ctx.send(error_catched(Modules.HSR, error), file=get_error_image(2))
 
 
 # OTHER COMMANDS

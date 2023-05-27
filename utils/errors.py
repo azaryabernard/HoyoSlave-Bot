@@ -7,6 +7,7 @@ from enum import Enum
 DIRNAME = os.path.dirname(__file__)
 ERROR_IMAGE_PATH = os.path.join(DIRNAME, f"../assets/shared/hotr_cried.jpg")
 ERROR_IMAGE_PATH_2 = os.path.join(DIRNAME, f"../assets/shared/bronya_angry.jpg")
+ERROR_IMAGE_PATH_3 = os.path.join(DIRNAME, f"../assets/shared/bronya_confused.jpg")
 
 class Modules(Enum):
     UNKNOWN, GI, HSR, HELP, SUDO = range(5)
@@ -16,8 +17,10 @@ def get_error_image(type: int = 0):
         return discord.File(ERROR_IMAGE_PATH, filename="hotr_cried.jpg")
     elif type == 1:
         return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_angry.jpg")
+    elif type == 2:
+        return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_confused.jpg")
     else:
-        return None
+        return discord.File(ERROR_IMAGE_PATH_2, filename="bronya_confused.jpg")
 
 # ERRORS - SHARED
 # CHARACTER NOT FOUND
