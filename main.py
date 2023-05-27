@@ -116,7 +116,6 @@ async def _gi(ctx, *args):
             from time import sleep
             for block in get_gi_all_characters_str():
                 await ctx.send(block)
-                sleep(0.5)
         elif len(args) >= 2:
             rarity = args[1]
             if rarity in ('5', '4'):
