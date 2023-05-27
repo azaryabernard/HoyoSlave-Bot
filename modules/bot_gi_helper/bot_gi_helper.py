@@ -248,7 +248,7 @@ def get_characters_str_by_rarity(rarity: int) -> str:
     for c in chars_list:
         name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()
         element_str = c.get_colored_element()
-        path_str = c.get_path().name.capitalize()
+        path_str = c.get_weapon_type().name.capitalize()
         ansi_block += f"{tabulator(name)}{tabulator(element_str, min_field=26)}{tabulator(path_str)}\n"
     ansi_block += "```"
     return f"{sub_title}\n{ansi_block}"
