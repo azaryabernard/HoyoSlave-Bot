@@ -17,9 +17,9 @@ def get_characters_per_rarity(rarity: int = None):
         chars_5, chars_4 = [], []
         for c in CHARACTERS:
             (chars_5, chars_4)[c.get_rarity() == 4].append(c)
-        return (chars_5, chars_4)
+        return (5, chars_5), (4, chars_4)
     else:
-        return [c for c in CHARACTERS if c.get_rarity() == rarity]
+        return (rarity, [c for c in CHARACTERS if c.get_rarity() == rarity]), (0, [])
     
 # This function is used to get the character by name
 def get_character_by_name(name: str):
@@ -33,14 +33,6 @@ def get_characters_by_element(element: Element):
     characters = []
     for character in CHARACTERS:
         if element == character.get_element():
-            characters.append(character)
-    return characters
-
-# This function is used to get the character by rarity (unused)
-def get_characters_by_rarity(rarity: int):
-    characters = []
-    for character in CHARACTERS:
-        if rarity == character.get_rarity():
             characters.append(character)
     return characters
 
@@ -243,15 +235,13 @@ def tabulator(text, min_field=14):
     return return_string 
 
 def get_all_characters_str(rarity: int = None) -> list[str]:
-    strs = []
-    rarities = (5, 4) if rarity is None else [rarity]
-    for r in rarities:
+    strs = [],
+    r_chars = get_characters_per_rarity(rarity)
+    # create an Ansi block every 25 characters
+    for r, chars in r_chars:
         strs.append(f"### {r}⭐️ Rarity ###")
-        # create an Ansi block every 15 characters
-        chars = get_characters_per_rarity(r)
-        len_chars = len(chars)
         inc = 25
-        for i in range(0, len_chars, inc):
+        for i in range(0, len(chars), inc):
             ansi_block = "```ansi\n"
             for c in chars[i:i+inc]:
                 name = "Traveler" if c.get_first_name() == "Traveler" else c.get_name()

@@ -18,13 +18,13 @@ def get_characters_per_rarity(rarity: int = None):
         for c in CHARACTERS:
             (chars_5, chars_4)[c.get_rarity() == 4].append(c)
         return (
-            sorted(chars_5, key=Character.get_name), 
-            sorted(chars_4, key=Character.get_name)
+            (5, sorted(chars_5, key=Character.get_name)), 
+            (4, sorted(chars_4, key=Character.get_name))
         )
     else:
-        return sorted(
-            [c for c in CHARACTERS if c.get_rarity() == rarity], 
-            key=Character.get_name
+        return (
+            (rarity, sorted([c for c in CHARACTERS if c.get_rarity() == rarity], key=Character.get_name)),
+            (0, [])
         )
 
 # This function is used to get the character by name
@@ -251,14 +251,12 @@ def tabulator(text, min_field=14):
 # Exported function to get the characters list string
 def get_all_characters_str(rarity: int = None) -> str:
     strs = []
-    rarities = (5, 4) if rarity is None else [rarity]
-    for r in rarities:
+    r_chars = get_characters_by_rarity(rarity)
+    # create an Ansi block every 15 characters
+    for r, chars in r_chars:
         strs.append(f"### {r}⭐️ Rarity ###")
-        # create an Ansi block every 15 characters
-        chars = get_characters_per_rarity(r)
-        len_chars = len(chars)
         inc = 25
-        for i in range(0, len_chars, inc):
+        for i in range(0, len(chars), inc):
             ansi_block = "```ansi\n"
             for c in chars[i:i+inc]:
                 name = "Trailblazer" if c.get_first_name() == "Trailblazer" else c.get_name()
