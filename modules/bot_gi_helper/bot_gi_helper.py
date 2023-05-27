@@ -235,7 +235,7 @@ def tabulator(text, min_field=14):
     return return_string 
 
 def get_all_characters_str(rarity: int = None) -> list[str]:
-    strs = []
+    strs = ["## List of Characters in Genshin Impact ##"]
     r_chars = get_characters_per_rarity(rarity)
     # create an Ansi block every 25 characters
     for _, (r, chars) in enumerate(r_chars):

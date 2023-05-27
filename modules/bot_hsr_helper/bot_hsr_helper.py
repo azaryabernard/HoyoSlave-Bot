@@ -250,7 +250,7 @@ def tabulator(text, min_field=14):
 
 # Exported function to get the characters list string
 def get_all_characters_str(rarity: int = None) -> str:
-    strs = []
+    strs = ["## List of Characters in Honkai: Star Rail ##"]
     r_chars = get_characters_per_rarity(rarity)
     # create an Ansi block every 15 characters
     for _, (r, chars) in enumerate(r_chars):
