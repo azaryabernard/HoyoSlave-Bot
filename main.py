@@ -274,7 +274,7 @@ async def _hsr(ctx, *args):
         if len(args) == 1:
             await ctx.send(
                 dedent("""\
-                    ## Honkai: Star Rail Character Builds, Guides, and Theorycrafting: 🤓 ##
+                    ## Honkai: Star Rail Characters Builds, Guides, and Theorycrafting: 🤓 ##
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use `.hsr chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one long message. 
