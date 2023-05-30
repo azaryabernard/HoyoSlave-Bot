@@ -229,6 +229,7 @@ HSR_COMMANDS = [
 ]
 
 HSR_HELP_MESSAGE = dedent(f"""\
+## Welcome to Everything Honkai: Star Rail! ##
 Usage: `.hsr <commands>`
 See available commands for more informations:
 `{''.join(HSR_COMMANDS)}`"""
