@@ -77,7 +77,7 @@ GI_COMMANDS = [
     '.gi wiki - Genshin Wikia 🧐\n', 
     '.gi db - Genshin Database, Wish Tracker 📚\n'
     '.gi chars - List of All Available Characters 📜\n'
-    '.gi build - Character Builds and Guides 🤓\n', 
+    '.gi build - Characters Builds, Guides, and Theorycrafting 🤓\n', 
     '.gi build <character name> for character specific build ⭐️ (new!)',
 ]
 
@@ -128,7 +128,7 @@ async def _gi(ctx, *args):
         if len(args) == 1:
             await ctx.send(
                 dedent("""\
-                    ## Genshin Impact Character Builds and Guides: 🤓 ##
+                    ## Genshin Impact Characters Builds, Guides, and Theorycrafting: 🤓 ##
                     Use `.gi build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use `.gi chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one message. 
@@ -224,7 +224,7 @@ HSR_COMMANDS = [
     '.hsr wiki - Honkai: Star Rail Wiki 🧐\n', 
     '.hsr db - Honkai: Star Rail Database, Warp Tracker, Tierlist 📚\n'
     '.hsr chars - List of All Available Characters 📜\n'
-    '.hsr build - Character Builds and Guides 🤓\n', 
+    '.hsr build - Characters Builds, Guides, and Theorycrafting 🤓\n', 
     '.hsr build <character name> - Specific Character Build ⭐️ (new!)'
 ]
 
@@ -274,7 +274,7 @@ async def _hsr(ctx, *args):
         if len(args) == 1:
             await ctx.send(
                 dedent("""\
-                    ## Honkai: Star Rail Character Builds and Guides: 🤓 ##
+                    ## Honkai: Star Rail Character Builds, Guides, and Theorycrafting: 🤓 ##
                     Use `.hsr build <character name> [--full | --update]` for specific character build! ⭐️  (BETA)
                     Use `.hsr chars` to get a list of all available characters.
                     Use the `--full` option to get the complete guide in one long message. 

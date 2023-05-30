@@ -45,7 +45,7 @@ kqm_icon = 'https://keqingmains.com/wp-content/uploads/2021/10/kqm-logo-full-e16
 EMBEDS_GI_BUILD_LINKS = [
     Embed(title='Helper Team\'s Characters Builds', url=helper_team, color=0x00ff00).set_thumbnail(url=helper_team_icon),
     Embed(title='Base Stat Comparison', url=base_stat_comp, color=0x00ff00).set_thumbnail(url=base_stat_icon),
-    Embed(title='KeqingMains', url=kqm, color=0x00ff00).set_thumbnail(url=kqm_icon)
+    Embed(title='KeqingMains (GI) Guides & Theorycrafting', url=kqm, color=0x00ff00).set_thumbnail(url=kqm_icon)
 ]
 
 # HSR Impact Wiki
@@ -72,7 +72,7 @@ hsr_kqm_icon = 'https://hsr.keqingmains.com/wp-content/uploads/2023/04/cropped-U
 
 EMBEDS_HSR_BUILD_LINKS = [
     Embed(title='Helper Team\'s Characters Builds', url=hsr_helper_team, color=0x00ff00).set_thumbnail(url=hsr_helper_team_icon),
-    Embed(title='KeqingMains\'s (HSR) Characters Builds', url=hsr_kqm, color=0x00ff00).set_thumbnail(url=hsr_kqm_icon)
+    Embed(title='KeqingMains\'s (HSR) Guides & Theorycrafting', url=hsr_kqm, color=0x00ff00).set_thumbnail(url=hsr_kqm_icon)
 ]
 
 # Honkai: Star Rail Database
