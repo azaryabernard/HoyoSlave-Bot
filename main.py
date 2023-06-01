@@ -157,13 +157,17 @@ async def _gi(ctx, *args):
                 if not results:
                     await ctx.send(error_character_not_found(Modules.GI, char_name), file=get_bronya_image(randrange(2)))
                     return
+                # variables
+                embeds = results[0]
+                image_path = results[1]
+                image_name = f'{char_name.replace(" ", "_").lower()}.png'
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    for c_e in results[0]: 
-                        await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png"))
+                    for c_e in embeds: 
+                        await ctx.send(embed=c_e, file=discord.File(fp=image_path, filename=image_name))
                     return
                 else:
                     await ctx.send(
@@ -174,7 +178,7 @@ async def _gi(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
+                msg = await ctx.send(embed=embeds[current], file=discord.File(fp=image_path, filename=image_name))
                 for button in buttons: await msg.add_reaction(button)
                 while True:
                     try:
@@ -182,7 +186,7 @@ async def _gi(ctx, *args):
                             "reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=90.0
                         )
                     except asyncio.TimeoutError as e:
-                        embed = results[0][current]
+                        embed = embeds[current]
                         embed.set_footer(text="Timed out!")
                         await msg.clear_reactions()
                     else:
@@ -193,14 +197,14 @@ async def _gi(ctx, *args):
                             if current > 0:
                                 current -= 1
                         elif reaction.emoji == u"\u25B6":
-                            if current < len(results[0]) - 1:
+                            if current < len(embeds) - 1:
                                 current += 1
                         elif reaction.emoji == u"\u23E9":
-                            current = len(results[0]) - 1
+                            current = len(embeds) - 1
 
                         for button in buttons: await msg.remove_reaction(button, ctx.author)
                         if current != previous_page:
-                            await msg.edit(embed=results[0][current])
+                            await msg.edit(embed=embeds[current])
             else:
                 await ctx.send(error_wrong_usage(Modules.GI, "build"), file=get_bronya_image(3))
     elif args[0] == 'db':
@@ -302,13 +306,17 @@ async def _hsr(ctx, *args):
                 if not results:
                     await ctx.send(error_character_not_found(Modules.HSR, char_name), file=get_bronya_image(randrange(2)))
                     return
+                # variables
+                embeds = results[0]
+                image_path = results[1]
+                image_name = f'{char_name.replace(" ", "_").lower()}.png'
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    for c_e in results[0]: 
-                        await ctx.send(embed=c_e, file=discord.File(fp=results[1], filename=f"{char_name}.png"))
+                    for c_e in embeds: 
+                        await ctx.send(embed=c_e, file=discord.File(fp=image_path, filename=image_name))
                     return
                 else:
                     await ctx.send(
@@ -319,7 +327,7 @@ async def _hsr(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=results[0][current], file=discord.File(fp=results[1], filename=f"{char_name}.png"))
+                msg = await ctx.send(embed=embeds[current], file=discord.File(fp=image_path, filename=image_name))
                 for button in buttons: await msg.add_reaction(button)    
                 while True:
                     try:
@@ -327,7 +335,7 @@ async def _hsr(ctx, *args):
                             "reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=90.0
                         )
                     except asyncio.TimeoutError as e:
-                        embed = results[0][current]
+                        embed = embeds[current]
                         embed.set_footer(text="Timed out!")
                         await msg.clear_reactions()
                     else:
@@ -338,14 +346,14 @@ async def _hsr(ctx, *args):
                             if current > 0:
                                 current -= 1
                         elif reaction.emoji == u"\u25B6":
-                            if current < len(results[0]) - 1:
+                            if current < len(embeds) - 1:
                                 current += 1
                         elif reaction.emoji == u"\u23E9":
-                            current = len(results[0]) - 1
+                            current = len(embeds) - 1
 
                         for button in buttons: await msg.remove_reaction(button, ctx.author)
                         if current != previous_page:
-                            await msg.edit(embed=results[0][current])
+                            await msg.edit(embed=embeds[current])
             else:
                 await ctx.send(error_wrong_usage(Modules.HSR, "build"), file=get_bronya_image(3))
     # HSR DB

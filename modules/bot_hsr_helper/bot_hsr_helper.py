@@ -149,14 +149,14 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         print(f"Error getting data for character: {character.get_name()}")
         return None
     # Creating the Embed object for discord
+    image_url = f'attachment://{char_name.replace(" ", "_").lower()}.png'
     # Roles
     roles_count = len(char_dict["roles"])
-
     # Main Embed (Roles, Light Cones, Relics)
     main_embed = Embed(
             title=f"{character.get_name()} (1/4)", 
             description=character.get_description(),
-        ).set_thumbnail(url=f"attachment://{char_name}.png")
+        ).set_thumbnail(url=image_url)
     
     roles = seperate_by_roles(char_dict["roles"], roles_count)
     light_cones = seperate_by_roles(char_dict["light_cones"], roles_count)
@@ -182,7 +182,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     stats_embed = Embed(
             title=f"{character.get_name()} (2/4)",
             description=character.get_description(),
-        ).set_thumbnail(url=f"attachment://{char_name}.png")
+        ).set_thumbnail(url=image_url)
     
     main_stats = seperate_by_roles(char_dict["main_stats"], roles_count)
     sub_stats = seperate_by_roles(char_dict["sub_stats"], roles_count)
@@ -208,7 +208,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     tips_embed = Embed(
         title=f"{character.get_name()} (3/4)",
         description=character.get_description(),
-    ).set_thumbnail(url=f"attachment://{char_name}.png")
+    ).set_thumbnail(url=image_url)
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     tips.append("...")
@@ -223,7 +223,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         title=f"{character.get_name()} (4/4)",
         description=character.get_description(),
     ).set_thumbnail(
-        url=f"attachment://{char_name}.png"
+        url=image_url
     ).set_footer(
         text= "Source: Honkai: Star Rail Community Character Build Guide"
     )
