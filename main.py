@@ -151,7 +151,6 @@ async def _gi(ctx, *args):
                 else:
                     char_name.append(arg)
             char_name = ' '.join(char_name)
-            print("CHAR NAME:", char_name)
             if char_name:
                 results = await get_gi_character_build(char_name, not build_flags["--update"])
                 if not results:

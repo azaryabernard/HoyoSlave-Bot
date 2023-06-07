@@ -99,6 +99,7 @@ class Character():
 CHARACTERS = [
     # QUANTUM
     Character("Seele", Element.QUANTUM, 5, Path.HUNT),
+    Character("Silver Wolf", Element.QUANTUM, 5, Path.NIHILITY),
     Character("Qingque", Element.QUANTUM, 4, Path.ERUDITION),
     # FIRE
     Character("Himeko", Element.FIRE, 5, Path.ERUDITION),
