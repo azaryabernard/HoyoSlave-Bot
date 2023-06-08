@@ -208,9 +208,9 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         description=character.get_description(),
     ).set_thumbnail(url=icon_url)
 
-    if not char_dict["tips"]:
-        char_dict["tips"] = character.get_abilty_priority()
     tips = seperate_by_roles(char_dict["tips"], roles_count)
+    if not tips:
+        tips = [character.get_abilty_priority()]
     for i in range(roles_count):
         tips_embed.add_field(
             name="Ability Priority" if i == 0 else "",
