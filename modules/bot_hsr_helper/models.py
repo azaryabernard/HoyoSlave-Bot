@@ -91,6 +91,10 @@ class Character():
         parsed_name = self.name.replace(" ", "_")
         return os.path.join(DIRNAME, f"../../assets/hsr_character_icons/{parsed_name}_Icon.png")
     
+    def get_AP_path(self):
+        parsed_name = self.name.replace(" ", "_")
+        return os.path.join(DIRNAME, f"../../assets/hsr_ability_priority/{parsed_name}_AP.png")
+    
     def get_description(self):
         return f"{self.name} is a {self.rarity}⭐️ {self.element.name.capitalize()} {self.path.name.capitalize()} user in Honkai: Star Rail."
 

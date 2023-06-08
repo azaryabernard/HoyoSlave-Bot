@@ -272,7 +272,7 @@ async def _hsr(ctx, *args):
                 await ctx.send(error_invalid_option(Modules.HSR, 'chars', rarity), file=get_bronya_image(3))
         else: 
             await ctx.send(error_wrong_usage(Modules.HSR, "chars"), file=get_bronya_image(3))
-    # HRS BUILD
+    # HSR BUILD
     elif args[0] == 'build':
         if len(args) == 1:
             await ctx.send(
@@ -307,15 +307,14 @@ async def _hsr(ctx, *args):
                     return
                 # variables
                 embeds = results[0]
-                image_path = results[1]
-                image_name = f'{char_name.replace(" ", "_").lower()}.png'
+                image_file = results[1]
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
                     for c_e in embeds: 
-                        await ctx.send(embed=c_e, file=discord.File(fp=image_path, filename=image_name))
+                        await ctx.send(embed=c_e, file=discord.File(*image_file))
                     return
                 else:
                     await ctx.send(
@@ -326,7 +325,7 @@ async def _hsr(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=embeds[current], file=discord.File(fp=image_path, filename=image_name))
+                msg = await ctx.send(embed=embeds[current], file=discord.File(*image_file))
                 for button in buttons: await msg.add_reaction(button)    
                 while True:
                     try:

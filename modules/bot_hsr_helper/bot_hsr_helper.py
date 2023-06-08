@@ -150,14 +150,14 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         print(f"Error getting data for character: {character.get_name()}")
         return None
     # Creating the Embed object for discord
-    image_url = f'attachment://{char_name.replace(" ", "_").lower()}.png'
+    icon_url = f'attachment://{char_name.replace(" ", "_").lower()}_icon.png'
     # Roles
     roles_count = len(char_dict["roles"])
     # Main Embed (Roles, Light Cones, Relics)
     main_embed = Embed(
             title=f"{character.get_name()} (1/4)", 
             description=character.get_description(),
-        ).set_thumbnail(url=image_url)
+        ).set_thumbnail(url=icon_url)
     
     roles = seperate_by_roles(char_dict["roles"], roles_count)
     light_cones = seperate_by_roles(char_dict["light_cones"], roles_count)
@@ -183,7 +183,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     stats_embed = Embed(
             title=f"{character.get_name()} (2/4)",
             description=character.get_description(),
-        ).set_thumbnail(url=image_url)
+        ).set_thumbnail(url=icon_url)
     
     main_stats = seperate_by_roles(char_dict["main_stats"], roles_count)
     sub_stats = seperate_by_roles(char_dict["sub_stats"], roles_count)
@@ -209,10 +209,12 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     tips_embed = Embed(
         title=f"{character.get_name()} (3/4)",
         description=character.get_description(),
-    ).set_thumbnail(url=image_url)
+    ).set_thumbnail(url=icon_url)
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     if not tips:
+        # add Ability Priority Image
+        # ap_image_url = f'attachment://{char_name.replace(" ", "_").lower()}_ap.png'
         tips.append("(TBA)")
     for i, tip in enumerate(tips):
         tips_embed.add_field(
@@ -225,7 +227,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         title=f"{character.get_name()} (4/4)",
         description=character.get_description(),
     ).set_thumbnail(
-        url=image_url
+        url=icon_url
     ).set_footer(
         text= "Source: Honkai: Star Rail Community Character Build Guide"
     )
@@ -241,8 +243,9 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     # Returning the Embeds
     return (
         [main_embed, stats_embed, tips_embed, notes_embed],
-        character.get_image_path()
+        (character.get_image_path(), icon_url)
     )
+
 
 # Functions to get the characters list string
 def tabulator(text, min_field=14):
