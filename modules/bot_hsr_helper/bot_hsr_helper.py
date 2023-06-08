@@ -201,6 +201,11 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
             value=sub_stats[i] if i < len(sub_stats) else "",
             inline=True
         )
+        stats_embed.add_field(
+            name="",
+            value="",
+            inline=True
+        )
 
     # Tips Embed (long > 1024)
     tips_embed = Embed(
@@ -212,11 +217,6 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     if not tips:
         tips = ["**[All]**\n" + character.get_abilty_priority()]
     for i in range(roles_count):
-        stats_embed.add_field(
-            name="",
-            value=[],
-            inline=True
-        )
         stats_embed.add_field(
             name="Ability Priority" if i == 0 else "",
             value=tips[i] if i < len(tips) else "",
