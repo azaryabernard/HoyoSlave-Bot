@@ -307,14 +307,14 @@ async def _hsr(ctx, *args):
                     return
                 # variables
                 embeds = results[0]
-                image_file = results[1]
+                image_path, image_name = results[1]
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
                     for c_e in embeds: 
-                        await ctx.send(embed=c_e, file=discord.File(*image_file))
+                        await ctx.send(embed=c_e, file=discord.File(fp=image_path, filename=image_name))
                     return
                 else:
                     await ctx.send(
@@ -325,7 +325,7 @@ async def _hsr(ctx, *args):
                 # MULTI PAGE EMBEDS
                 buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
                 current = 0
-                msg = await ctx.send(embed=embeds[current], file=discord.File(*image_file))
+                msg = await ctx.send(embed=embeds[current], file=discord.File(fp=image_path, filename=image_name))
                 for button in buttons: await msg.add_reaction(button)    
                 while True:
                     try:
