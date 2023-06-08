@@ -102,7 +102,6 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         df = df.drop(df.columns[df_drops], axis=1)[4:]
         df.columns = ['characters', 'roles', 'light_cones', 'relics', 'main_stats', 'sub_stats', 'traces', 'tips']
         df.reset_index(drop=True, inplace=True)
-        print("Masuk")
         # special case for Trailblazer
         if "Trailblazer" in character.get_name():
             character = Character(
@@ -118,6 +117,8 @@ async def get_data_from_google_sheets(character: Character, cached: bool = True)
         )
         start_index = df_bool.eq(True).argmax()
         end_index = df.characters[start_index+1:].notna().idxmax()
+        # TODO: ABILITY PRIORITY AS TIPS REPLACEMENT
+
         # parse to Dict
         char_dict = gen_character_dict(
             character=character,
