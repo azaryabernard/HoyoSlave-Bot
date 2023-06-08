@@ -150,7 +150,8 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         print(f"Error getting data for character: {character.get_name()}")
         return None
     # Creating the Embed object for discord
-    icon_url = f'attachment://{char_name.replace(" ", "_").lower()}_icon.png'
+    icon_name = f'{char_name.replace(" ", "_").lower()}_icon.png'
+    icon_url = f'attachment://{icon_name}'
     # Roles
     roles_count = len(char_dict["roles"])
     # Main Embed (Roles, Light Cones, Relics)
@@ -243,7 +244,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     # Returning the Embeds
     return (
         [main_embed, stats_embed, tips_embed, notes_embed],
-        (character.get_image_path(), icon_url)
+        (character.get_image_path(), icon_name)
     )
 
 
