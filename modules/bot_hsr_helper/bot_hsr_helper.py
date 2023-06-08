@@ -212,10 +212,11 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     ).set_thumbnail(url=image_url)
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
-    tips.append("...")
+    if not tips:
+        tips.append("(TBA)")
     for i, tip in enumerate(tips):
         tips_embed.add_field(
-            name="Ability Priority (TBA)" if i == 0 else "",
+            name="Ability Priority" if i == 0 else "",
             value=tip,
             inline=False
         )
