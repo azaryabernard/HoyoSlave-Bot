@@ -156,7 +156,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
     roles_count = len(char_dict["roles"])
     # Main Embed (Roles, Light Cones, Relics)
     main_embed = Embed(
-            title=f"{character.get_name()} (1/4)", 
+            title=f"{character.get_name()} (1/3)", 
             description=character.get_description(),
         ).set_thumbnail(url=icon_url)
     
@@ -182,7 +182,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         )
     # Stats Embed (Main Stats, Sub Stats)
     stats_embed = Embed(
-            title=f"{character.get_name()} (2/4)",
+            title=f"{character.get_name()} (2/3)",
             description=character.get_description(),
         ).set_thumbnail(url=icon_url)
     
@@ -207,11 +207,11 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
             inline=True
         )
 
-    # Tips Embed (long > 1024)
-    tips_embed = Embed(
-        title=f"{character.get_name()} (3/4)",
-        description=character.get_description(),
-    ).set_thumbnail(url=icon_url)
+    # # Tips Embed (long > 1024)
+    # tips_embed = Embed(
+    #     title=f"{character.get_name()} (3/4)",
+    #     description=character.get_description(),
+    # ).set_thumbnail(url=icon_url)
 
     tips = seperate_by_roles(char_dict["tips"], roles_count)
     if not tips:
@@ -229,7 +229,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         )
     # Notes Embed (long > 1024)
     notes_embed = Embed(
-        title=f"{character.get_name()} (4/4)",
+        title=f"{character.get_name()} (3/3)",
         description=character.get_description(),
     ).set_thumbnail(
         url=icon_url
@@ -247,7 +247,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         )
     # Returning the Embeds
     return (
-        [main_embed, stats_embed, tips_embed, notes_embed],
+        [main_embed, stats_embed, notes_embed],
         (character.get_image_path(), icon_name)
     )
 
