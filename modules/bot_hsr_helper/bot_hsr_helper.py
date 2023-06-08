@@ -215,7 +215,7 @@ async def get_character_build(char_name: str, cached: bool = True) -> list[Embed
         stats_embed.add_field(
             name="Ability Priority" if i == 0 else "",
             value=tips[i] if i < len(tips) else "",
-            inline=False
+            inline=True
         )
         stats_embed.add_field(
             name="Trace Priority" if i == 0 else "",
