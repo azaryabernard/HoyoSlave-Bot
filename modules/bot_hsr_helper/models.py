@@ -110,7 +110,7 @@ class Character():
 CHARACTERS = [
     # QUANTUM
     Character("Seele", Element.QUANTUM, 5, Path.HUNT, "USTB"),
-    Character("Silver Wolf", Element.QUANTUM, 5, Path.NIHILITY "USTB"),
+    Character("Silver Wolf", Element.QUANTUM, 5, Path.NIHILITY, "USTB"),
     Character("Qingque", Element.QUANTUM, 4, Path.ERUDITION, "BTSU"),
     # FIRE
     Character("Himeko", Element.FIRE, 5, Path.ERUDITION),
