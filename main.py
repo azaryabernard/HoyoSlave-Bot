@@ -313,8 +313,8 @@ async def _hsr(ctx, *args):
                     build_flags["--full"] = True
                     await ctx.send("DM only mode, forcing full page!")
                 if build_flags["--full"]:
-                    for c_e in embeds: 
-                        await ctx.send(embed=c_e, file=discord.File(*icon_file))
+                    for embed in embeds: 
+                        await ctx.send(embed=embed, file=discord.File(*icon_file))
                     return
                 else:
                     await ctx.send(

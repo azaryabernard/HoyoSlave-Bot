@@ -59,11 +59,19 @@ class Path(Enum):
 
 # Class for the characters
 class Character():
-    def __init__(self, name: str, element: Element, rarity: int, path: Path):
+    def __init__(self, name: str, element: Element, rarity: int, path: Path, ap_hash: str = ""):
         self.name = name
         self.element = element
         self.rarity = rarity
         self.path = path
+        self.ap_hash = ap_hash
+
+    AP_MAP = {
+        "U": "Ultimate",
+        "S": "Skill",
+        "T": "Talent",
+        "B": "Basic"
+    }
 
     def get_name(self):
         return self.name
@@ -86,14 +94,13 @@ class Character():
     def get_path(self):
         return self.path
     
+    def get_abilty_priority(self):
+        return [f"{i}. {ap}" for i, ap in zip(range(1, len(self.ap_hash)+1), map(self.AP_MAP.get, self.ap_hash))]
+    
     def get_image_path(self):
         # Thanks to u/jojocheck for compiling all the icons!
         parsed_name = self.name.replace(" ", "_")
         return os.path.join(DIRNAME, f"../../assets/hsr_character_icons/{parsed_name}_Icon.png")
-    
-    def get_AP_path(self):
-        parsed_name = self.name.replace(" ", "_")
-        return os.path.join(DIRNAME, f"../../assets/hsr_ability_priority/{parsed_name}_AP.png")
     
     def get_description(self):
         return f"{self.name} is a {self.rarity}⭐️ {self.element.name.capitalize()} {self.path.name.capitalize()} user in Honkai: Star Rail."
@@ -102,9 +109,9 @@ class Character():
 # Define all the characters
 CHARACTERS = [
     # QUANTUM
-    Character("Seele", Element.QUANTUM, 5, Path.HUNT),
-    Character("Silver Wolf", Element.QUANTUM, 5, Path.NIHILITY),
-    Character("Qingque", Element.QUANTUM, 4, Path.ERUDITION),
+    Character("Seele", Element.QUANTUM, 5, Path.HUNT, "USTB"),
+    Character("Silver Wolf", Element.QUANTUM, 5, Path.NIHILITY "USTB"),
+    Character("Qingque", Element.QUANTUM, 4, Path.ERUDITION, "BTSU"),
     # FIRE
     Character("Himeko", Element.FIRE, 5, Path.ERUDITION),
     Character("Trailblazer Fire", Element.FIRE, 5, Path.PRESERVATION),
