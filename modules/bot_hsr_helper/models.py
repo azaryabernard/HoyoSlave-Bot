@@ -95,7 +95,7 @@ class Character():
         return self.path
     
     def get_abilty_priority(self):
-        return [f"{i}. {ap}" for i, ap in zip(range(1, len(self.ap_hash)+1), map(self.AP_MAP.get, self.ap_hash))]
+        return "\n".join([f"{i}. {ap}" for i, ap in zip(range(1, len(self.ap_hash)+1), map(self.AP_MAP.get, self.ap_hash))])
     
     def get_image_path(self):
         # Thanks to u/jojocheck for compiling all the icons!
