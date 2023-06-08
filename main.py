@@ -308,7 +308,7 @@ async def _hsr(ctx, *args):
                 # variables
                 embeds = results[0]
                 image_path = results[1][0]
-                image_name = f'{char_name.replace(" ", "_").lower()}_icon.png'
+                image_name = results[1][1]
                 # Force full page in DM
                 if ctx.guild is None:
                     build_flags["--full"] = True
