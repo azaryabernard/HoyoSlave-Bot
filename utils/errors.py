@@ -35,7 +35,7 @@ def get_bronya_image(type: int = 0):
 def error_character_not_found(module: Modules = Modules.UNKNOWN, char_name: str = "unknown"):
     return dedent(f"""```ansi
 \u001b[0;31m{module.name} ERROR: Character Data for \u001b[4m{char_name}\u001b[0;31m not found!
-Use: \u001b[1;31m.{module.name.lower()} chars\u001b[0;31m to see the list of available characters!```""")
+Use: \u001b[1;31m.{module.name.lower()} chars\u001b[0;31m to see the list of available characters.```""")
 
 # INVALID ARGUMENT
 def error_invalid_option(module: Modules = Modules.UNKNOWN, arg: str = "unknown"):
@@ -56,7 +56,7 @@ def error_catched(module: Modules = Modules.UNKNOWN, error = "unknown"):
 # ERRORS - SUDO
 def error_access_denied(module: Modules = Modules.UNKNOWN, user: str = "unknown"):
     return dedent(f"""```ansi
-\u001b[0;31mSUDO ERROR: ACCESS DENIED! 
+\u001b[0;31m{module.name} ERROR: ACCESS DENIED! 
 User: \u001b[4m{user}\u001b[0;31m is not the admin!
 Further trigger of this command will be reported to the admin!```""")
 
