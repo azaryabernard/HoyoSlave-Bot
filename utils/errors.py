@@ -35,7 +35,7 @@ def get_bronya_image(type: int = 0):
 def error_character_not_found(module: Modules = Modules.UNKNOWN, char_name: str = "unknown"):
     return dedent(f"""```ansi
 \u001b[0;31m{module.name} ERROR: Character Data for \u001b[4m{char_name}\u001b[0;31m not found!
-Use \".hsr | .gi chars\" to see the list of available characters!```""")
+Use \".hsr chars | .gi chars\" to see the list of available characters!```""")
 
 # INVALID ARGUMENT
 def error_invalid_option(module: Modules = Modules.UNKNOWN, arg: str = "unknown"):
