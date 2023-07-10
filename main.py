@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 import asyncio, sys, os
 from textwrap import dedent
 from random import randrange
@@ -517,7 +518,9 @@ async def sudo_error(ctx, error):
 
 
 # Run the client on the server
-bot.run('MTEwMjk3OTQ2MzA0MzYxMjcxMw.GJtoDg.QDwZlZAr-N5VujaDhnDsITfXzPjcPffKEmPbfQ')
+load_dotenv()
+BOT_API_KEY = os.getenv('BOT_API_KEY')
+bot.run(BOT_API_KEY)
 
 if REBOOT:
     print("Rebooting now...")
