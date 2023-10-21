@@ -132,10 +132,12 @@ CHARACTERS = [
     Character("Tingyun", Element.LIGHTNING, 4, Path.HARMONY),
     # WIND
     Character("Bronya", Element.WIND, 5, Path.HARMONY),
+    Character("Blade", Element.WIND, 5, Path.DESTURCTION),
     Character("Dan Heng", Element.WIND, 4, Path.HUNT),
     Character("Sampo", Element.WIND, 4, Path.NIHILITY),
     # IMAGINARY
     Character("Welt", Element.IMAGINARY, 5, Path.NIHILITY),
+    Character("Luocha", Element.IMAGINARY, 5, Path.ABUNDANCE),
     Character("Yukong", Element.IMAGINARY, 4, Path.HARMONY),
     # PHYSICAL
     Character("Clara", Element.PHYSICAL, 5, Path.DESTURCTION),
