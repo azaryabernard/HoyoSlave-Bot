@@ -124,6 +124,7 @@ CHARACTERS = [
     Character("March 7th", Element.ICE, 4, Path.PRESERVATION),
     Character("Pela", Element.ICE, 4, Path.NIHILITY),
     # LIGHTNING
+    Character("Kafka", Element.LIGHTNING, 5, Path.NIHILITY),
     Character("Bailu", Element.LIGHTNING, 5, Path.ABUNDANCE),
     Character("Jing Yuan", Element.LIGHTNING, 5, Path.ERUDITION),
     Character("Arlan", Element.LIGHTNING, 4, Path.DESTURCTION),
@@ -135,6 +136,7 @@ CHARACTERS = [
     Character("Sampo", Element.WIND, 4, Path.NIHILITY),
     # IMAGINARY
     Character("Welt", Element.IMAGINARY, 5, Path.NIHILITY),
+    Character("Yukong", Element.IMAGINARY, 4, Path.HARMONY),
     # PHYSICAL
     Character("Clara", Element.PHYSICAL, 5, Path.DESTURCTION),
     Character("Trailblazer Physical", Element.PHYSICAL, 5, Path.DESTURCTION),
